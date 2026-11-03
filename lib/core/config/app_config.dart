@@ -22,15 +22,23 @@ class AppConfig {
   );
   static const String appName = String.fromEnvironment(
     'APP_NAME',
-    defaultValue: 'Flutter Starter',
+    defaultValue: 'Gotit',
   );
   static const String applicationId = String.fromEnvironment(
     'APPLICATION_ID',
-    defaultValue: 'com.starter.flutter_starter',
+    defaultValue: 'com.clark.gotit',
   );
   static const String baseUrl = String.fromEnvironment(
     'BASE_URL',
-    defaultValue: 'https://dummyjson.com',
+    defaultValue: '',
+  );
+  static const String supabaseUrl = String.fromEnvironment(
+    'SUPABASE_URL',
+    defaultValue: '',
+  );
+  static const String supabaseAnonKey = String.fromEnvironment(
+    'SUPABASE_ANON_KEY',
+    defaultValue: '',
   );
   static const int connectTimeoutSeconds = int.fromEnvironment(
     'CONNECT_TIMEOUT_SECONDS',

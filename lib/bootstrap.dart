@@ -173,6 +173,6 @@ Future<void> bootstrap() async {
   }
 
   runApp(
-    StarterApp(initialRoute: initialRoute, initialRouteArgs: initialRouteArgs),
+    GotitApp(initialRoute: initialRoute, initialRouteArgs: initialRouteArgs),
   );
 }

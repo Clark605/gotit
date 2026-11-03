@@ -15,21 +15,21 @@ import 'package:gotit/core/widgets/app_snackbar.dart';
 import 'package:gotit/core/widgets/offline_banner.dart';
 import 'package:gotit/l10n/generated/app_localizations.dart';
 
-class StarterApp extends StatefulWidget {
+class GotitApp extends StatefulWidget {
   final String initialRoute;
   final Object? initialRouteArgs;
 
-  const StarterApp({
+  const GotitApp({
     super.key,
     required this.initialRoute,
     this.initialRouteArgs,
   });
 
   @override
-  State<StarterApp> createState() => _StarterAppState();
+  State<GotitApp> createState() => _GotitAppState();
 }
 
-class _StarterAppState extends State<StarterApp> {
+class _GotitAppState extends State<GotitApp> {
   StreamSubscription<void>? _sessionExpiredSubscription;
 
   @override

@@ -1,8 +1,9 @@
 {
   "FLAVOR": "staging",
-  "APP_NAME": "Starter (Staging)",
+  "APP_NAME": "Gotit (Staging)",
   "APPLICATION_ID": "com.clark.gotit.staging",
-  "BASE_URL": "https://dummyjson.com",
+  "SUPABASE_URL": "https://your-staging-project-id.supabase.co",
+  "SUPABASE_ANON_KEY": "your-staging-anon-key-here",
   "CONNECT_TIMEOUT_SECONDS": 30,
   "RECEIVE_TIMEOUT_SECONDS": 30,
   "ENABLE_LOGGING": true,

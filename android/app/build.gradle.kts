@@ -36,7 +36,7 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-        manifestPlaceholders["appName"] = "Starter"
+        manifestPlaceholders["appName"] = "Gotit"
     }
 
     flavorDimensions += "default"
@@ -45,16 +45,16 @@ android {
         create("dev") {
             dimension = "default"
             applicationIdSuffix = ".dev"
-            manifestPlaceholders["appName"] = "Starter (Dev)"
+            manifestPlaceholders["appName"] = "Gotit (Dev)"
         }
         create("staging") {
             dimension = "default"
             applicationIdSuffix = ".staging"
-            manifestPlaceholders["appName"] = "Starter (Staging)"
+            manifestPlaceholders["appName"] = "Gotit (Staging)"
         }
         create("prod") {
             dimension = "default"
-            manifestPlaceholders["appName"] = "Starter"
+            manifestPlaceholders["appName"] = "Gotit"
         }
     }
 
