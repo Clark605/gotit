@@ -1,0 +1,99 @@
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:gotit/core/config/app_config.dart';
+import 'package:gotit/core/cubit/app_settings_cubit.dart';
+import 'package:gotit/core/cubit/app_settings_state.dart';
+import 'package:gotit/core/cubit/connectivity_cubit.dart';
+import 'package:gotit/core/di/injection.dart';
+import 'package:gotit/core/network/auth_interceptor.dart';
+import 'package:gotit/core/routes/app_navigator.dart';
+import 'package:gotit/core/routes/app_router.dart';
+import 'package:gotit/core/theme/app_theme.dart';
+import 'package:gotit/core/widgets/app_snackbar.dart';
+import 'package:gotit/core/widgets/offline_banner.dart';
+import 'package:gotit/l10n/generated/app_localizations.dart';
+
+class StarterApp extends StatefulWidget {
+  final String initialRoute;
+  final Object? initialRouteArgs;
+
+  const StarterApp({
+    super.key,
+    required this.initialRoute,
+    this.initialRouteArgs,
+  });
+
+  @override
+  State<StarterApp> createState() => _StarterAppState();
+}
+
+class _StarterAppState extends State<StarterApp> {
+  StreamSubscription<void>? _sessionExpiredSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+    _sessionExpiredSubscription = AuthInterceptor.onSessionExpired.listen((_) {
+      final context = AppNavigator.currentContext;
+      if (context != null && context.mounted) {
+        context.showErrorSnackBar('Session expired. Please log in again.');
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _sessionExpiredSubscription?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AppSettingsCubit>.value(value: getIt<AppSettingsCubit>()),
+        BlocProvider<ConnectivityCubit>.value(
+          value: getIt<ConnectivityCubit>(),
+        ),
+      ],
+      child: BlocBuilder<AppSettingsCubit, AppSettingsState>(
+        builder: (context, state) {
+          return MaterialApp(
+            title: AppConfig.appName,
+            debugShowCheckedModeBanner: false,
+            navigatorKey: AppNavigator.navigatorKey,
+            themeMode: state.themeMode,
+            theme: AppTheme.light(state.locale),
+            darkTheme: AppTheme.dark(state.locale),
+            locale: state.locale,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: AppLocalizations.supportedLocales,
+            initialRoute: widget.initialRoute,
+            onGenerateInitialRoutes: (initialRouteName) {
+              return [
+                AppRouter.onGenerateRoute(
+                      RouteSettings(
+                        name: initialRouteName,
+                        arguments: widget.initialRouteArgs,
+                      ),
+                    ) ??
+                    MaterialPageRoute(builder: (_) => const SizedBox.shrink()),
+              ];
+            },
+            onGenerateRoute: AppRouter.onGenerateRoute,
+            builder: (context, child) {
+              return OfflineBanner(child: child ?? const SizedBox.shrink());
+            },
+          );
+        },
+      ),
+    );
+  }
+}
