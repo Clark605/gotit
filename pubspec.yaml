@@ -1,5 +1,5 @@
 name: gotit
-description: "A production-grade, reusable Flutter starter template."
+description: "Gotit - Automation-first AI task capture app."
 publish_to: 'none'
 
 version: 1.0.0+1
