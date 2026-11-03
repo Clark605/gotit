@@ -81,3 +81,5 @@ android/key.properties
 !android/key.properties.example
 *.jks
 *.keystore
+
+graphify-out/cache/

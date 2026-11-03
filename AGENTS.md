@@ -1,7 +1,9 @@
 # Agent Guidelines & Engineering Standards
 
 ## 1. Project Overview
-`flutter_starter` is a production-grade, reusable Flutter starter template targeting Android and iOS (Web optional). Built with Dart 3.11+ and Flutter 3.41.1, it employs `flutter_bloc` (Bloc & Cubit), Freezed 3, Injectable DI, Dio networking with resilient guarded actions, Material 3 theming with full English and Arabic (RTL) localization, and native multi-flavor environments (`dev`, `staging`, `prod`).
+`gotit` is an automation-first task app built with Dart 3.11+ and Flutter 3.41.1, employing `flutter_bloc` (Bloc & Cubit), Freezed 3, Drift SQLite, Injectable DI, Material 3 theming with full English and Arabic (RTL) localization, and native multi-flavor environments (`dev`, `staging`, `prod`).
+
+This project is governed by the [Gotit Constitution](.specify/memory/constitution.md) and follows the design-first Spec Kit lifecycle incorporating `speckit-ui`, `StitchMCP`, and `Graphify`.
 
 ## 2. Architecture & The 8 Golden Rules
 Every feature lives in `lib/features/<feature_name>/`:
@@ -41,21 +43,30 @@ lib/features/<feature_name>/
 - `utils/`: `AppLogger`, `LoadStatus`, `ResponsiveLayout`, `PaginationState`, `FormValidators`.
 - `widgets/`: Shared design system widgets (`AppButton`, `AppTextField`, `AppAvatar`, `StatusBadge`).
 
-## 4. Mandatory New-Feature Checklist
-1. Create the feature directory structure as shown in Section 2.
-2. Model (Freezed) -> Data Source (throws) -> Repository Interface -> Repository Impl (throws).
-3. State (Freezed class with `LoadStatus status`, data fields, `Failure? failure`) -> Cubit/Bloc extending `BaseCubit` or using `ActionGuard` (`guard()` returns `Result<T>`).
-4. Screen and private widgets using `lib/core/widgets/` and theme tokens. Screens consume Cubit via context.
-5. Add localized strings in `l10n/app_en.arb` and `l10n/app_ar.arb`.
-6. Add route name in `route_names.dart`, typed args in `ui/`, provider in `route_providers.dart`, and route in `app_router.dart`.
-7. Run validation pipeline:
-   ```bash
-   dart run build_runner build --delete-conflicting-outputs
-   dart format .
-   flutter analyze
-   dart run tool/check_architecture.dart
-   ```
-8. Verify layout at mobile width (<768px) and in RTL (Arabic).
+## 4. Mandatory New-Feature Checklist (Spec-Driven & Design-First)
+1. **Specify (`/speckit-specify`)**: Draft `specs/<feature>/spec.md` with prioritized user stories, acceptance scenarios, and success criteria.
+2. **Clarify (`/speckit-clarify`)**: Resolve underspecified questions before planning.
+3. **Inspect Architecture (`Graphify`)**: Query the codebase graph (`query_graph`, `shortest_path`) to map existing dependencies.
+4. **Plan (`/speckit-plan`)**: Draft `plan.md` (data model, contracts, Constitution check).
+5. **UI Design (`speckit-ui brief`)**: Read `DESIGN.md` and generate UI brief + Stitch prompts; create screens via `StitchMCP` and hand off for human approval in `specs/<feature>/design/screens/`.
+6. **Finalize UI (`speckit-ui finalize`)**: Reconcile approved screens with `DESIGN.md` and update `plan.md` with the screen-to-widget breakdown and test plan.
+7. **Tasks (`/speckit-tasks`)**: Generate `tasks.md` covering data layer, state, and UI widgets matching the approved designs.
+8. **Implement (`/speckit-implement`)**: Feature directory structure (`data/`, `cubit/`, `ui/`).
+   - Model (Freezed) -> Data Source (throws) -> Repository Interface -> Repository Impl (throws).
+   - State (Freezed class with `LoadStatus status`, data fields, `Failure? failure`) -> Cubit/Bloc extending `BaseCubit` or using `ActionGuard` (`guard()` returns `Result<T>`).
+   - Screen and private widgets using `lib/core/widgets/` and theme tokens. Screens consume Cubit via context.
+   - Add localized strings in `l10n/app_en.arb` and `l10n/app_ar.arb`.
+   - Add route name in `route_names.dart`, typed args in `ui/`, provider in `route_providers.dart`, and route in `app_router.dart`.
+9. **Update Graph & Validate**:
+   - Run `graphify update .` to keep AST knowledge graph synchronized.
+   - Run validation pipeline:
+     ```bash
+     dart run build_runner build --delete-conflicting-outputs
+     dart format .
+     flutter analyze
+     dart run tool/check_architecture.dart
+     ```
+10. Verify layout at mobile width (<768px) and in RTL (Arabic).
 
 ## 5. Reference Implementation
 Always inspect and mirror `lib/features/example/`:
@@ -89,6 +100,8 @@ Always inspect and mirror `lib/features/example/`:
 - ❌ **DON'T** clear existing data when a reload starts.
 - ❌ **DON'T** use `default:` when switching on `LoadStatus`.
 - ❌ **DON'T** use sealed Freezed unions for load lifecycles.
+- ❌ **DON'T** write Flutter UI code or generate tasks before completing the speckit-ui brief and finalize stages.
+- ❌ **DON'T** guess codebase connections; query Graphify first (graphify query / query_graph).
 - ✅ **DO** return plain `Future<T>` from repositories; data sources and repositories throw, and `guard()` in Cubit/Bloc returns `Result<T>`.
 - ✅ **DO** ensure touch targets >= 48px.
 - ✅ **DO** test both English and Arabic RTL layouts.
