@@ -63,6 +63,22 @@ flutter:
     - assets/icons/
 
   fonts:
+    - family: IBM Plex Sans Arabic
+      fonts:
+        - asset: assets/fonts/IBMPlexSansArabic-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/IBMPlexSansArabic-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/IBMPlexSansArabic-SemiBold.ttf
+          weight: 600
+    - family: IBMPlexSansArabic
+      fonts:
+        - asset: assets/fonts/IBMPlexSansArabic-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/IBMPlexSansArabic-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/IBMPlexSansArabic-SemiBold.ttf
+          weight: 600
     - family: Inter
       fonts:
         - asset: assets/fonts/Inter-Regular.ttf
@@ -72,14 +88,4 @@ flutter:
         - asset: assets/fonts/Inter-SemiBold.ttf
           weight: 600
         - asset: assets/fonts/Inter-Bold.ttf
-          weight: 700
-    - family: IBMPlexSansArabic
-      fonts:
-        - asset: assets/fonts/IBMPlexSansArabic-Regular.ttf
-          weight: 400
-        - asset: assets/fonts/IBMPlexSansArabic-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/IBMPlexSansArabic-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/IBMPlexSansArabic-Bold.ttf
           weight: 700

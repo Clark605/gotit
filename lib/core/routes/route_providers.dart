@@ -12,6 +12,7 @@ import 'package:gotit/core/widgets/screens/not_found_screen.dart';
 import 'package:gotit/core/widgets/screens/onboarding_screen.dart';
 import 'package:gotit/core/widgets/screens/settings_screen.dart';
 import 'package:gotit/core/widgets/screens/splash_screen.dart';
+import 'package:gotit/core/widgets/screens/theme_gallery_screen.dart';
 import 'package:gotit/core/widgets/screens/update_required_screen.dart';
 import 'package:gotit/features/example/bloc/example_detail_bloc.dart';
 import 'package:gotit/features/example/bloc/example_detail_event.dart';
@@ -31,6 +32,8 @@ Widget buildOnboardingRoute() => OnboardingScreen(
 );
 
 Widget buildSettingsRoute() => const SettingsScreen();
+
+Widget buildThemeGalleryRoute() => const ThemeGalleryScreen();
 
 Widget buildNotFoundRoute(String? routeName) =>
     NotFoundScreen(routeName: routeName);

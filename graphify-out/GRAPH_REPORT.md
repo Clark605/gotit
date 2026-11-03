@@ -1,17 +1,17 @@
 # Graph Report - gotit  (2026-11-03)
 
 ## Corpus Check
-- 189 files · ~84,688 words
+- 192 files · ~89,251 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 54 file(s) not represented in the graph (top: .xml 13, .ttf 8, (none) 7)
 
 ## Summary
-- 2208 nodes · 2730 edges · 136 communities (121 shown, 15 thin omitted)
+- 2346 nodes · 2881 edges · 146 communities (129 shown, 17 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 16 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `1b76bbe2`
+- Built from commit: `1a0803de`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -19,7 +19,7 @@
 - app_localizations.dart
 - app_localizations_ar.dart
 - app_localizations_en.dart
-- example_state.dart
+- app_settings_state.dart
 - app_spacing.dart
 - app_colors_extension.dart
 - with
@@ -59,33 +59,33 @@
 - connectivity_state.dart
 - Stitch DESIGN.md Skill
 - Architectural Blueprint
-- app_exception.dart
+- app.dart
 - pagination_state.dart
 - rules
 - result.dart
 - example_screen.dart
 - Execution Steps
-- package:injectable/injectable.dart
+- connectivity_cubit.dart
 - example_detail_screen.dart
 - auth_interceptor.dart
-- crash_reporter.dart
+- push_notification_service.dart
 - prefs_service.dart
-- app_empty_state.dart
+- item_card.dart
 - app_error_state.dart
 - Design System: Taste Standard
 - commands
 - secure_storage_service.dart
-- app.dart
+- theme_gallery_screen.dart
 - bootstrap.dart
 - route_names.dart
-- package:gotit/core/theme/app_colors.dart
+- package:gotit/core/theme/app_spacing.dart
 - check_architecture.dart
 - Agent Guidelines & Engineering Standards
 - app_avatar.dart
 - flutter_launcher_icons
 - flutter_launcher_icons
 - flutter_launcher_icons
-- package:gotit/core/errors/failure.dart
+- example_detail_state.dart
 - Feature Specification: [FEATURE NAME]
 - app_date_field.dart
 - Core Principles
@@ -93,13 +93,13 @@
 - speckit-specify/SKILL.md
 - speckit-tasks/SKILL.md
 - force_update_gate.dart
-- action_guard.dart
+- example_state.dart
 - remote_config_service.dart
 - app_navigator.dart
 - update_required_screen.dart
 - Core Principles
 - manifest.json
-- Contributing to `flutter_starter`
+- app_durations.dart
 - 22. STYLE VARIATION ENGINE
 - package:flutter/material.dart
 - api_constants.dart
@@ -109,12 +109,12 @@
 - flutter_native_splash
 - Implementation Plan: [FEATURE]
 - speckit-checklist/SKILL.md
-- package:flutter_bloc/flutter_bloc.dart
-- AppSettingsCubit
+- ActionGuard
+- responsive_layout.dart
 - 2. Supported Backend Variants
 - 1. Design Tokens Scale
 - storage_keys.dart
-- app_settings_cubit.dart
+- package:injectable/injectable.dart
 - app_typography.dart
 - validators.dart
 - item_remote_data_source.dart
@@ -126,7 +126,7 @@
 - Stitch Design System Documentation Skill
 - speckit-constitution/SKILL.md
 - speckit-taskstoissues/SKILL.md
-- app_error_banner.dart
+- State
 - AppLocalizations
 - 21. MOBILE ANTI-AI-TELLS RULE
 - Backend Variant: Supabase
@@ -146,6 +146,16 @@
 - LaunchImage.imageset/README.md
 - is_socket_error_stub.dart
 - load_status.dart
+- Spec Kit Design-First & Architecture Workflow
+- app_snackbar.dart
+- dev_dependencies
+- 6. Functional Requirements
+- crash_reporter.dart
+- app_icon_size.dart
+- breakpoints.dart
+- BuildContext
+- 5. Scope and Roadmap
+- AppColorsExtension
 
 ## God Nodes (most connected - your core abstractions)
 1. `_` - 42 edges
@@ -160,21 +170,21 @@
 10. `Core Principles` - 12 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `AppSettingsState` --configures--> `freezed`  [EXTRACTED]
+  lib/core/cubit/app_settings_state.dart → pubspec.yaml
 - `ConnectivityState` --configures--> `freezed`  [EXTRACTED]
   lib/core/cubit/connectivity_state.dart → pubspec.yaml
 - `ExampleDetailBloc` --configures--> `injectable`  [EXTRACTED]
   lib/features/example/bloc/example_detail_bloc.dart → pubspec.yaml
 - `ExampleDetailEvent` --configures--> `freezed`  [EXTRACTED]
   lib/features/example/bloc/example_detail_event.dart → pubspec.yaml
-- `ItemModel` --configures--> `freezed`  [EXTRACTED]
-  lib/features/example/data/models/item_model.dart → pubspec.yaml
-- `AppSettingsState` --configures--> `freezed`  [EXTRACTED]
-  lib/core/cubit/app_settings_state.dart → pubspec.yaml
+- `ExampleDetailState` --configures--> `freezed`  [EXTRACTED]
+  lib/features/example/bloc/example_detail_state.dart → pubspec.yaml
 
 ## Import Cycles
 - None detected.
 
-## Communities (136 total, 15 thin omitted)
+## Communities (146 total, 17 thin omitted)
 
 ### Community 0 - "app_localizations.dart"
 Cohesion: 0.02
@@ -188,29 +198,29 @@ Nodes (72): about, appTitle, appVersion, arabic, back, backOnlineText, cancel, c
 Cohesion: 0.03
 Nodes (72): about, appTitle, appVersion, arabic, back, backOnlineText, cancel, close (+64 more)
 
-### Community 3 - "example_state.dart"
-Cohesion: 0.06
-Nodes (55): _, AppSettingsStatePatterns, class, hashCode, identical, null, operator, orElse (+47 more)
+### Community 3 - "app_settings_state.dart"
+Cohesion: 0.20
+Nodes (15): _, AppSettingsStatePatterns, class, hashCode, identical, null, operator, orElse (+7 more)
 
 ### Community 4 - "app_spacing.dart"
 Cohesion: 0.04
-Nodes (43): AppSpacing, edgeInsetsAllLg, edgeInsetsAllMd, edgeInsetsAllSm, edgeInsetsAllXl, edgeInsetsAllXs, edgeInsetsAllXxl, edgeInsetsHLg (+35 more)
+Nodes (53): AppSpacing, bottomNavHeight, buttonHeight, checkboxSize, chipHeight, edgeInsetsAllLg, edgeInsetsAllMd, edgeInsetsAllSm (+45 more)
 
 ### Community 5 - "app_colors_extension.dart"
 Cohesion: 0.05
-Nodes (34): LocalizationContextExtension, appColors, AppColorsExtension, AppColorsExtensionContext, border, copyWith, dark, error (+26 more)
+Nodes (37): accent, accentPressed, accentSoft, appColors, border, canvas, charcoal, copyWith (+29 more)
 
 ### Community 6 - "with"
 Cohesion: 0.05
 Nodes (43): name, needs, runs-on, steps, timeout-minutes, name, needs, runs-on (+35 more)
 
 ### Community 7 - "app_radius.dart"
-Cohesion: 0.05
-Nodes (36): AppIconSize, lg, md, sm, xl, xs, xxl, AppRadius (+28 more)
+Cohesion: 0.07
+Nodes (25): AppRadius, bottomLg, bottomMd, full, fullRadius, fullValue, lg, lgRadius (+17 more)
 
 ### Community 8 - "app_colors.dart"
-Cohesion: 0.05
-Nodes (35): AppColors, avatarPalette, black, darkBackground, darkBorder, darkSurface, darkSurfaceContainer, darkSurfaceHigh (+27 more)
+Cohesion: 0.02
+Nodes (79): accent, accentPressed, accentSoft, AppColors, avatarPalette, black, canvas, charcoal (+71 more)
 
 ### Community 9 - "CORE DIRECTIVE: PREMIUM MOBILE APP IMAGE DIRECTION"
 Cohesion: 0.06
@@ -221,8 +231,8 @@ Cohesion: 0.06
 Nodes (33): dependencies, connectivity_plus, dio, flutter, flutter_bloc, flutter_localizations, flutter_native_splash, flutter_secure_storage (+25 more)
 
 ### Community 11 - "Gotit: Product Requirements Document"
-Cohesion: 0.06
-Nodes (32): 10. Success Metrics, 11. Privacy and Security, 12. Non-Functional Requirements, 13. Risks and Mitigations, 14. Milestones (Rough), 15. Open Questions, 1. Overview, 2. Goals and Non-Goals (+24 more)
+Cohesion: 0.11
+Nodes (19): 10. Success Metrics, 11. Privacy and Security, 12. Non-Functional Requirements, 13. Risks and Mitigations, 14. Milestones (Rough), 15. Open Questions, 1. Overview, 2. Goals and Non-Goals (+11 more)
 
 ### Community 12 - "failure.dart"
 Cohesion: 0.08
@@ -233,8 +243,8 @@ Cohesion: 0.06
 Nodes (30): args, inputs, integration, spec, default, prompt, type, any (+22 more)
 
 ### Community 14 - "infinite_scroll_list.dart"
-Cohesion: 0.08
-Nodes (23): AppTextField, _AppTextFieldState, build, controller, _createdController, createState, dispose, emptyWidget (+15 more)
+Cohesion: 0.10
+Nodes (17): build, controller, _createdController, createState, dispose, emptyWidget, hasMore, initState (+9 more)
 
 ### Community 15 - "app_config.dart"
 Cohesion: 0.07
@@ -277,16 +287,16 @@ Cohesion: 0.08
 Nodes (23): 1. Environment Files, 2. Running & Building per Flavor, 3. Native Setup, 4. Flavor-Specific App Icons, 5. Release Signing, Android (`android/app/build.gradle.kts`), CI/CD Secret Injection, Development (+15 more)
 
 ### Community 25 - "onboarding_screen.dart"
-Cohesion: 0.09
-Nodes (15): AppRouter, AuthRedirect, _fadeRoute, onGenerateRoute, build, errorMessage, ErrorScreen, failure (+7 more)
+Cohesion: 0.07
+Nodes (16): l10n, AppRouter, AuthRedirect, _fadeRoute, onGenerateRoute, build, errorMessage, ErrorScreen (+8 more)
 
 ### Community 26 - "example_cubit.dart"
 Cohesion: 0.09
 Nodes (15): createItem, loadItems, loadMore, _pageSize, refresh, _repository, createItem, getItem (+7 more)
 
 ### Community 27 - "logging_interceptor.dart"
-Cohesion: 0.09
-Nodes (15): AuthInterceptor, onError, onRequest, onResponse, SafeLoggingInterceptor, _sanitizeData, _sanitizeHeaders, _sensitiveBodyKeys (+7 more)
+Cohesion: 0.08
+Nodes (16): AuthInterceptor, mapDioException, onError, onRequest, onResponse, SafeLoggingInterceptor, _sanitizeData, _sanitizeHeaders (+8 more)
 
 ### Community 28 - "DESIGN.md"
 Cohesion: 0.09
@@ -301,16 +311,16 @@ Cohesion: 0.09
 Nodes (19): AppLogger, _cyan, debug, error, ExecutionTimer, _gray, info, _log (+11 more)
 
 ### Community 31 - "package:gotit/core/theme/app_spacing.dart"
-Cohesion: 0.12
-Nodes (14): ConnectivityCubit, AppAvatar, AppButton, AppDateField, AppErrorBanner, build, child, OfflineBanner (+6 more)
+Cohesion: 0.14
+Nodes (13): ConnectivityCubit, ResponsiveLayout, AppAvatar, AppButton, AppDateField, AppErrorState, build, child (+5 more)
 
 ### Community 32 - "route_providers.dart"
-Cohesion: 0.09
-Nodes (11): buildErrorRoute, buildExampleDetailRoute, buildExampleRoute, buildMaintenanceRoute, buildNoInternetRoute, buildNotFoundRoute, buildOnboardingRoute, buildSettingsRoute (+3 more)
+Cohesion: 0.08
+Nodes (12): buildErrorRoute, buildExampleDetailRoute, buildExampleRoute, buildMaintenanceRoute, buildNoInternetRoute, buildNotFoundRoute, buildOnboardingRoute, buildSettingsRoute (+4 more)
 
 ### Community 33 - "example_detail_event.dart"
-Cohesion: 0.18
-Nodes (19): _, class, ExampleDetailEventPatterns, hashCode, id, identical, null, operator (+11 more)
+Cohesion: 0.19
+Nodes (17): _, class, ExampleDetailEventPatterns, hashCode, id, identical, null, operator (+9 more)
 
 ### Community 34 - "AppDelegate"
 Cohesion: 0.11
@@ -321,8 +331,8 @@ Cohesion: 0.11
 Nodes (15): AppButtonVariant, borderRadius, build, height, icon, isExpanded, isLoading, label (+7 more)
 
 ### Community 36 - "connectivity_service.dart"
-Cohesion: 0.12
-Nodes (12): _connectivity, ConnectivityService, _hasConnection, IConnectivityService, isConnected, onConnectivityChanged, getToken, init (+4 more)
+Cohesion: 0.22
+Nodes (6): _connectivity, ConnectivityService, _hasConnection, IConnectivityService, isConnected, onConnectivityChanged
 
 ### Community 37 - "User Scenarios & Testing *(mandatory)*"
 Cohesion: 0.10
@@ -345,12 +355,12 @@ Cohesion: 0.11
 Nodes (17): 1. Extract Project Identity (JSON), 2. Define the Atmosphere (Image/HTML), 3. Map the Color Palette (Tailwind Config/JSON), 4. Translate Geometry & Shape (CSS/Tailwind), 5. Describe Depth & Elevation, Analysis & Synthesis Instructions, Best Practices, Common Pitfalls to Avoid (+9 more)
 
 ### Community 42 - "Architectural Blueprint"
-Cohesion: 0.11
-Nodes (18): 1. The Seam: Why There Is No Domain Layer, 2. Guarded Actions (`ActionGuard`), 3. Pluggable Error Mapping & Failures, 4. Central Routing & Navigation Guarding, 5. Startup Bootstrap Sequence, 6. Architecture Linter (`tool/check_architecture.dart`), 7. Web Support, Architectural Blueprint (+10 more)
+Cohesion: 0.07
+Nodes (25): 1. Branch Naming Conventions, 2. Commit Message Guidelines (Conventional Commits), 3. Architecture Rules & The 8 Golden Rules, 4. Mandatory Verification Pipeline, Contributing to `flutter_starter`, Examples:, Types:, 1. The Seam: Why There Is No Domain Layer (+17 more)
 
-### Community 43 - "app_exception.dart"
-Cohesion: 0.17
-Nodes (16): AppException, CancelledException, code, fieldErrors, ForbiddenException, message, NetworkException, NotFoundException (+8 more)
+### Community 43 - "app.dart"
+Cohesion: 0.07
+Nodes (28): build, createState, dispose, initialRoute, initialRouteArgs, initState, _sessionExpiredSubscription, StarterApp (+20 more)
 
 ### Community 44 - "pagination_state.dart"
 Cohesion: 0.11
@@ -372,33 +382,33 @@ Nodes (7): ExampleCubit, build, _buildList, _buildSkeleton, ExampleScreen, _show
 Cohesion: 0.12
 Nodes (15): 1. Initialize Convergence Context, 2. Load Artifacts (Progressive Disclosure), 3. Build the Intent Inventory, 4. Assess the Codebase and Classify Findings, 5. Assign Severity, 6. Present the In-Session Findings Summary, 7. Append Convergence Tasks (or report converged), 8. Provide Next Actions (Handoff) (+7 more)
 
-### Community 49 - "package:injectable/injectable.dart"
-Cohesion: 0.12
-Nodes (7): close, _connectivityService, _init, refresh, _subscription, configureDependencies, getIt
+### Community 49 - "connectivity_cubit.dart"
+Cohesion: 0.11
+Nodes (11): close, _connectivityService, _init, refresh, _subscription, clearMappers, CustomErrorMapper, _customMappers (+3 more)
 
 ### Community 50 - "example_detail_screen.dart"
-Cohesion: 0.17
-Nodes (8): ExampleDetailBloc, _onLoad, _onRefresh, _repository, build, _buildSkeleton, ExampleDetailScreen, itemId
+Cohesion: 0.14
+Nodes (11): emit, ExampleDetailBloc, _onLoad, _onRefresh, _repository, ExampleDetailEvent, build, _buildContent (+3 more)
 
 ### Community 51 - "auth_interceptor.dart"
 Cohesion: 0.13
 Nodes (11): notifySessionExpired, onError, onRequest, onSessionExpired, _sessionExpiredController, _tokenProvider, getAccessToken, getRefreshToken (+3 more)
 
-### Community 52 - "crash_reporter.dart"
-Cohesion: 0.14
-Nodes (13): IAnalyticsService, logEvent, NoOpAnalyticsService, setCurrentScreen, setUserId, setUserProperty, ICrashReporter, init (+5 more)
+### Community 52 - "push_notification_service.dart"
+Cohesion: 0.13
+Nodes (12): IAnalyticsService, logEvent, NoOpAnalyticsService, setCurrentScreen, setUserId, setUserProperty, getToken, init (+4 more)
 
 ### Community 53 - "prefs_service.dart"
 Cohesion: 0.12
 Nodes (13): clearAll, getBool, getLocaleCode, getString, getThemeMode, hasSeenOnboarding, _prefs, remove (+5 more)
 
-### Community 54 - "app_empty_state.dart"
-Cohesion: 0.12
-Nodes (11): AppEmptyState, build, ctaText, description, icon, onCtaPressed, title, build (+3 more)
+### Community 54 - "item_card.dart"
+Cohesion: 0.25
+Nodes (4): build, item, ItemCard, onTap
 
 ### Community 55 - "app_error_state.dart"
-Cohesion: 0.16
-Nodes (10): AppErrorState, build, errorMessage, failure, onRetry, build, MaintenanceScreen, onRetry (+2 more)
+Cohesion: 0.11
+Nodes (16): AppEmptyState, build, ctaText, description, icon, onCtaPressed, title, build (+8 more)
 
 ### Community 56 - "Design System: Taste Standard"
 Cohesion: 0.13
@@ -412,21 +422,21 @@ Nodes (14): run, run, analyze, architecture-check, conventional-commit, format, 
 Cohesion: 0.14
 Nodes (10): clearTokens, delete, deleteAll, getAccessToken, getRefreshToken, hasTokens, read, saveTokens (+2 more)
 
-### Community 59 - "app.dart"
-Cohesion: 0.15
-Nodes (9): build, createState, dispose, initialRoute, initialRouteArgs, initState, _sessionExpiredSubscription, StarterApp (+1 more)
+### Community 59 - "theme_gallery_screen.dart"
+Cohesion: 0.09
+Nodes (21): build, _buildBottomNavPreview, _buildButtonsSection, _buildColorGrid, _buildContextTagsSection, _buildEmptyStatePreview, _buildFilterChipsSection, _buildInputsSection (+13 more)
 
 ### Community 60 - "bootstrap.dart"
-Cohesion: 0.14
-Nodes (7): bootstrap, initialRoute, initialRouteArgs, isCrashReporterReady, preInitErrors, startupTimer, widgetsBinding
+Cohesion: 0.09
+Nodes (12): bootstrap, initialRoute, initialRouteArgs, isCrashReporterReady, preInitErrors, startupTimer, widgetsBinding, ActionGuardConfig (+4 more)
 
 ### Community 61 - "route_names.dart"
-Cohesion: 0.14
-Nodes (13): error, example, exampleDetail, home, initial, maintenance, noInternet, notFound (+5 more)
+Cohesion: 0.13
+Nodes (14): error, example, exampleDetail, home, initial, maintenance, noInternet, notFound (+6 more)
 
-### Community 62 - "package:gotit/core/theme/app_colors.dart"
-Cohesion: 0.18
-Nodes (8): buildDarkTheme, colorScheme, fontFallback, fontFamily, buildLightTheme, colorScheme, fontFallback, fontFamily
+### Community 62 - "package:gotit/core/theme/app_spacing.dart"
+Cohesion: 0.11
+Nodes (12): buildDarkTheme, colorScheme, textTheme, buildLightTheme, colorScheme, textTheme, AppErrorBanner, build (+4 more)
 
 ### Community 63 - "check_architecture.dart"
 Cohesion: 0.14
@@ -434,7 +444,7 @@ Nodes (13): allowedCoreFeatureImporters, current, dartFiles, false, importRegex,
 
 ### Community 64 - "Agent Guidelines & Engineering Standards"
 Cohesion: 0.15
-Nodes (13): 10. Git Workflow, 11. Definition of Done, 1. Project Overview, 2. Architecture & The 8 Golden Rules, 3. Directory Map (`lib/core/`), 4. Mandatory New-Feature Checklist, 5. Reference Implementation, 6. Naming Conventions (+5 more)
+Nodes (13): 10. Git Workflow, 11. Definition of Done, 1. Project Overview, 2. Architecture & The 8 Golden Rules, 3. Directory Map (`lib/core/`), 4. Mandatory New-Feature Checklist (Spec-Driven & Design-First), 5. Reference Implementation, 6. Naming Conventions (+5 more)
 
 ### Community 65 - "app_avatar.dart"
 Cohesion: 0.15
@@ -452,9 +462,9 @@ Nodes (12): flutter_launcher_icons, adaptive_icon_background, adaptive_icon_fore
 Cohesion: 0.15
 Nodes (12): flutter_launcher_icons, adaptive_icon_background, adaptive_icon_foreground, android, image_path, ios, min_sdk_android, web (+4 more)
 
-### Community 69 - "package:gotit/core/errors/failure.dart"
-Cohesion: 0.15
-Nodes (7): clearMappers, CustomErrorMapper, _customMappers, ErrorMapper, map, register, mapDioException
+### Community 69 - "example_detail_state.dart"
+Cohesion: 0.22
+Nodes (15): _, class, ExampleDetailStatePatterns, hashCode, identical, null, operator, orElse (+7 more)
 
 ### Community 70 - "Feature Specification: [FEATURE NAME]"
 Cohesion: 0.15
@@ -484,9 +494,9 @@ Nodes (10): Checklist Format (REQUIRED), Completion Report, Done When, Mandatory
 Cohesion: 0.18
 Nodes (8): check, GateCheckResult, GateStatus, isBlocked, _isVersionBelow, _remoteConfig, status, updateUrl
 
-### Community 77 - "action_guard.dart"
-Cohesion: 0.18
-Nodes (5): ActionGuardConfig, crashReporter, _inFlightActionKeys, _isInactive, _logAndReportFailure
+### Community 77 - "example_state.dart"
+Cohesion: 0.22
+Nodes (16): _, class, ExampleStatePatterns, hashCode, identical, _items, null, operator (+8 more)
 
 ### Community 78 - "remote_config_service.dart"
 Cohesion: 0.20
@@ -508,17 +518,17 @@ Nodes (10): Core Principles, Governance, [PRINCIPLE_1_NAME], [PRINCIPLE_2_NAME],
 Cohesion: 0.18
 Nodes (10): background_color, description, display, icons, name, orientation, prefer_related_applications, short_name (+2 more)
 
-### Community 83 - "Contributing to `flutter_starter`"
-Cohesion: 0.20
-Nodes (7): 1. Branch Naming Conventions, 2. Commit Message Guidelines (Conventional Commits), 3. Architecture Rules & The 8 Golden Rules, 4. Mandatory Verification Pipeline, Contributing to `flutter_starter`, Examples:, Types:
+### Community 83 - "app_durations.dart"
+Cohesion: 0.15
+Nodes (10): AppDurations, checkDraw, defaultCurve, enterCurve, exitCurve, fast, medium, normal (+2 more)
 
 ### Community 84 - "22. STYLE VARIATION ENGINE"
 Cohesion: 0.20
 Nodes (10): 22. STYLE VARIATION ENGINE, Decorative Asset Set, Image Art Direction Bias, Motion-Implied Language, Palette Logic, Signature Component Set, Structure Bias, Texture / Surface Treatment (+2 more)
 
 ### Community 85 - "package:flutter/material.dart"
-Cohesion: 0.20
-Nodes (4): l10n, AppTheme, dark, light
+Cohesion: 0.33
+Nodes (3): AppTheme, dark, light
 
 ### Community 86 - "api_constants.dart"
 Cohesion: 0.20
@@ -548,13 +558,9 @@ Nodes (8): Complexity Tracking, Constitution Check, Documentation (this feature)
 Cohesion: 0.25
 Nodes (7): Anti-Examples: What NOT To Do, Checklist Purpose: "Unit Tests for English", Example Checklist Types & Sample Items, Execution Steps, Post-Execution Checks, Pre-Execution Checks, User Input
 
-### Community 93 - "package:flutter_bloc/flutter_bloc.dart"
-Cohesion: 0.29
-Nodes (3): ActionGuard, BaseCubit, emit
-
-### Community 94 - "AppSettingsCubit"
-Cohesion: 0.32
-Nodes (3): AppSettingsCubit, build, SettingsScreen
+### Community 94 - "responsive_layout.dart"
+Cohesion: 0.17
+Nodes (9): build, desktop, isDesktop, isMobile, isTablet, mobile, screenHeight, screenWidth (+1 more)
 
 ### Community 95 - "2. Supported Backend Variants"
 Cohesion: 0.25
@@ -565,23 +571,23 @@ Cohesion: 0.25
 Nodes (7): 1. Design Tokens Scale, 2. Locale-Aware Typography, 3. Semantic Theme Extensions (`AppColorsExtension`), Animation Durations & Curves (`AppDurations`), Design Tokens & Theming System, Radii (`AppRadius`), Spacing (`AppSpacing`)
 
 ### Community 97 - "storage_keys.dart"
-Cohesion: 0.25
+Cohesion: 0.22
 Nodes (7): accessToken, hasSeenOnboarding, locale, refreshToken, StorageKeys, themeMode, userId
 
-### Community 98 - "app_settings_cubit.dart"
-Cohesion: 0.25
-Nodes (5): _loadPackageInfo, _prefs, setLocale, setThemeMode, toggleThemeMode
+### Community 98 - "package:injectable/injectable.dart"
+Cohesion: 0.12
+Nodes (7): _loadPackageInfo, _prefs, setLocale, setThemeMode, toggleThemeMode, configureDependencies, getIt
 
 ### Community 99 - "app_typography.dart"
-Cohesion: 0.25
-Nodes (6): AppTypography, arabicFontFamily, fallbackFor, fontFamilyFor, getTextTheme, latinFontFamily
+Cohesion: 0.10
+Nodes (17): AppTypography, arabicFontFamily, body, bodyMedium, bodySm, button, caption, captionBold (+9 more)
 
 ### Community 100 - "validators.dart"
 Cohesion: 0.25
 Nodes (6): email, _emailRegex, FormValidators, matches, minLength, requiredField
 
 ### Community 101 - "item_remote_data_source.dart"
-Cohesion: 0.29
+Cohesion: 0.25
 Nodes (6): createItem, _dio, getItem, getItems, ItemRemoteDataSource, ItemRemoteDataSourceImpl
 
 ### Community 102 - "33. CATEGORY-SPECIFIC BIAS"
@@ -616,9 +622,9 @@ Nodes (5): Outline, Post-Execution Checks, Pre-Execution Checks, Scope Guard, Us
 Cohesion: 0.33
 Nodes (5): Deprecation Notice, Outline, Post-Execution Checks, Pre-Execution Checks, User Input
 
-### Community 110 - "app_error_banner.dart"
-Cohesion: 0.33
-Nodes (3): build, errorMessage, onDismiss
+### Community 110 - "State"
+Cohesion: 0.27
+Nodes (8): AppTextField, _AppTextFieldState, InfiniteScrollList, _InfiniteScrollListState, OnboardingScreen, _OnboardingScreenState, ThemeGalleryScreen, _ThemeGalleryScreenState
 
 ### Community 111 - "AppLocalizations"
 Cohesion: 0.33
@@ -660,25 +666,61 @@ Nodes (3): 1. Dependencies to Add to `pubspec.yaml`, 2. Architecture & Cache-Fir
 Cohesion: 0.50
 Nodes (3): 1. Dependencies to Add to `pubspec.yaml`, 2. Wiring Steps, Push Notifications Optional Module
 
+### Community 136 - "Spec Kit Design-First & Architecture Workflow"
+Cohesion: 0.22
+Nodes (8): 1. Specification (`/speckit-specify`), 2. Clarification (`/speckit-clarify`), 3. Architecture & Planning with Graphify (`/speckit-plan`), 4. UI Design Stage (`speckit-ui brief`), 5. UI Finalization & Plan Synchronization (`speckit-ui finalize`), 6. Task Generation (`/speckit-tasks`), 7. Implementation & Graphify Update (`/speckit-implement`), Spec Kit Design-First & Architecture Workflow
+
+### Community 137 - "app_snackbar.dart"
+Cohesion: 0.22
+Nodes (8): showAppErrorSnackBar, showAppInfoSnackBar, showAppSnackBar, showAppSuccessSnackBar, showErrorSnackBar, showInfoSnackBar, showSnackBar, showSuccessSnackBar
+
+### Community 138 - "dev_dependencies"
+Cohesion: 0.22
+Nodes (9): dev_dependencies, build_runner, flutter_launcher_icons, flutter_lints, flutter_test, freezed, injectable_generator, json_serializable (+1 more)
+
+### Community 139 - "6. Functional Requirements"
+Cohesion: 0.25
+Nodes (8): 6.1 Capture, 6.2 Extraction, 6.3 Tasks and Today view, 6.4 Reminders, 6.5 Widget, 6.6 Account and sync, 6.7 Limits, 6. Functional Requirements
+
+### Community 140 - "crash_reporter.dart"
+Cohesion: 0.29
+Nodes (7): ICrashReporter, init, log, NoOpCrashReporter, recordError, setCustomKey, setUserId
+
+### Community 141 - "app_icon_size.dart"
+Cohesion: 0.25
+Nodes (7): AppIconSize, lg, md, sm, xl, xs, xxl
+
+### Community 142 - "breakpoints.dart"
+Cohesion: 0.29
+Nodes (5): Breakpoints, desktop, largeDesktop, mobile, tablet
+
+### Community 143 - "BuildContext"
+Cohesion: 0.40
+Nodes (4): LocalizationContextExtension, AppColorsExtensionContext, ResponsiveContextExtension, AppSnackBarExtension
+
+### Community 144 - "5. Scope and Roadmap"
+Cohesion: 0.40
+Nodes (5): 5. Scope and Roadmap, Later, v1 (MVP), v2, v3
+
 ## Knowledge Gaps
-- **834 isolated node(s):** `XCTest`, `initialRoute`, `initialRouteArgs`, `_sessionExpiredSubscription`, `createState` (+829 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1596 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **15 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **957 isolated node(s):** `XCTest`, `initialRoute`, `initialRouteArgs`, `_sessionExpiredSubscription`, `createState` (+952 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1728 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **17 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `injectable` connect `example_screen.dart` to `example_detail_screen.dart`, `dependencies`?**
-  _High betweenness centrality (0.025) - this node is a cross-community bridge._
+- **Why does `_` connect `_` to `package:injectable/injectable.dart`, `connectivity_service.dart`, `item_remote_data_source.dart`, `app.dart`, `crash_reporter.dart`, `remote_config_service.dart`, `example_screen.dart`, `example_detail_screen.dart`, `auth_interceptor.dart`, `push_notification_service.dart`, `prefs_service.dart`, `example_cubit.dart`, `logging_interceptor.dart`, `package:gotit/core/theme/app_spacing.dart`?**
+  _High betweenness centrality (0.023) - this node is a cross-community bridge._
 - **What connects `XCTest`, `initialRoute`, `initialRouteArgs` to the rest of the system?**
-  _834 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _957 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `app_localizations.dart` be split into smaller, more focused modules?**
   _Cohesion score 0.023529411764705882 - nodes in this community are weakly interconnected._
-- **Why does `_` connect `_` to `connectivity_service.dart`, `item_remote_data_source.dart`, `package:gotit/core/errors/failure.dart`, `remote_config_service.dart`, `example_screen.dart`, `package:injectable/injectable.dart`, `example_detail_screen.dart`, `auth_interceptor.dart`, `crash_reporter.dart`, `prefs_service.dart`, `example_cubit.dart`, `logging_interceptor.dart`, `AppSettingsCubit`, `package:gotit/core/theme/app_spacing.dart`?**
-  _High betweenness centrality (0.025) - this node is a cross-community bridge._
+- **Why does `ExampleDetailBloc` connect `example_detail_screen.dart` to `route_providers.dart`, `example_detail_state.dart`, `example_screen.dart`, `_`, `ActionGuard`?**
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
 - **Should `app_localizations_ar.dart` be split into smaller, more focused modules?**
-  _Cohesion score 0.02702702702702703 - nodes in this community are weakly interconnected._
-- **Why does `dependencies` connect `dependencies` to `example_screen.dart`?**
-  _High betweenness centrality (0.020) - this node is a cross-community bridge._
-- **Should `app_localizations_en.dart` be split into smaller, more focused modules?**
   _Cohesion score 0.0273972602739726 - nodes in this community are weakly interconnected._
+- **Why does `ConnectivityCubit` connect `package:gotit/core/theme/app_spacing.dart` to `connectivity_state.dart`, `connectivity_cubit.dart`, `app.dart`, `_`?**
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
+- **Should `app_localizations_en.dart` be split into smaller, more focused modules?**
+  _Cohesion score 0.02702702702702703 - nodes in this community are weakly interconnected._

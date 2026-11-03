@@ -37,6 +37,12 @@ class AppRouter {
           settings: settings,
         );
 
+      case RouteNames.themeGallery:
+        return MaterialPageRoute(
+          builder: (_) => buildThemeGalleryRoute(),
+          settings: settings,
+        );
+
       case RouteNames.noInternet:
         return MaterialPageRoute(
           builder: (_) => buildNoInternetRoute(),

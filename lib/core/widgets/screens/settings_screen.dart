@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gotit/core/cubit/app_settings_cubit.dart';
 import 'package:gotit/core/cubit/app_settings_state.dart';
 import 'package:gotit/core/l10n/l10n_extension.dart';
+import 'package:gotit/core/routes/route_names.dart';
 import 'package:gotit/core/theme/app_spacing.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -123,6 +124,18 @@ class SettingsScreen extends StatelessWidget {
                           color: theme.colorScheme.onSurfaceVariant,
                         ),
                       ),
+                    ),
+                    const Divider(height: 1),
+                    ListTile(
+                      leading: const Icon(Icons.palette_outlined),
+                      title: const Text('Theme Gallery (Dev)'),
+                      subtitle: const Text(
+                        'Inspect DESIGN.md tokens & components',
+                      ),
+                      trailing: const Icon(Icons.chevron_right_rounded),
+                      onTap: () => Navigator.of(
+                        context,
+                      ).pushNamed(RouteNames.themeGallery),
                     ),
                   ],
                 ),

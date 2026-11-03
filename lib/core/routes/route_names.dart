@@ -6,6 +6,7 @@ class RouteNames {
   static const String onboarding = '/onboarding';
   static const String home = '/home';
   static const String settings = '/settings';
+  static const String themeGallery = '/theme-gallery';
   static const String example = '/example';
   static const String exampleDetail = '/example-detail';
   static const String noInternet = '/no-internet';

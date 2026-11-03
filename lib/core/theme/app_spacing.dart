@@ -1,22 +1,35 @@
 import 'package:flutter/material.dart';
 
-/// Semantic layout spacing and dimensional tokens.
+/// Semantic layout spacing and dimensional tokens defined in DESIGN.md.
 class AppSpacing {
   AppSpacing._();
 
   static const double zero = 0.0;
-  static const double xxs = 2.0;
-  static const double xs = 4.0;
-  static const double sm = 8.0;
-  static const double md = 12.0;
-  static const double lg = 16.0;
-  static const double xl = 20.0;
-  static const double xxl = 24.0;
-  static const double xxxl = 32.0;
-  static const double huge = 48.0;
+  static const double xxs = 4.0;
+  static const double xs = 8.0;
+  static const double sm = 12.0;
+  static const double md = 16.0;
+  static const double lg = 20.0;
+  static const double xl = 24.0;
+  static const double xxl = 32.0;
 
+  // Specific semantic dimensions from DESIGN.md
+  static const double screenGutter = 16.0;
+  static const double touchTarget = 48.0;
+  static const double minTouchTarget =
+      touchTarget; // >= 48dp per constitution & DESIGN.md
+  static const double rowMinHeight = 56.0;
+  static const double checkboxSize = 24.0;
+  static const double chipHeight = 36.0;
+  static const double inputHeight = 48.0;
+  static const double buttonHeight = 48.0;
+  static const double fabSize = 56.0;
+  static const double bottomNavHeight = 64.0;
+
+  // Additional convenience & legacy tokens
+  static const double xxxl = 40.0;
+  static const double huge = 48.0;
   static const double fabClearance = 80.0;
-  static const double minTouchTarget = 48.0;
 
   // Horizontal gaps
   static const SizedBox gapWXxs = SizedBox(width: xxs);
@@ -46,9 +59,13 @@ class AppSpacing {
   static const EdgeInsets edgeInsetsAllXl = EdgeInsets.all(xl);
   static const EdgeInsets edgeInsetsAllXxl = EdgeInsets.all(xxl);
 
+  // Screen gutter margin (16px per DESIGN.md & AGENTS.md)
   static const EdgeInsets edgeInsetsPage = EdgeInsets.symmetric(
-    horizontal: lg,
-    vertical: lg,
+    horizontal: screenGutter,
+    vertical: screenGutter,
+  );
+  static const EdgeInsets edgeInsetsScreenGutter = EdgeInsets.symmetric(
+    horizontal: screenGutter,
   );
   static const EdgeInsets edgeInsetsHLg = EdgeInsets.symmetric(horizontal: lg);
   static const EdgeInsets edgeInsetsHXl = EdgeInsets.symmetric(horizontal: xl);
