@@ -245,4 +245,164 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get getStarted => 'Get Started';
+
+  @override
+  String get todayNav => 'Today';
+
+  @override
+  String get tasksNav => 'Tasks';
+
+  @override
+  String get todayTitle => 'Today';
+
+  @override
+  String get overdueSection => 'Overdue';
+
+  @override
+  String get dueTodaySection => 'Due Today';
+
+  @override
+  String get startTodaySection => 'Start Today';
+
+  @override
+  String get allClearTitle => 'All clear for today';
+
+  @override
+  String get allClearSubtitle => 'Take a breath or plan ahead.';
+
+  @override
+  String get addTask => 'Add a task';
+
+  @override
+  String get tasksTitle => 'Tasks';
+
+  @override
+  String get activeStatus => 'Active';
+
+  @override
+  String get completedStatus => 'Completed';
+
+  @override
+  String get allStatus => 'All';
+
+  @override
+  String get allContexts => 'All';
+
+  @override
+  String get newContext => '+ New';
+
+  @override
+  String get dailyMomentum => 'Daily Momentum';
+
+  @override
+  String completedRatio(int completed, int total, int percent) {
+    return '$completed of $total completed ($percent%)';
+  }
+
+  @override
+  String get noTasksInContext => 'No tasks in this context.';
+
+  @override
+  String get taskDetailTitle => 'Task Detail';
+
+  @override
+  String get checklistTitle => 'Checklist';
+
+  @override
+  String checklistProgress(int completed, int total) {
+    return '$completed of $total completed';
+  }
+
+  @override
+  String estimatedEffort(String effort) {
+    return 'Estimated effort: $effort';
+  }
+
+  @override
+  String get notesTitle => 'Notes';
+
+  @override
+  String get deleteTaskConfirmTitle => 'Delete this task?';
+
+  @override
+  String get deleteTaskConfirmMessage =>
+      'This will remove the task and its checklist items.';
+
+  @override
+  String get undo => 'Undo';
+
+  @override
+  String get taskDeleted => 'Task deleted';
+
+  @override
+  String get newTaskTitle => 'New Task';
+
+  @override
+  String get editTaskTitle => 'Edit Task';
+
+  @override
+  String get taskTitleLabel => 'Title';
+
+  @override
+  String get taskTitleHint => 'Task title';
+
+  @override
+  String get titleRequiredError => 'Title cannot be empty';
+
+  @override
+  String get scheduleLabel => 'Schedule';
+
+  @override
+  String get allDay => 'All-day';
+
+  @override
+  String get contextLabel => 'Context';
+
+  @override
+  String get effortEstimateLabel => 'Estimated Effort';
+
+  @override
+  String get notesHint => 'Add notes or details...';
+
+  @override
+  String get addChecklistItem => 'Add checklist item';
+
+  @override
+  String get saveTask => 'Save Task';
+
+  @override
+  String get manageContextsTitle => 'Manage Contexts';
+
+  @override
+  String get contextNameHint => 'Context name (e.g. Finance, Fitness)';
+
+  @override
+  String get addContext => 'Add Context';
+
+  @override
+  String get contextAlreadyExists => 'Context already exists';
+
+  @override
+  String deleteContextConfirmTitle(String name) {
+    return 'Delete \"$name\"?';
+  }
+
+  @override
+  String get deleteContextConfirmMessage =>
+      'Tasks with this context will be kept and set to No Context.';
+
+  @override
+  String get noContext => 'No Context';
+
+  @override
+  String get defaultContext => 'Default';
+
+  @override
+  String get contextWork => 'Work';
+
+  @override
+  String get contextHome => 'Home';
+
+  @override
+  String get contextPersonal => 'Personal';
 }

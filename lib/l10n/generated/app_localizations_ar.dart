@@ -9,7 +9,7 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get appTitle => 'قالب البداية لفلاتر';
+  String get appTitle => 'Gotit';
 
   @override
   String get ok => 'حسناً';
@@ -246,4 +246,164 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get getStarted => 'ابدأ الآن';
+
+  @override
+  String get todayNav => 'اليوم';
+
+  @override
+  String get tasksNav => 'المهام';
+
+  @override
+  String get todayTitle => 'اليوم';
+
+  @override
+  String get overdueSection => 'المتأخرة';
+
+  @override
+  String get dueTodaySection => 'اليوم';
+
+  @override
+  String get startTodaySection => 'البدء اليوم';
+
+  @override
+  String get allClearTitle => 'لا توجد مهام متبقية لليوم';
+
+  @override
+  String get allClearSubtitle => 'خذ قسطاً من الراحة أو خطط للمستقبل.';
+
+  @override
+  String get addTask => 'إضافة مهمة';
+
+  @override
+  String get tasksTitle => 'المهام';
+
+  @override
+  String get activeStatus => 'النشطة';
+
+  @override
+  String get completedStatus => 'المكتملة';
+
+  @override
+  String get allStatus => 'الكل';
+
+  @override
+  String get allContexts => 'الكل';
+
+  @override
+  String get newContext => '+ جديد';
+
+  @override
+  String get dailyMomentum => 'إنجاز اليوم';
+
+  @override
+  String completedRatio(int completed, int total, int percent) {
+    return '$completed من $total مكتملة ($percent%)';
+  }
+
+  @override
+  String get noTasksInContext => 'لا توجد مهام في هذا التصنيف.';
+
+  @override
+  String get taskDetailTitle => 'تفاصيل المهمة';
+
+  @override
+  String get checklistTitle => 'قائمة المهام الفرعية';
+
+  @override
+  String checklistProgress(int completed, int total) {
+    return '$completed من $total مكتملة';
+  }
+
+  @override
+  String estimatedEffort(String effort) {
+    return 'الجهد المقدر: $effort';
+  }
+
+  @override
+  String get notesTitle => 'الملاحظات';
+
+  @override
+  String get deleteTaskConfirmTitle => 'حذف هذه المهمة؟';
+
+  @override
+  String get deleteTaskConfirmMessage =>
+      'سيؤدي هذا إلى إزالة المهمة وجميع عناصرها الفرعية.';
+
+  @override
+  String get undo => 'تراجع';
+
+  @override
+  String get taskDeleted => 'تم حذف المهمة';
+
+  @override
+  String get newTaskTitle => 'مهمة جديدة';
+
+  @override
+  String get editTaskTitle => 'تعديل المهمة';
+
+  @override
+  String get taskTitleLabel => 'العنوان';
+
+  @override
+  String get taskTitleHint => 'عنوان المهمة';
+
+  @override
+  String get titleRequiredError => 'لا يمكن ترك العنوان فارغاً';
+
+  @override
+  String get scheduleLabel => 'الموعد';
+
+  @override
+  String get allDay => 'طوال اليوم';
+
+  @override
+  String get contextLabel => 'التصنيف';
+
+  @override
+  String get effortEstimateLabel => 'الجهد المقدر';
+
+  @override
+  String get notesHint => 'أضف ملاحظات أو تفاصيل...';
+
+  @override
+  String get addChecklistItem => 'إضافة عنصر فرعي';
+
+  @override
+  String get saveTask => 'حفظ المهمة';
+
+  @override
+  String get manageContextsTitle => 'إدارة التصنيفات';
+
+  @override
+  String get contextNameHint => 'اسم التصنيف (مثل: المالية، الصحة)';
+
+  @override
+  String get addContext => 'إضافة تصنيف';
+
+  @override
+  String get contextAlreadyExists => 'هذا التصنيف موجود بالفعل';
+
+  @override
+  String deleteContextConfirmTitle(String name) {
+    return 'حذف \"$name\"؟';
+  }
+
+  @override
+  String get deleteContextConfirmMessage =>
+      'سيتم الاحتفاظ بالمهام المرتبطة بهذا التصنيف وتعيينها كـ \"بدون تصنيف\".';
+
+  @override
+  String get noContext => 'بدون تصنيف';
+
+  @override
+  String get defaultContext => 'افتراضي';
+
+  @override
+  String get contextWork => 'العمل';
+
+  @override
+  String get contextHome => 'المنزل';
+
+  @override
+  String get contextPersonal => 'شخصي';
 }
