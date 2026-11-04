@@ -74,12 +74,12 @@ description: "Task list for Phase 2: Resilient Task Reminders & Notifications"
 **Independent Test**: Create a task due at 4:00 PM with an effort estimate of 45 minutes, verify that a distinct start-working notification is scheduled for 3:15 PM with body *"Time to start working on [Task] — due in 45m"*.
 
 ### Tests for User Story 2
-- [ ] T022 [P] [US2] Write unit tests for start-working reminder trigger time calculation (`dueDate - effortMinutes`) and past-time suppression in `test/core/services/reminder_service_start_working_test.dart`
-- [ ] T025 [P] [US2] Write widget tests for start-working helper card visibility and dynamic calculation in `test/features/tasks/ui/widgets/start_working_helper_test.dart`
+- [X] T022 [P] [US2] Write unit tests for start-working reminder trigger time calculation (`dueDate - effortMinutes`) and past-time suppression in `test/core/services/reminder_service_start_working_test.dart`
+- [X] T025 [P] [US2] Write widget tests for start-working helper card visibility and dynamic calculation in `test/features/tasks/ui/widgets/start_working_helper_test.dart`
 
 ### Implementation for User Story 2
-- [ ] T023 [US2] Implement start-working reminder scheduling in `ReminderServiceImpl.syncRemindersForTask` in `lib/core/services/reminder_service.dart` to calculate trigger time `due - effort` and schedule secondary notification when `effortMinutes > 0` and target time is in the future
-- [ ] T024 [US2] Add `StartWorkingHelperCard` to `TaskFormSheet` in `lib/features/tasks/ui/widgets/task_form_sheet.dart` dynamically displaying lead-time notice (e.g., *"🔔 Start-working reminder will sound at 3:15 PM (45m lead time)"*) when effort is selected
+- [X] T023 [US2] Implement start-working reminder scheduling in `ReminderServiceImpl.syncRemindersForTask` in `lib/core/services/reminder_service.dart` to calculate trigger time `due - effort` and schedule secondary notification when `effortMinutes > 0` and target time is in the future
+- [X] T024 [US2] Add `StartWorkingHelperCard` to `TaskFormSheet` in `lib/features/tasks/ui/widgets/task_form_sheet.dart` dynamically displaying lead-time notice (e.g., *"🔔 Start-working reminder will sound at 3:15 PM (45m lead time)"*) when effort is selected
 
 **Checkpoint**: User Stories 1 & 2 functional and independently testable.
 
