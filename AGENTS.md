@@ -146,7 +146,9 @@ dart run tool/rename.dart --name my_app --org com.mycompany --display "My App"
 
 ## 10. Git Workflow
 - Branches: `feat/<name>`, `fix/<name>`, `refactor/<name>`.
-- Conventional Commits: `feat(items): add pagination support`, `fix(auth): handle token refresh lock`.
+- Conventional Commits: Enforce structured format from `.agents/rules/commit-convention.md`:
+  `<type>(<feature>/<layer>): <imperative subject (max 72 chars, no period)>` with bulleted body detailing changes, technical symbols, and rationale.
+  Examples: `feat(tasks/ui): add task form modal`, `feat(tasks/data): define Drift SQLite tables`.
 
 ## 11. Definition of Done
 A task is done only when:
