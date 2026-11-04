@@ -51,17 +51,17 @@ description: "Task list for Phase 2: Resilient Task Reminders & Notifications"
 **Independent Test**: Create a task with a due time 2 minutes in the future and reminder set to "At due time", verify notification chimes in notification shade with title, context tag, and due time, tapping which opens task details.
 
 ### Tests for User Story 1
-- [ ] T013 [P] [US1] Write unit tests for due reminder trigger time calculation and deterministic notification ID generation in `test/core/services/reminder_service_test.dart`
-- [ ] T021 [P] [US1] Write widget tests for `TaskFormSheet` reminder toggle, lead time selection, and all-day alert time picker in `test/features/tasks/ui/widgets/task_form_sheet_reminders_test.dart`
+- [X] T013 [P] [US1] Write unit tests for due reminder trigger time calculation and deterministic notification ID generation in `test/core/services/reminder_service_test.dart`
+- [X] T021 [P] [US1] Write widget tests for `TaskFormSheet` reminder toggle, lead time selection, and all-day alert time picker in `test/features/tasks/ui/widgets/task_form_sheet_reminders_test.dart`
 
 ### Implementation for User Story 1
-- [ ] T014 [P] [US1] Create shared reusable `ReminderLeadTimeChips` widget in `lib/core/widgets/reminder_lead_time_chips.dart` with selectable full-pill chips (`At due time`, `5m before`, `15m before [Default]`, `30m before`, `1h before`, `1d before`) consuming `AppColors.accent` and `AppColors.accentSoft`
-- [ ] T015 [US1] Implement due reminder scheduling in `ReminderServiceImpl.syncRemindersForTask` (`lib/core/services/reminder_service.dart`) scheduling exact or inexact alarms via `flutter_local_notifications`'s `zonedSchedule`
-- [ ] T016 [US1] Update `TaskLocalDataSource` and `TaskLocalDataSourceImpl` in `lib/features/tasks/data/datasources/task_local_data_source.dart` and `lib/features/tasks/data/datasources/task_local_data_source_impl.dart` with reminder CRUD methods (`insertReminder`, `getRemindersForTask`, `updateReminderStatus`, `deleteRemindersForTask`)
-- [ ] T017 [US1] Update `TaskRepositoryImpl` in `lib/features/tasks/data/repositories/task_repository_impl.dart` to invoke `reminderService.syncRemindersForTask(task)` upon `createTask` and `updateTask`
-- [ ] T018 [US1] Update `TaskFormCubit` and `TaskFormState` in `lib/features/tasks/cubit/task_form_cubit.dart` and `lib/features/tasks/cubit/task_form_state.dart` with reminder toggle (`toggleReminder`), lead time selection (`setReminderLeadMinutes`), and all-day alert time (`setAllDayReminderTime`)
-- [ ] T019 [US1] Add Reminders section to `TaskFormSheet` in `lib/features/tasks/ui/widgets/task_form_sheet.dart` matching approved mockup `01-reminders-modal-en-light.png` with reminder switch, `ReminderLeadTimeChips`, and all-day time picker
-- [ ] T020 [US1] Update `TaskCard` in `lib/features/tasks/ui/widgets/task_card.dart` to render subtle reminder bell icon badge (`🔔 15m`) next to due time matching approved mockup `05-task-card-reminder-en.png`
+- [X] T014 [P] [US1] Create shared reusable `ReminderLeadTimeChips` widget in `lib/core/widgets/reminder_lead_time_chips.dart` with selectable full-pill chips (`At due time`, `5m before`, `15m before [Default]`, `30m before`, `1h before`, `1d before`) consuming `AppColors.accent` and `AppColors.accentSoft`
+- [X] T015 [US1] Implement due reminder scheduling in `ReminderServiceImpl.syncRemindersForTask` (`lib/core/services/reminder_service.dart`) scheduling exact or inexact alarms via `flutter_local_notifications`'s `zonedSchedule`
+- [X] T016 [US1] Update `TaskLocalDataSource` and `TaskLocalDataSourceImpl` in `lib/features/tasks/data/datasources/task_local_data_source.dart` and `lib/features/tasks/data/datasources/task_local_data_source_impl.dart` with reminder CRUD methods (`insertReminder`, `getRemindersForTask`, `updateReminderStatus`, `deleteRemindersForTask`)
+- [X] T017 [US1] Update `TaskRepositoryImpl` in `lib/features/tasks/data/repositories/task_repository_impl.dart` to invoke `reminderService.syncRemindersForTask(task)` upon `createTask` and `updateTask`
+- [X] T018 [US1] Update `TaskFormCubit` and `TaskFormState` in `lib/features/tasks/cubit/task_form_cubit.dart` and `lib/features/tasks/cubit/task_form_state.dart` with reminder toggle (`toggleReminder`), lead time selection (`setReminderLeadMinutes`), and all-day alert time (`setAllDayReminderTime`)
+- [X] T019 [US1] Add Reminders section to `TaskFormSheet` in `lib/features/tasks/ui/widgets/task_form_sheet.dart` matching approved mockup `01-reminders-modal-en-light.png` with reminder switch, `ReminderLeadTimeChips`, and all-day time picker
+- [X] T020 [US1] Update `TaskCard` in `lib/features/tasks/ui/widgets/task_card.dart` to render subtle reminder bell icon badge (`🔔 15m`) next to due time matching approved mockup `05-task-card-reminder-en.png`
 
 **Checkpoint**: User Story 1 complete and independently testable as an MVP.
 

@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TaskFormState {
 
- LoadStatus get status; String? get taskId; String get title; DateTime? get dueDate; bool get isAllDay; String? get contextId; String get notes; int? get effortMinutes; List<String> get checklistDrafts; String? get titleError; Failure? get failure;
+ LoadStatus get status; String? get taskId; String get title; DateTime? get dueDate; bool get isAllDay; String? get contextId; String get notes; int? get effortMinutes; List<String> get checklistDrafts; bool get isReminderEnabled; int? get reminderLeadMinutes; String? get allDayReminderTime; String? get titleError; Failure? get failure;
 /// Create a copy of TaskFormState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $TaskFormStateCopyWith<TaskFormState> get copyWith => _$TaskFormStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskFormState&&(identical(other.status, status) || other.status == status)&&(identical(other.taskId, taskId) || other.taskId == taskId)&&(identical(other.title, title) || other.title == title)&&(identical(other.dueDate, dueDate) || other.dueDate == dueDate)&&(identical(other.isAllDay, isAllDay) || other.isAllDay == isAllDay)&&(identical(other.contextId, contextId) || other.contextId == contextId)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.effortMinutes, effortMinutes) || other.effortMinutes == effortMinutes)&&const DeepCollectionEquality().equals(other.checklistDrafts, checklistDrafts)&&(identical(other.titleError, titleError) || other.titleError == titleError)&&(identical(other.failure, failure) || other.failure == failure));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskFormState&&(identical(other.status, status) || other.status == status)&&(identical(other.taskId, taskId) || other.taskId == taskId)&&(identical(other.title, title) || other.title == title)&&(identical(other.dueDate, dueDate) || other.dueDate == dueDate)&&(identical(other.isAllDay, isAllDay) || other.isAllDay == isAllDay)&&(identical(other.contextId, contextId) || other.contextId == contextId)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.effortMinutes, effortMinutes) || other.effortMinutes == effortMinutes)&&const DeepCollectionEquality().equals(other.checklistDrafts, checklistDrafts)&&(identical(other.isReminderEnabled, isReminderEnabled) || other.isReminderEnabled == isReminderEnabled)&&(identical(other.reminderLeadMinutes, reminderLeadMinutes) || other.reminderLeadMinutes == reminderLeadMinutes)&&(identical(other.allDayReminderTime, allDayReminderTime) || other.allDayReminderTime == allDayReminderTime)&&(identical(other.titleError, titleError) || other.titleError == titleError)&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,taskId,title,dueDate,isAllDay,contextId,notes,effortMinutes,const DeepCollectionEquality().hash(checklistDrafts),titleError,failure);
+int get hashCode => Object.hash(runtimeType,status,taskId,title,dueDate,isAllDay,contextId,notes,effortMinutes,const DeepCollectionEquality().hash(checklistDrafts),isReminderEnabled,reminderLeadMinutes,allDayReminderTime,titleError,failure);
 
 @override
 String toString() {
-  return 'TaskFormState(status: $status, taskId: $taskId, title: $title, dueDate: $dueDate, isAllDay: $isAllDay, contextId: $contextId, notes: $notes, effortMinutes: $effortMinutes, checklistDrafts: $checklistDrafts, titleError: $titleError, failure: $failure)';
+  return 'TaskFormState(status: $status, taskId: $taskId, title: $title, dueDate: $dueDate, isAllDay: $isAllDay, contextId: $contextId, notes: $notes, effortMinutes: $effortMinutes, checklistDrafts: $checklistDrafts, isReminderEnabled: $isReminderEnabled, reminderLeadMinutes: $reminderLeadMinutes, allDayReminderTime: $allDayReminderTime, titleError: $titleError, failure: $failure)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $TaskFormStateCopyWith<$Res>  {
   factory $TaskFormStateCopyWith(TaskFormState value, $Res Function(TaskFormState) _then) = _$TaskFormStateCopyWithImpl;
 @useResult
 $Res call({
- LoadStatus status, String? taskId, String title, DateTime? dueDate, bool isAllDay, String? contextId, String notes, int? effortMinutes, List<String> checklistDrafts, String? titleError, Failure? failure
+ LoadStatus status, String? taskId, String title, DateTime? dueDate, bool isAllDay, String? contextId, String notes, int? effortMinutes, List<String> checklistDrafts, bool isReminderEnabled, int? reminderLeadMinutes, String? allDayReminderTime, String? titleError, Failure? failure
 });
 
 
@@ -62,7 +62,7 @@ class _$TaskFormStateCopyWithImpl<$Res>
 
 /// Create a copy of TaskFormState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? taskId = freezed,Object? title = null,Object? dueDate = freezed,Object? isAllDay = null,Object? contextId = freezed,Object? notes = null,Object? effortMinutes = freezed,Object? checklistDrafts = null,Object? titleError = freezed,Object? failure = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? taskId = freezed,Object? title = null,Object? dueDate = freezed,Object? isAllDay = null,Object? contextId = freezed,Object? notes = null,Object? effortMinutes = freezed,Object? checklistDrafts = null,Object? isReminderEnabled = null,Object? reminderLeadMinutes = freezed,Object? allDayReminderTime = freezed,Object? titleError = freezed,Object? failure = freezed,}) {
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as LoadStatus,taskId: freezed == taskId ? _self.taskId : taskId // ignore: cast_nullable_to_non_nullable
@@ -73,7 +73,10 @@ as bool,contextId: freezed == contextId ? _self.contextId : contextId // ignore:
 as String?,notes: null == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
 as String,effortMinutes: freezed == effortMinutes ? _self.effortMinutes : effortMinutes // ignore: cast_nullable_to_non_nullable
 as int?,checklistDrafts: null == checklistDrafts ? _self.checklistDrafts : checklistDrafts // ignore: cast_nullable_to_non_nullable
-as List<String>,titleError: freezed == titleError ? _self.titleError : titleError // ignore: cast_nullable_to_non_nullable
+as List<String>,isReminderEnabled: null == isReminderEnabled ? _self.isReminderEnabled : isReminderEnabled // ignore: cast_nullable_to_non_nullable
+as bool,reminderLeadMinutes: freezed == reminderLeadMinutes ? _self.reminderLeadMinutes : reminderLeadMinutes // ignore: cast_nullable_to_non_nullable
+as int?,allDayReminderTime: freezed == allDayReminderTime ? _self.allDayReminderTime : allDayReminderTime // ignore: cast_nullable_to_non_nullable
+as String?,titleError: freezed == titleError ? _self.titleError : titleError // ignore: cast_nullable_to_non_nullable
 as String?,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
 as Failure?,
   ));
@@ -160,10 +163,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( LoadStatus status,  String? taskId,  String title,  DateTime? dueDate,  bool isAllDay,  String? contextId,  String notes,  int? effortMinutes,  List<String> checklistDrafts,  String? titleError,  Failure? failure)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( LoadStatus status,  String? taskId,  String title,  DateTime? dueDate,  bool isAllDay,  String? contextId,  String notes,  int? effortMinutes,  List<String> checklistDrafts,  bool isReminderEnabled,  int? reminderLeadMinutes,  String? allDayReminderTime,  String? titleError,  Failure? failure)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TaskFormState() when $default != null:
-return $default(_that.status,_that.taskId,_that.title,_that.dueDate,_that.isAllDay,_that.contextId,_that.notes,_that.effortMinutes,_that.checklistDrafts,_that.titleError,_that.failure);case _:
+return $default(_that.status,_that.taskId,_that.title,_that.dueDate,_that.isAllDay,_that.contextId,_that.notes,_that.effortMinutes,_that.checklistDrafts,_that.isReminderEnabled,_that.reminderLeadMinutes,_that.allDayReminderTime,_that.titleError,_that.failure);case _:
   return orElse();
 
 }
@@ -181,10 +184,10 @@ return $default(_that.status,_that.taskId,_that.title,_that.dueDate,_that.isAllD
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( LoadStatus status,  String? taskId,  String title,  DateTime? dueDate,  bool isAllDay,  String? contextId,  String notes,  int? effortMinutes,  List<String> checklistDrafts,  String? titleError,  Failure? failure)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( LoadStatus status,  String? taskId,  String title,  DateTime? dueDate,  bool isAllDay,  String? contextId,  String notes,  int? effortMinutes,  List<String> checklistDrafts,  bool isReminderEnabled,  int? reminderLeadMinutes,  String? allDayReminderTime,  String? titleError,  Failure? failure)  $default,) {final _that = this;
 switch (_that) {
 case _TaskFormState():
-return $default(_that.status,_that.taskId,_that.title,_that.dueDate,_that.isAllDay,_that.contextId,_that.notes,_that.effortMinutes,_that.checklistDrafts,_that.titleError,_that.failure);case _:
+return $default(_that.status,_that.taskId,_that.title,_that.dueDate,_that.isAllDay,_that.contextId,_that.notes,_that.effortMinutes,_that.checklistDrafts,_that.isReminderEnabled,_that.reminderLeadMinutes,_that.allDayReminderTime,_that.titleError,_that.failure);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -201,10 +204,10 @@ return $default(_that.status,_that.taskId,_that.title,_that.dueDate,_that.isAllD
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( LoadStatus status,  String? taskId,  String title,  DateTime? dueDate,  bool isAllDay,  String? contextId,  String notes,  int? effortMinutes,  List<String> checklistDrafts,  String? titleError,  Failure? failure)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( LoadStatus status,  String? taskId,  String title,  DateTime? dueDate,  bool isAllDay,  String? contextId,  String notes,  int? effortMinutes,  List<String> checklistDrafts,  bool isReminderEnabled,  int? reminderLeadMinutes,  String? allDayReminderTime,  String? titleError,  Failure? failure)?  $default,) {final _that = this;
 switch (_that) {
 case _TaskFormState() when $default != null:
-return $default(_that.status,_that.taskId,_that.title,_that.dueDate,_that.isAllDay,_that.contextId,_that.notes,_that.effortMinutes,_that.checklistDrafts,_that.titleError,_that.failure);case _:
+return $default(_that.status,_that.taskId,_that.title,_that.dueDate,_that.isAllDay,_that.contextId,_that.notes,_that.effortMinutes,_that.checklistDrafts,_that.isReminderEnabled,_that.reminderLeadMinutes,_that.allDayReminderTime,_that.titleError,_that.failure);case _:
   return null;
 
 }
@@ -216,7 +219,7 @@ return $default(_that.status,_that.taskId,_that.title,_that.dueDate,_that.isAllD
 
 
 class _TaskFormState implements TaskFormState {
-  const _TaskFormState({this.status = LoadStatus.initial, this.taskId, this.title = '', this.dueDate, this.isAllDay = false, this.contextId, this.notes = '', this.effortMinutes, final  List<String> checklistDrafts = const <String>[], this.titleError, this.failure}): _checklistDrafts = checklistDrafts;
+  const _TaskFormState({this.status = LoadStatus.initial, this.taskId, this.title = '', this.dueDate, this.isAllDay = false, this.contextId, this.notes = '', this.effortMinutes, final  List<String> checklistDrafts = const <String>[], this.isReminderEnabled = false, this.reminderLeadMinutes, this.allDayReminderTime, this.titleError, this.failure}): _checklistDrafts = checklistDrafts;
   
 
 @override@JsonKey() final  LoadStatus status;
@@ -234,6 +237,9 @@ class _TaskFormState implements TaskFormState {
   return EqualUnmodifiableListView(_checklistDrafts);
 }
 
+@override@JsonKey() final  bool isReminderEnabled;
+@override final  int? reminderLeadMinutes;
+@override final  String? allDayReminderTime;
 @override final  String? titleError;
 @override final  Failure? failure;
 
@@ -247,16 +253,16 @@ _$TaskFormStateCopyWith<_TaskFormState> get copyWith => __$TaskFormStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TaskFormState&&(identical(other.status, status) || other.status == status)&&(identical(other.taskId, taskId) || other.taskId == taskId)&&(identical(other.title, title) || other.title == title)&&(identical(other.dueDate, dueDate) || other.dueDate == dueDate)&&(identical(other.isAllDay, isAllDay) || other.isAllDay == isAllDay)&&(identical(other.contextId, contextId) || other.contextId == contextId)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.effortMinutes, effortMinutes) || other.effortMinutes == effortMinutes)&&const DeepCollectionEquality().equals(other._checklistDrafts, _checklistDrafts)&&(identical(other.titleError, titleError) || other.titleError == titleError)&&(identical(other.failure, failure) || other.failure == failure));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TaskFormState&&(identical(other.status, status) || other.status == status)&&(identical(other.taskId, taskId) || other.taskId == taskId)&&(identical(other.title, title) || other.title == title)&&(identical(other.dueDate, dueDate) || other.dueDate == dueDate)&&(identical(other.isAllDay, isAllDay) || other.isAllDay == isAllDay)&&(identical(other.contextId, contextId) || other.contextId == contextId)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.effortMinutes, effortMinutes) || other.effortMinutes == effortMinutes)&&const DeepCollectionEquality().equals(other._checklistDrafts, _checklistDrafts)&&(identical(other.isReminderEnabled, isReminderEnabled) || other.isReminderEnabled == isReminderEnabled)&&(identical(other.reminderLeadMinutes, reminderLeadMinutes) || other.reminderLeadMinutes == reminderLeadMinutes)&&(identical(other.allDayReminderTime, allDayReminderTime) || other.allDayReminderTime == allDayReminderTime)&&(identical(other.titleError, titleError) || other.titleError == titleError)&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,taskId,title,dueDate,isAllDay,contextId,notes,effortMinutes,const DeepCollectionEquality().hash(_checklistDrafts),titleError,failure);
+int get hashCode => Object.hash(runtimeType,status,taskId,title,dueDate,isAllDay,contextId,notes,effortMinutes,const DeepCollectionEquality().hash(_checklistDrafts),isReminderEnabled,reminderLeadMinutes,allDayReminderTime,titleError,failure);
 
 @override
 String toString() {
-  return 'TaskFormState(status: $status, taskId: $taskId, title: $title, dueDate: $dueDate, isAllDay: $isAllDay, contextId: $contextId, notes: $notes, effortMinutes: $effortMinutes, checklistDrafts: $checklistDrafts, titleError: $titleError, failure: $failure)';
+  return 'TaskFormState(status: $status, taskId: $taskId, title: $title, dueDate: $dueDate, isAllDay: $isAllDay, contextId: $contextId, notes: $notes, effortMinutes: $effortMinutes, checklistDrafts: $checklistDrafts, isReminderEnabled: $isReminderEnabled, reminderLeadMinutes: $reminderLeadMinutes, allDayReminderTime: $allDayReminderTime, titleError: $titleError, failure: $failure)';
 }
 
 
@@ -267,7 +273,7 @@ abstract mixin class _$TaskFormStateCopyWith<$Res> implements $TaskFormStateCopy
   factory _$TaskFormStateCopyWith(_TaskFormState value, $Res Function(_TaskFormState) _then) = __$TaskFormStateCopyWithImpl;
 @override @useResult
 $Res call({
- LoadStatus status, String? taskId, String title, DateTime? dueDate, bool isAllDay, String? contextId, String notes, int? effortMinutes, List<String> checklistDrafts, String? titleError, Failure? failure
+ LoadStatus status, String? taskId, String title, DateTime? dueDate, bool isAllDay, String? contextId, String notes, int? effortMinutes, List<String> checklistDrafts, bool isReminderEnabled, int? reminderLeadMinutes, String? allDayReminderTime, String? titleError, Failure? failure
 });
 
 
@@ -284,7 +290,7 @@ class __$TaskFormStateCopyWithImpl<$Res>
 
 /// Create a copy of TaskFormState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? taskId = freezed,Object? title = null,Object? dueDate = freezed,Object? isAllDay = null,Object? contextId = freezed,Object? notes = null,Object? effortMinutes = freezed,Object? checklistDrafts = null,Object? titleError = freezed,Object? failure = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? taskId = freezed,Object? title = null,Object? dueDate = freezed,Object? isAllDay = null,Object? contextId = freezed,Object? notes = null,Object? effortMinutes = freezed,Object? checklistDrafts = null,Object? isReminderEnabled = null,Object? reminderLeadMinutes = freezed,Object? allDayReminderTime = freezed,Object? titleError = freezed,Object? failure = freezed,}) {
   return _then(_TaskFormState(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as LoadStatus,taskId: freezed == taskId ? _self.taskId : taskId // ignore: cast_nullable_to_non_nullable
@@ -295,7 +301,10 @@ as bool,contextId: freezed == contextId ? _self.contextId : contextId // ignore:
 as String?,notes: null == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
 as String,effortMinutes: freezed == effortMinutes ? _self.effortMinutes : effortMinutes // ignore: cast_nullable_to_non_nullable
 as int?,checklistDrafts: null == checklistDrafts ? _self._checklistDrafts : checklistDrafts // ignore: cast_nullable_to_non_nullable
-as List<String>,titleError: freezed == titleError ? _self.titleError : titleError // ignore: cast_nullable_to_non_nullable
+as List<String>,isReminderEnabled: null == isReminderEnabled ? _self.isReminderEnabled : isReminderEnabled // ignore: cast_nullable_to_non_nullable
+as bool,reminderLeadMinutes: freezed == reminderLeadMinutes ? _self.reminderLeadMinutes : reminderLeadMinutes // ignore: cast_nullable_to_non_nullable
+as int?,allDayReminderTime: freezed == allDayReminderTime ? _self.allDayReminderTime : allDayReminderTime // ignore: cast_nullable_to_non_nullable
+as String?,titleError: freezed == titleError ? _self.titleError : titleError // ignore: cast_nullable_to_non_nullable
 as String?,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
 as Failure?,
   ));

@@ -71,6 +71,10 @@ void notificationTapBackground(NotificationResponse notificationResponse) async 
       );
     }
   } catch (e, st) {
-    AppLogger.error('Error handling background notification tap', e, st);
+    AppLogger.error(
+      'Error handling background notification tap',
+      error: e,
+      stackTrace: st,
+    );
   }
 }

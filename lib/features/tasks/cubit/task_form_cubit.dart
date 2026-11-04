@@ -33,6 +33,9 @@ class TaskFormCubit extends BaseCubit<TaskFormState> {
         notes: task.notes,
         effortMinutes: task.effortMinutes,
         checklistDrafts: task.checklist.map((e) => e.content).toList(),
+        isReminderEnabled: task.isReminderEnabled,
+        reminderLeadMinutes: task.reminderLeadMinutes,
+        allDayReminderTime: task.allDayReminderTime,
         titleError: null,
         status: LoadStatus.initial,
       ),
@@ -62,6 +65,18 @@ class TaskFormCubit extends BaseCubit<TaskFormState> {
 
   void updateEffortMinutes(int? minutes) {
     emit(state.copyWith(effortMinutes: minutes));
+  }
+
+  void toggleReminder(bool enabled) {
+    emit(state.copyWith(isReminderEnabled: enabled));
+  }
+
+  void setReminderLeadMinutes(int? minutes) {
+    emit(state.copyWith(reminderLeadMinutes: minutes));
+  }
+
+  void setAllDayReminderTime(String? time) {
+    emit(state.copyWith(allDayReminderTime: time));
   }
 
   void addChecklistItem(String content) {
@@ -127,6 +142,9 @@ class TaskFormCubit extends BaseCubit<TaskFormState> {
       notes: state.notes,
       effortMinutes: state.effortMinutes,
       checklist: checklistItems,
+      isReminderEnabled: state.isReminderEnabled,
+      reminderLeadMinutes: state.reminderLeadMinutes,
+      allDayReminderTime: state.allDayReminderTime,
       createdAt: now,
       updatedAt: now,
     );

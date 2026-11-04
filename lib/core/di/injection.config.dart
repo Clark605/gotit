@@ -98,11 +98,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i908.AuthInterceptor>(
       () => _i908.AuthInterceptor(gh<_i853.TokenProvider>()),
     );
-    gh.lazySingleton<_i1069.TaskRepository>(
-      () => _i20.TaskRepositoryImpl(gh<_i505.TaskLocalDataSource>()),
-    );
     gh.lazySingleton<_i361.Dio>(
       () => dioModule.dio(gh<_i908.AuthInterceptor>()),
+    );
+    gh.lazySingleton<_i1069.TaskRepository>(
+      () => _i20.TaskRepositoryImpl(
+        gh<_i505.TaskLocalDataSource>(),
+        gh<_i537.IReminderService>(),
+      ),
     );
     gh.factory<_i703.TaskFormCubit>(
       () => _i703.TaskFormCubit(gh<_i1069.TaskRepository>()),

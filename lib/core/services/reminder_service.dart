@@ -87,18 +87,26 @@ class ReminderServiceImpl implements IReminderService {
   static int getSnoozeNotificationId(String taskId) =>
       (taskId.hashCode ^ 0x3000) & 0x7FFFFFFF;
 
-  @override
-  Future<void> initialize() async {
-    if (_isInitialized) return;
-
+  void _ensureTimezoneInitialized() {
     try {
+      tz.local;
+    } catch (_) {
       tz.initializeTimeZones();
       try {
         final localName = DateTime.now().timeZoneName;
         tz.setLocalLocation(tz.getLocation(localName));
       } catch (_) {
-        // Fallback to UTC or existing tz.local
+        tz.setLocalLocation(tz.getLocation('UTC'));
       }
+    }
+  }
+
+  @override
+  Future<void> initialize() async {
+    if (_isInitialized) return;
+
+    try {
+      _ensureTimezoneInitialized();
 
       const androidSettings =
           AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -126,7 +134,11 @@ class ReminderServiceImpl implements IReminderService {
       await _createNotificationChannels();
       _isInitialized = true;
     } catch (e, st) {
-      AppLogger.error('Failed to initialize ReminderService', e, st);
+      AppLogger.error(
+        'Failed to initialize ReminderService',
+        error: e,
+        stackTrace: st,
+      );
     }
   }
 
@@ -208,6 +220,7 @@ class ReminderServiceImpl implements IReminderService {
 
   @override
   Future<void> syncReminderSchedule(TaskReminderSchedule schedule) async {
+    _ensureTimezoneInitialized();
     // 1. Cancel any existing notifications and database reminders for this task
     await cancelForTask(schedule.taskId);
 
@@ -281,7 +294,11 @@ class ReminderServiceImpl implements IReminderService {
               ),
             );
       } catch (e, st) {
-        AppLogger.error('Failed to schedule due reminder', e, st);
+        AppLogger.error(
+          'Failed to schedule due reminder',
+          error: e,
+          stackTrace: st,
+        );
       }
     }
 
@@ -326,7 +343,11 @@ class ReminderServiceImpl implements IReminderService {
                 ),
               );
         } catch (e, st) {
-          AppLogger.error('Failed to schedule start-working reminder', e, st);
+          AppLogger.error(
+            'Failed to schedule start-working reminder',
+            error: e,
+            stackTrace: st,
+          );
         }
       }
     }
@@ -347,12 +368,17 @@ class ReminderServiceImpl implements IReminderService {
             ..where((r) => r.taskId.equals(taskId)))
           .go();
     } catch (e, st) {
-      AppLogger.error('Failed to cancel reminders for task $taskId', e, st);
+      AppLogger.error(
+        'Failed to cancel reminders for task $taskId',
+        error: e,
+        stackTrace: st,
+      );
     }
   }
 
   @override
   Future<void> snoozeReminder(String taskId, {int minutes = 15}) async {
+    _ensureTimezoneInitialized();
     final snoozeTime = DateTime.now().add(Duration(minutes: minutes));
     final snoozeId = getSnoozeNotificationId(taskId);
 
@@ -387,12 +413,17 @@ class ReminderServiceImpl implements IReminderService {
         payload: taskId,
       );
     } catch (e, st) {
-      AppLogger.error('Failed to snooze reminder for task $taskId', e, st);
+      AppLogger.error(
+        'Failed to snooze reminder for task $taskId',
+        error: e,
+        stackTrace: st,
+      );
     }
   }
 
   @override
   Future<void> restoreAndReconcileSchedule() async {
+    _ensureTimezoneInitialized();
     final now = DateTime.now();
     final cutoff24hAgo = now.subtract(const Duration(hours: 24));
 
@@ -478,7 +509,11 @@ class ReminderServiceImpl implements IReminderService {
         );
       }
     } catch (e, st) {
-      AppLogger.error('Failed to restore and reconcile schedule', e, st);
+      AppLogger.error(
+        'Failed to restore and reconcile schedule',
+        error: e,
+        stackTrace: st,
+      );
     }
   }
 

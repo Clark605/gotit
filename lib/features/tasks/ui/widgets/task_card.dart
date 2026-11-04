@@ -7,7 +7,7 @@ import 'package:gotit/features/tasks/ui/widgets/context_tag.dart';
 import 'package:intl/intl.dart';
 
 /// TaskCard renders an individual task row with 48dp touch targets,
-/// 24px circular checkbox, title, context tag, due time, effort, and checklist progress.
+/// 24px circular checkbox, title, context tag, due time, reminder indicator, effort, and checklist progress.
 class TaskCard extends StatelessWidget {
   final TaskModel task;
   final VoidCallback? onTap;
@@ -71,8 +71,8 @@ class TaskCard extends StatelessWidget {
                         color: isCompleted
                             ? (isDark ? AppColors.darkAccent : AppColors.accent)
                             : (isDark
-                                  ? AppColors.darkHairlineStrong
-                                  : AppColors.hairlineStrong),
+                                ? AppColors.darkHairlineStrong
+                                : AppColors.hairlineStrong),
                         width: 1.5,
                       ),
                     ),
@@ -102,7 +102,7 @@ class TaskCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  // Metadata Badges (Context, Time, Checklist, Effort)
+                  // Metadata Badges (Context, Time, Reminder, Checklist, Effort)
                   Wrap(
                     crossAxisAlignment: WrapCrossAlignment.center,
                     spacing: 6,
@@ -123,6 +123,30 @@ class TaskCard extends StatelessWidget {
                               _formatDue(task.dueDate!, task.isAllDay),
                               style: AppTypography.caption.copyWith(
                                 color: metaColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                      if (task.isReminderEnabled) ...[
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.notifications_active_outlined,
+                              size: 12,
+                              color: isDark
+                                  ? AppColors.darkAccent
+                                  : AppColors.accent,
+                            ),
+                            const SizedBox(width: 3),
+                            Text(
+                              _formatReminderLead(task.reminderLeadMinutes),
+                              style: AppTypography.caption.copyWith(
+                                color: isDark
+                                    ? AppColors.darkAccent
+                                    : AppColors.accent,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ],
@@ -174,22 +198,45 @@ class TaskCard extends StatelessWidget {
     );
   }
 
-  String _formatDue(DateTime date, bool isAllDay) {
-    if (isAllDay) {
-      return DateFormat('MMM d').format(date);
+  String _formatReminderLead(int? minutes) {
+    final mins = minutes ?? 15;
+    if (mins == 0) return 'At due';
+    if (mins < 60) return '${mins}m';
+    if (mins < 1440) return '${mins ~/ 60}h';
+    return '${mins ~/ 1440}d';
+  }
+
+  String _formatDue(DateTime due, bool isAllDay) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final dueDate = DateTime(due.year, due.month, due.day);
+
+    if (dueDate == today) {
+      if (isAllDay) return 'Today';
+      return DateFormat('h:mm a').format(due);
     }
-    return DateFormat('h:mm a').format(date);
+
+    final tomorrow = today.add(const Duration(days: 1));
+    if (dueDate == tomorrow) {
+      if (isAllDay) return 'Tomorrow';
+      return 'Tomorrow, ${DateFormat('h:mm a').format(due)}';
+    }
+
+    final yesterday = today.subtract(const Duration(days: 1));
+    if (dueDate == yesterday) {
+      if (isAllDay) return 'Yesterday';
+      return 'Yesterday, ${DateFormat('h:mm a').format(due)}';
+    }
+
+    if (isAllDay) return DateFormat('MMM d').format(due);
+    return DateFormat('MMM d, h:mm a').format(due);
   }
 
   String _formatEffort(int minutes) {
-    if (minutes < 60) {
-      return '${minutes}m';
-    }
+    if (minutes < 60) return '${minutes}m';
     final hours = minutes ~/ 60;
     final remainingMinutes = minutes % 60;
-    if (remainingMinutes == 0) {
-      return '${hours}h';
-    }
+    if (remainingMinutes == 0) return '${hours}h';
     return '${hours}h ${remainingMinutes}m';
   }
 }

@@ -3,6 +3,7 @@ import 'package:gotit/core/storage/app_database.dart';
 import 'package:gotit/features/tasks/data/datasources/task_local_data_source.dart';
 import 'package:gotit/features/tasks/data/models/checklist_item_model.dart';
 import 'package:gotit/features/tasks/data/models/context_model.dart';
+import 'package:gotit/features/tasks/data/models/reminder_model.dart';
 import 'package:gotit/features/tasks/data/models/task_model.dart';
 import 'package:injectable/injectable.dart';
 
@@ -163,6 +164,9 @@ class TaskLocalDataSourceImpl implements TaskLocalDataSource {
               effortMinutes: Value(task.effortMinutes),
               sourceExcerpt: Value(task.sourceExcerpt),
               isDeleted: Value(task.isDeleted),
+              isReminderEnabled: Value(task.isReminderEnabled),
+              reminderLeadMinutes: Value(task.reminderLeadMinutes),
+              allDayReminderTime: Value(task.allDayReminderTime),
               createdAt: Value(task.createdAt),
               updatedAt: Value(task.updatedAt),
             ),
@@ -207,6 +211,9 @@ class TaskLocalDataSourceImpl implements TaskLocalDataSource {
               effortMinutes: Value(task.effortMinutes),
               sourceExcerpt: Value(task.sourceExcerpt),
               isDeleted: Value(task.isDeleted),
+              isReminderEnabled: Value(task.isReminderEnabled),
+              reminderLeadMinutes: Value(task.reminderLeadMinutes),
+              allDayReminderTime: Value(task.allDayReminderTime),
               updatedAt: Value(now),
             ),
           );
@@ -416,6 +423,9 @@ class TaskLocalDataSourceImpl implements TaskLocalDataSource {
       effortMinutes: task.effortMinutes,
       sourceExcerpt: task.sourceExcerpt,
       isDeleted: task.isDeleted,
+      isReminderEnabled: task.isReminderEnabled,
+      reminderLeadMinutes: task.reminderLeadMinutes,
+      allDayReminderTime: task.allDayReminderTime,
       checklist: checklist
           .map(
             (c) => ChecklistItemModel(
@@ -432,5 +442,77 @@ class TaskLocalDataSourceImpl implements TaskLocalDataSource {
       createdAt: task.createdAt,
       updatedAt: task.updatedAt,
     );
+  }
+
+  @override
+  Future<void> insertReminder({
+    required String id,
+    required String taskId,
+    required String type,
+    required DateTime scheduledTime,
+    required int leadTimeMinutes,
+    required int notificationId,
+  }) async {
+    final now = DateTime.now();
+    await _db.into(_db.remindersTable).insertOnConflictUpdate(
+          RemindersTableCompanion.insert(
+            id: id,
+            taskId: taskId,
+            type: type,
+            scheduledTime: scheduledTime,
+            leadTimeMinutes: Value(leadTimeMinutes),
+            status: const Value('pending'),
+            notificationId: notificationId,
+            createdAt: Value(now),
+            updatedAt: Value(now),
+          ),
+        );
+  }
+
+  @override
+  Future<List<ReminderModel>> getRemindersForTask(String taskId) async {
+    final rows = await (_db.select(_db.remindersTable)
+          ..where((r) => r.taskId.equals(taskId)))
+        .get();
+
+    return rows
+        .map(
+          (r) => ReminderModel(
+            id: r.id,
+            taskId: r.taskId,
+            type: r.type == 'start_working'
+                ? ReminderType.startWorking
+                : ReminderType.due,
+            scheduledTime: r.scheduledTime,
+            leadTimeMinutes: r.leadTimeMinutes,
+            status: switch (r.status) {
+              'fired' => ReminderStatus.fired,
+              'cancelled' => ReminderStatus.cancelled,
+              'dismissed' => ReminderStatus.dismissed,
+              _ => ReminderStatus.pending,
+            },
+            notificationId: r.notificationId,
+            createdAt: r.createdAt,
+            updatedAt: r.updatedAt,
+          ),
+        )
+        .toList();
+  }
+
+  @override
+  Future<void> updateReminderStatus(String id, String status) async {
+    await (_db.update(_db.remindersTable)..where((r) => r.id.equals(id))).write(
+      RemindersTableCompanion(
+        status: Value(status),
+        updatedAt: Value(DateTime.now()),
+      ),
+    );
+  }
+
+  @override
+  Future<void> deleteRemindersForTask(String taskId) async {
+    await (_db.delete(_db.remindersTable)
+          ..where((r) => r.taskId.equals(taskId)))
+        .go();
   }
 }
