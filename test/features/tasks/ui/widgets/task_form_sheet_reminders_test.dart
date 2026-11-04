@@ -80,6 +80,13 @@ void main() {
       await tester.tap(reminderSwitch);
       await tester.pumpAndSettle();
 
+      // Tap Enable Reminders on educational primer
+      final primerEnable = find.byKey(const Key('primer_enable_button'));
+      if (primerEnable.evaluate().isNotEmpty) {
+        await tester.tap(primerEnable);
+        await tester.pumpAndSettle();
+      }
+
       expect(cubit.state.isReminderEnabled, isTrue);
       expect(find.byType(ReminderLeadTimeChips), findsOneWidget);
 

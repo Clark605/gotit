@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gotit/core/routes/route_names.dart';
 import 'package:gotit/core/theme/app_colors.dart';
 import 'package:gotit/core/theme/app_radius.dart';
 import 'package:gotit/core/theme/app_spacing.dart';
@@ -9,6 +10,7 @@ import 'package:gotit/core/widgets/reminder_lead_time_chips.dart';
 import 'package:gotit/features/tasks/cubit/task_form_cubit.dart';
 import 'package:gotit/features/tasks/cubit/task_form_state.dart';
 import 'package:gotit/features/tasks/data/models/context_model.dart';
+import 'package:gotit/features/tasks/ui/widgets/permission_primer_dialog.dart';
 import 'package:gotit/l10n/generated/app_localizations.dart';
 import 'package:intl/intl.dart';
 
@@ -263,13 +265,25 @@ class _TaskFormSheetState extends State<TaskFormSheet> {
               key: const Key('reminder_switch'),
               value: state.isReminderEnabled,
               activeColor: AppColors.accent,
-              onChanged: cubit.toggleReminder,
+              onChanged: (enabled) async {
+                if (enabled) {
+                  final accepted = await PermissionPrimerDialog.show(context);
+                  if (accepted) {
+                    cubit.toggleReminder(true);
+                  }
+                } else {
+                  cubit.toggleReminder(false);
+                }
+              },
             ),
           ],
         ),
 
         // Expanded Reminder Configuration
         if (state.isReminderEnabled) ...[
+          const SizedBox(height: 6),
+          // Inexact alarm warning banner (US4)
+          _buildInexactAlarmBanner(context, l10n, isDark),
           const SizedBox(height: 6),
           if (state.isAllDay) ...[
             // All-day alert time selector
@@ -387,6 +401,81 @@ class _TaskFormSheetState extends State<TaskFormSheet> {
               l10n.startWorkingNotice(timeStr, effortLabel),
               style: AppTypography.caption.copyWith(
                 color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInexactAlarmBanner(
+    BuildContext context,
+    AppLocalizations l10n,
+    bool isDark,
+  ) {
+    return Container(
+      key: const Key('inexact_alarm_banner'),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
+      decoration: BoxDecoration(
+        color: isDark ? AppColors.darkTintYellow : AppColors.tintYellow,
+        borderRadius: AppRadius.md,
+        border: Border.all(
+          color: isDark
+              ? AppColors.darkTintYellowText.withValues(alpha: 0.3)
+              : AppColors.tintYellowText.withValues(alpha: 0.3),
+        ),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.warning_amber_rounded,
+            size: 18,
+            color: isDark
+                ? AppColors.darkTintYellowText
+                : AppColors.tintYellowText,
+          ),
+          AppSpacing.gapWXs,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.inexactAlarmWarningTitle,
+                  style: AppTypography.captionBold.copyWith(
+                    color: isDark
+                        ? AppColors.darkTintYellowText
+                        : AppColors.tintYellowText,
+                  ),
+                ),
+                Text(
+                  l10n.inexactAlarmWarningBody,
+                  style: AppTypography.caption.copyWith(
+                    color: isDark
+                        ? AppColors.darkTintYellowText
+                        : AppColors.tintYellowText,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          TextButton(
+            key: const Key('inexact_alarm_fix_button'),
+            onPressed: () {
+              Navigator.of(context).pushNamed(
+                RouteNames.reminderTroubleshooting,
+              );
+            },
+            child: Text(
+              l10n.inexactAlarmFixButton,
+              style: AppTypography.captionBold.copyWith(
+                color: isDark
+                    ? AppColors.darkTintYellowText
+                    : AppColors.tintYellowText,
               ),
             ),
           ),

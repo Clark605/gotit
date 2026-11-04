@@ -112,14 +112,14 @@ description: "Task list for Phase 2: Resilient Task Reminders & Notifications"
 **Independent Test**: Launch fresh install, verify educational primer precedes OS notification permission dialog; deny exact alarms, verify inexact fallback banner appears and directs to `ReminderTroubleshootingScreen`.
 
 ### Tests for User Story 4
-- [ ] T037 [P] [US4] Write golden tests for `PermissionPrimerDialog` and `ReminderTroubleshootingScreen` across Light, Dark, and Arabic RTL layouts in `test/features/tasks/ui/reminder_troubleshooting_screen_test.dart` and `test/features/tasks/ui/widgets/permission_primer_dialog_test.dart`
+- [X] T037 [P] [US4] Write golden tests for `PermissionPrimerDialog` and `ReminderTroubleshootingScreen` across Light, Dark, and Arabic RTL layouts in `test/features/tasks/ui/reminder_troubleshooting_screen_test.dart` and `test/features/tasks/ui/widgets/permission_primer_dialog_test.dart`
 
 ### Implementation for User Story 4
-- [ ] T032 [P] [US4] Create reusable `PermissionStatusBadge` widget in `lib/core/widgets/permission_status_badge.dart` supporting active (`#DCF0E4`), inexact (`#FAF0C8`), and disabled states
-- [ ] T033 [P] [US4] Create `PermissionPrimerDialog` modal sheet in `lib/features/tasks/ui/widgets/permission_primer_dialog.dart` matching approved mockups `02-permission-primer-en-light.png` and `02-permission-primer-ar-light.png`
-- [ ] T034 [US4] Implement educational primer trigger logic in `TaskFormSheet` (`lib/features/tasks/ui/widgets/task_form_sheet.dart`) displaying `PermissionPrimerDialog` prior to invoking OS permission dialogs
-- [ ] T035 [US4] Add `InexactAlarmWarningBanner` in `TaskFormSheet` (`lib/features/tasks/ui/widgets/task_form_sheet.dart`) matching approved mockup `01-reminders-modal-inexact-warning.png` when exact alarm permission is restricted
-- [ ] T036 [US4] Build `ReminderTroubleshootingScreen` in `lib/features/tasks/ui/reminder_troubleshooting_screen.dart` matching approved mockups `03-reminder-reliability-en-light.png`, `03-reminder-reliability-ar-light.png`, and `03-reminder-reliability-en-dark.png` with system diagnostics card and OEM accordion guides
+- [X] T032 [P] [US4] Create reusable `PermissionStatusBadge` widget in `lib/core/widgets/permission_status_badge.dart` supporting active (`#DCF0E4`), inexact (`#FAF0C8`), and disabled states
+- [X] T033 [P] [US4] Create `PermissionPrimerDialog` modal sheet in `lib/features/tasks/ui/widgets/permission_primer_dialog.dart` matching approved mockups `02-permission-primer-en-light.png` and `02-permission-primer-ar-light.png`
+- [X] T034 [US4] Implement educational primer trigger logic in `TaskFormSheet` (`lib/features/tasks/ui/widgets/task_form_sheet.dart`) displaying `PermissionPrimerDialog` prior to invoking OS permission dialogs
+- [X] T035 [US4] Add `InexactAlarmWarningBanner` in `TaskFormSheet` (`lib/features/tasks/ui/widgets/task_form_sheet.dart`) matching approved mockup `01-reminders-modal-inexact-warning.png` when exact alarm permission is restricted
+- [X] T036 [US4] Build `ReminderTroubleshootingScreen` in `lib/features/tasks/ui/reminder_troubleshooting_screen.dart` matching approved mockups `03-reminder-reliability-en-light.png`, `03-reminder-reliability-ar-light.png`, and `03-reminder-reliability-en-dark.png` with system diagnostics card and OEM accordion guides
 
 **Checkpoint**: Permissions, graceful degradation, and OEM troubleshooting complete.
 

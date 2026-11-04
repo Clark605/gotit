@@ -21,30 +21,12 @@ class ReminderLeadTimeChips extends StatelessWidget {
   final bool enabled;
 
   static const List<ReminderLeadTimeOption> options = [
-    ReminderLeadTimeOption(
-      minutes: 0,
-      labelBuilder: _labelAtDue,
-    ),
-    ReminderLeadTimeOption(
-      minutes: 5,
-      labelBuilder: _label5m,
-    ),
-    ReminderLeadTimeOption(
-      minutes: 15,
-      labelBuilder: _label15m,
-    ),
-    ReminderLeadTimeOption(
-      minutes: 30,
-      labelBuilder: _label30m,
-    ),
-    ReminderLeadTimeOption(
-      minutes: 60,
-      labelBuilder: _label1h,
-    ),
-    ReminderLeadTimeOption(
-      minutes: 1440,
-      labelBuilder: _label1d,
-    ),
+    ReminderLeadTimeOption(minutes: 0, labelBuilder: _labelAtDue),
+    ReminderLeadTimeOption(minutes: 5, labelBuilder: _label5m),
+    ReminderLeadTimeOption(minutes: 15, labelBuilder: _label15m),
+    ReminderLeadTimeOption(minutes: 30, labelBuilder: _label30m),
+    ReminderLeadTimeOption(minutes: 60, labelBuilder: _label1h),
+    ReminderLeadTimeOption(minutes: 1440, labelBuilder: _label1d),
   ];
 
   static String _labelAtDue(AppLocalizations l) => l.reminderLeadAtDue;
@@ -72,9 +54,7 @@ class ReminderLeadTimeChips extends StatelessWidget {
       child: Row(
         children: options.map((option) {
           final isSelected = option.minutes == selectedMinutes;
-          final label = l10n != null
-              ? option.labelBuilder(l10n)
-              : '${option.minutes}m';
+          final label = option.labelBuilder(l10n);
 
           return Padding(
             padding: const EdgeInsets.only(right: AppSpacing.sm),
@@ -103,18 +83,18 @@ class ReminderLeadTimeChips extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: isSelected
                           ? (isDark
-                              ? AppColors.darkAccentSoft
-                              : AppColors.accentSoft)
+                                ? AppColors.darkAccentSoft
+                                : AppColors.accentSoft)
                           : (isDark
-                              ? AppColors.darkSurface
-                              : AppColors.surface),
+                                ? AppColors.darkSurface
+                                : AppColors.surface),
                       borderRadius: AppRadius.full,
                       border: Border.all(
                         color: isSelected
                             ? (isDark ? AppColors.darkAccent : AppColors.accent)
                             : (isDark
-                                ? AppColors.darkHairline
-                                : AppColors.hairline),
+                                  ? AppColors.darkHairline
+                                  : AppColors.hairline),
                         width: isSelected ? 1.5 : 1.0,
                       ),
                     ),
@@ -122,14 +102,13 @@ class ReminderLeadTimeChips extends StatelessWidget {
                       label,
                       style: AppTypography.caption.copyWith(
                         color: isSelected
-                            ? (isDark
-                                ? AppColors.darkAccent
-                                : AppColors.accent)
+                            ? (isDark ? AppColors.darkAccent : AppColors.accent)
                             : (isDark
-                                ? AppColors.darkTextSecondary
-                                : AppColors.slate),
-                        fontWeight:
-                            isSelected ? FontWeight.w600 : FontWeight.w500,
+                                  ? AppColors.darkTextSecondary
+                                  : AppColors.slate),
+                        fontWeight: isSelected
+                            ? FontWeight.w600
+                            : FontWeight.w500,
                       ),
                     ),
                   ),
