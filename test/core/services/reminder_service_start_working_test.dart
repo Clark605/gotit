@@ -33,92 +33,101 @@ void main() {
 
   group('Start-Working Reminders Calculation & Scheduling', () {
     test(
-        'schedules start-working reminder at due - effort when target time is future',
-        () async {
-      final now = DateTime.now();
-      final futureDue = now.add(const Duration(hours: 3));
-      const effortMinutes = 45;
+      'schedules start-working reminder at due - effort when target time is future',
+      () async {
+        final now = DateTime.now();
+        final futureDue = now.add(const Duration(hours: 3));
+        const effortMinutes = 45;
 
-      await database.into(database.tasksTable).insert(
-            TasksTableCompanion.insert(
-              id: 'task-start-1',
-              title: 'Prepare presentation',
-              dueDate: Value(futureDue),
-              effortMinutes: const Value(effortMinutes),
-              isReminderEnabled: const Value(true),
-            ),
-          );
+        await database
+            .into(database.tasksTable)
+            .insert(
+              TasksTableCompanion.insert(
+                id: 'task-start-1',
+                title: 'Prepare presentation',
+                dueDate: Value(futureDue),
+                effortMinutes: const Value(effortMinutes),
+                isReminderEnabled: const Value(true),
+              ),
+            );
 
-      await reminderService.syncReminderSchedule(
-        TaskReminderSchedule(
-          taskId: 'task-start-1',
-          title: 'Prepare presentation',
-          dueDate: futureDue,
-          effortMinutes: effortMinutes,
-          isReminderEnabled: true,
-          reminderLeadMinutes: 15,
-        ),
-      );
+        await reminderService.syncReminderSchedule(
+          TaskReminderSchedule(
+            taskId: 'task-start-1',
+            title: 'Prepare presentation',
+            dueDate: futureDue,
+            effortMinutes: effortMinutes,
+            isReminderEnabled: true,
+            reminderLeadMinutes: 15,
+          ),
+        );
 
-      final reminders = await (database.select(database.remindersTable)
-            ..where((r) => r.taskId.equals('task-start-1')))
-          .get();
+        final reminders = await (database.select(
+          database.remindersTable,
+        )..where((r) => r.taskId.equals('task-start-1'))).get();
 
-      // Both due reminder and start-working reminder scheduled
-      expect(reminders.length, equals(2));
+        // Both due reminder and start-working reminder scheduled
+        expect(reminders.length, equals(2));
 
-      final startWorkingReminder =
-          reminders.firstWhere((r) => r.type == 'start_working');
-      expect(startWorkingReminder.leadTimeMinutes, equals(effortMinutes));
-      expect(
-        startWorkingReminder.scheduledTime.difference(futureDue).inMinutes,
-        equals(-effortMinutes),
-      );
-    });
+        final startWorkingReminder = reminders.firstWhere(
+          (r) => r.type == 'start_working',
+        );
+        expect(startWorkingReminder.leadTimeMinutes, equals(effortMinutes));
+        expect(
+          startWorkingReminder.scheduledTime.difference(futureDue).inMinutes,
+          equals(-effortMinutes),
+        );
+      },
+    );
 
     test(
-        'suppresses start-working reminder when target time is in the past',
-        () async {
-      final now = DateTime.now();
-      // Due in 30 minutes, effort is 60 minutes -> start working was 30 minutes ago
-      final futureDue = now.add(const Duration(minutes: 30));
-      const effortMinutes = 60;
+      'suppresses start-working reminder when target time is in the past',
+      () async {
+        final now = DateTime.now();
+        // Due in 30 minutes, effort is 60 minutes -> start working was 30 minutes ago
+        final futureDue = now.add(const Duration(minutes: 30));
+        const effortMinutes = 60;
 
-      await database.into(database.tasksTable).insert(
-            TasksTableCompanion.insert(
-              id: 'task-start-2',
-              title: 'Quick review',
-              dueDate: Value(futureDue),
-              effortMinutes: const Value(effortMinutes),
-              isReminderEnabled: const Value(true),
-            ),
-          );
+        await database
+            .into(database.tasksTable)
+            .insert(
+              TasksTableCompanion.insert(
+                id: 'task-start-2',
+                title: 'Quick review',
+                dueDate: Value(futureDue),
+                effortMinutes: const Value(effortMinutes),
+                isReminderEnabled: const Value(true),
+              ),
+            );
 
-      await reminderService.syncReminderSchedule(
-        TaskReminderSchedule(
-          taskId: 'task-start-2',
-          title: 'Quick review',
-          dueDate: futureDue,
-          effortMinutes: effortMinutes,
-          isReminderEnabled: true,
-          reminderLeadMinutes: 15,
-        ),
-      );
+        await reminderService.syncReminderSchedule(
+          TaskReminderSchedule(
+            taskId: 'task-start-2',
+            title: 'Quick review',
+            dueDate: futureDue,
+            effortMinutes: effortMinutes,
+            isReminderEnabled: true,
+            reminderLeadMinutes: 15,
+          ),
+        );
 
-      final reminders = await (database.select(database.remindersTable)
-            ..where((r) => r.taskId.equals('task-start-2')))
-          .get();
+        final reminders = await (database.select(
+          database.remindersTable,
+        )..where((r) => r.taskId.equals('task-start-2'))).get();
 
-      // Only due reminder scheduled, start-working suppressed
-      expect(reminders.length, equals(1));
-      expect(reminders.first.type, equals('due'));
-    });
+        // Only due reminder scheduled, start-working suppressed
+        expect(reminders.length, equals(1));
+        expect(reminders.first.type, equals('due'));
+      },
+    );
 
     test('suppresses start-working reminder for all-day tasks', () async {
       final now = DateTime.now();
       final tomorrow = DateTime(now.year, now.month, now.day + 1);
 
-      await database.into(database.tasksTable).insert(
+      await database
+          .into(database.tasksTable)
+          .insert(
             TasksTableCompanion.insert(
               id: 'task-start-3',
               title: 'Conference day',
@@ -140,9 +149,9 @@ void main() {
         ),
       );
 
-      final reminders = await (database.select(database.remindersTable)
-            ..where((r) => r.taskId.equals('task-start-3')))
-          .get();
+      final reminders = await (database.select(
+        database.remindersTable,
+      )..where((r) => r.taskId.equals('task-start-3'))).get();
 
       expect(reminders.length, equals(1));
       expect(reminders.first.type, equals('due'));

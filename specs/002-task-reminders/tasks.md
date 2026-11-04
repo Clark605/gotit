@@ -129,11 +129,11 @@ description: "Task list for Phase 2: Resilient Task Reminders & Notifications"
 
 **Purpose**: Verification, code formatting, static analysis, architecture compliance, and AST graph synchronization.
 
-- [ ] T038 Execute automated verification scenarios from `specs/002-task-reminders/quickstart.md`
-- [ ] T039 Run `dart format .` and verify 0 formatting diffs
-- [ ] T040 Run `flutter analyze` and ensure 0 errors, warnings, and lints
-- [ ] T041 Run `dart run tool/check_architecture.dart` and ensure 0 architecture violations
-- [ ] T042 Update AST knowledge graph with `graphify update .`
+- [X] T038 Execute automated verification scenarios from `specs/002-task-reminders/quickstart.md`
+- [X] T039 Run `dart format .` and verify 0 formatting diffs
+- [X] T040 Run `flutter analyze` and ensure 0 errors, warnings, and lints
+- [X] T041 Run `dart run tool/check_architecture.dart` and ensure 0 architecture violations
+- [X] T042 Update AST knowledge graph with `graphify update .`
 
 ---
 

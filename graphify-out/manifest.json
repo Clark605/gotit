@@ -246,9 +246,9 @@
     "semantic_hash": ""
   },
   "lib/bootstrap.dart": {
-    "mtime": 1793729431.781326,
-    "seen": 1793737548.9516594,
-    "ast_hash": "76a78d911c1b37f3cabda9a7bf5c1a20",
+    "mtime": 1793794270.6348462,
+    "seen": 1793794730.0366662,
+    "ast_hash": "cd1872d6fcf20f30c7d91028619638f0",
     "semantic_hash": ""
   },
   "lib/core/config/app_config.dart": {
@@ -264,9 +264,9 @@
     "semantic_hash": ""
   },
   "lib/core/constants/storage_keys.dart": {
-    "mtime": 1793696682.564914,
-    "seen": 1793711808.5691025,
-    "ast_hash": "a64ee21f9d24c7467e6af163188ef445",
+    "mtime": 1793794270.666505,
+    "seen": 1793794730.0366662,
+    "ast_hash": "c221de92dab205f7e333418d013902fc",
     "semantic_hash": ""
   },
   "lib/core/cubit/action_guard.dart": {
@@ -318,9 +318,9 @@
     "semantic_hash": ""
   },
   "lib/core/di/injection.config.dart": {
-    "mtime": 1793781184.6523867,
-    "seen": 1793783523.99925,
-    "ast_hash": "c2995881fcb383dfef155ef2b8a75ee0",
+    "mtime": 1793792379.507377,
+    "seen": 1793794730.0366662,
+    "ast_hash": "ffe794868ab45af6b8f62f49ae0a1178",
     "semantic_hash": ""
   },
   "lib/core/di/injection.dart": {
@@ -444,21 +444,21 @@
     "semantic_hash": ""
   },
   "lib/core/routes/app_router.dart": {
-    "mtime": 1793781184.6523867,
-    "seen": 1793783523.99925,
-    "ast_hash": "0698ad280bae0f52b021991a1ce4bda6",
+    "mtime": 1793794270.8643112,
+    "seen": 1793794730.0366662,
+    "ast_hash": "e2a870df16918e5de8818c2f39324c51",
     "semantic_hash": ""
   },
   "lib/core/routes/route_names.dart": {
-    "mtime": 1793781184.6523867,
-    "seen": 1793783523.99925,
-    "ast_hash": "b044791b036b124aaf827d6b30a607cd",
+    "mtime": 1793794270.865597,
+    "seen": 1793794730.0366662,
+    "ast_hash": "5cccfe402c0c8c8962d54e5d4116be5f",
     "semantic_hash": ""
   },
   "lib/core/routes/route_providers.dart": {
-    "mtime": 1793781184.6523867,
-    "seen": 1793783523.99925,
-    "ast_hash": "63ec0a6f75df1c6638e54841b0682926",
+    "mtime": 1793794270.9020958,
+    "seen": 1793794730.0366662,
+    "ast_hash": "ad18906c3347789c14fc93c28b53fc85",
     "semantic_hash": ""
   },
   "lib/core/services/connectivity_service.dart": {
@@ -468,9 +468,9 @@
     "semantic_hash": ""
   },
   "lib/core/storage/prefs_service.dart": {
-    "mtime": 1793696740.9424183,
-    "seen": 1793711808.5691025,
-    "ast_hash": "7e4987fb50fd1a6a9c0d3b9dfa6a41ac",
+    "mtime": 1793794271.1998942,
+    "seen": 1793794730.0366662,
+    "ast_hash": "2e7d54a1a1c7a20c2d533f6a79bd64db",
     "semantic_hash": ""
   },
   "lib/core/storage/secure_storage_service.dart": {
@@ -798,21 +798,21 @@
     "semantic_hash": ""
   },
   "lib/l10n/generated/app_localizations.dart": {
-    "mtime": 1793781233.0245152,
-    "seen": 1793783523.99925,
-    "ast_hash": "5d25cf8abf32641f51e98ff4d19503f1",
+    "mtime": 1793794634.069676,
+    "seen": 1793794730.0378337,
+    "ast_hash": "f9c7e15547754f3265a298a6c25b217a",
     "semantic_hash": ""
   },
   "lib/l10n/generated/app_localizations_ar.dart": {
-    "mtime": 1793781233.017963,
-    "seen": 1793783523.99925,
-    "ast_hash": "f8f3c9ef21b94c884f764af966ca93cb",
+    "mtime": 1793794634.019413,
+    "seen": 1793794730.0378337,
+    "ast_hash": "98af0d70b203e128d5e863a241ae078f",
     "semantic_hash": ""
   },
   "lib/l10n/generated/app_localizations_en.dart": {
-    "mtime": 1793781233.0205085,
-    "seen": 1793783523.99925,
-    "ast_hash": "34edf531fd844ee4c7ce79df1a109aee",
+    "mtime": 1793794634.0409126,
+    "seen": 1793794730.0378337,
+    "ast_hash": "fc43a883893c747927be1e1b48a4c35c",
     "semantic_hash": ""
   },
   "lib/main.dart": {
@@ -840,9 +840,9 @@
     "semantic_hash": ""
   },
   "pubspec.yaml": {
-    "mtime": 1793781205.2337718,
-    "seen": 1793783523.99925,
-    "ast_hash": "8839d1adda5878e4bdd603b18f745907",
+    "mtime": 1793794620.3755789,
+    "seen": 1793794730.0378337,
+    "ast_hash": "82b3b0b74d9bc06bddccb7b0732b497b",
     "semantic_hash": ""
   },
   "skills-lock.json": {
@@ -1902,33 +1902,33 @@
     "semantic_hash": ""
   },
   "lib/core/storage/app_database.dart": {
-    "mtime": 1793781184.6538942,
-    "seen": 1793783523.99925,
-    "ast_hash": "b416d5fad73799ebdd19f643e0359625",
+    "mtime": 1793790410.3887608,
+    "seen": 1793794730.0366662,
+    "ast_hash": "d039a025a1d522a7363cf258db6ba039",
     "semantic_hash": ""
   },
   "lib/core/storage/app_database.g.dart": {
-    "mtime": 1793781184.6549065,
-    "seen": 1793783523.99925,
-    "ast_hash": "80f727af3af2ec9ce89f1e2bd06d7dac",
+    "mtime": 1793790505.247024,
+    "seen": 1793794730.0366662,
+    "ast_hash": "dda6ad526ccb33612721bba22ff6bc72",
     "semantic_hash": ""
   },
   "lib/features/tasks/cubit/task_form_cubit.dart": {
-    "mtime": 1793781184.6549065,
-    "seen": 1793783523.99925,
-    "ast_hash": "c332018b2f69e6f80758e5dad791f9d0",
+    "mtime": 1793791904.7286797,
+    "seen": 1793794730.0366662,
+    "ast_hash": "07e11580160cdb78d9dd839779f5115e",
     "semantic_hash": ""
   },
   "lib/features/tasks/cubit/task_form_state.dart": {
-    "mtime": 1793781184.6549065,
-    "seen": 1793783523.99925,
-    "ast_hash": "8b4fffbb16267e2e0c2ef6ba0d8cfc59",
+    "mtime": 1793791883.7843351,
+    "seen": 1793794730.0366662,
+    "ast_hash": "975217cbad248cae976497602cc720a4",
     "semantic_hash": ""
   },
   "lib/features/tasks/cubit/task_form_state.freezed.dart": {
-    "mtime": 1793781184.655905,
-    "seen": 1793783523.99925,
-    "ast_hash": "d0894f13bce1047043329d3b67e6dd28",
+    "mtime": 1793792379.4465346,
+    "seen": 1793794730.0366662,
+    "ast_hash": "91a35a99af89593c16918ae8ee80240e",
     "semantic_hash": ""
   },
   "lib/features/tasks/cubit/tasks_cubit.dart": {
@@ -1944,21 +1944,21 @@
     "semantic_hash": ""
   },
   "lib/features/tasks/cubit/tasks_state.freezed.dart": {
-    "mtime": 1793781184.6603868,
-    "seen": 1793783523.99925,
-    "ast_hash": "1a93df07566e95dbe491f33ac456a67a",
+    "mtime": 1793790504.973006,
+    "seen": 1793794730.0366662,
+    "ast_hash": "54e8853e0bf51542205770bb31a51c8f",
     "semantic_hash": ""
   },
   "lib/features/tasks/data/datasources/task_local_data_source.dart": {
-    "mtime": 1793781184.6609778,
-    "seen": 1793783523.99925,
-    "ast_hash": "4a74cf4a67202e6e253a9ce8a41d493f",
+    "mtime": 1793794272.004251,
+    "seen": 1793794730.0366662,
+    "ast_hash": "86b7fd6320d44a72b8e546ff6eee8cbc",
     "semantic_hash": ""
   },
   "lib/features/tasks/data/datasources/task_local_data_source_impl.dart": {
-    "mtime": 1793781184.661592,
-    "seen": 1793783523.99925,
-    "ast_hash": "b5d25382a8e671b2a82a13c7d792add2",
+    "mtime": 1793794272.077157,
+    "seen": 1793794730.0366662,
+    "ast_hash": "26f9523f03d20d6da8719541131da215",
     "semantic_hash": ""
   },
   "lib/features/tasks/data/models/checklist_item_model.dart": {
@@ -1968,15 +1968,15 @@
     "semantic_hash": ""
   },
   "lib/features/tasks/data/models/checklist_item_model.freezed.dart": {
-    "mtime": 1793781184.6621404,
-    "seen": 1793783523.99925,
-    "ast_hash": "02844d4328ad871dc39045c98f356dd0",
+    "mtime": 1793790504.973006,
+    "seen": 1793794730.0366662,
+    "ast_hash": "31adbcc5cfc794e2760fb7702aaa0de7",
     "semantic_hash": ""
   },
   "lib/features/tasks/data/models/checklist_item_model.g.dart": {
-    "mtime": 1793781184.6626623,
-    "seen": 1793783523.99925,
-    "ast_hash": "8bec87f1d47259b8471f9d3015246827",
+    "mtime": 1793790505.2495372,
+    "seen": 1793794730.0366662,
+    "ast_hash": "e5c544956296714be2891a01c3fe1a72",
     "semantic_hash": ""
   },
   "lib/features/tasks/data/models/context_model.dart": {
@@ -1986,33 +1986,33 @@
     "semantic_hash": ""
   },
   "lib/features/tasks/data/models/context_model.freezed.dart": {
-    "mtime": 1793781184.6632335,
-    "seen": 1793783523.99925,
-    "ast_hash": "274faf9c746bc86eeb80f9d1e81e9694",
+    "mtime": 1793790504.973006,
+    "seen": 1793794730.0366662,
+    "ast_hash": "d44be4944eb2d5b09d6496b79de8f852",
     "semantic_hash": ""
   },
   "lib/features/tasks/data/models/context_model.g.dart": {
-    "mtime": 1793781184.6637807,
-    "seen": 1793783523.99925,
-    "ast_hash": "3c2e97f8dd79a03e54db085cc9a8cf78",
+    "mtime": 1793790505.2505515,
+    "seen": 1793794730.0366662,
+    "ast_hash": "02769f047ca9de548001cfb037740463",
     "semantic_hash": ""
   },
   "lib/features/tasks/data/models/task_model.dart": {
-    "mtime": 1793781184.6637807,
-    "seen": 1793783523.99925,
-    "ast_hash": "066f80e3850080edacac93eaac9ed3e2",
+    "mtime": 1793794272.1415484,
+    "seen": 1793794730.0366662,
+    "ast_hash": "837f56f43455899e0960b06a66e495f1",
     "semantic_hash": ""
   },
   "lib/features/tasks/data/models/task_model.freezed.dart": {
-    "mtime": 1793781184.6643493,
-    "seen": 1793783523.99925,
-    "ast_hash": "725d1ebe9b4544b6f3e74ba7069c88d2",
+    "mtime": 1793790504.9741173,
+    "seen": 1793794730.0366662,
+    "ast_hash": "fc3a28460da4e4c8bd8d376813fd06ed",
     "semantic_hash": ""
   },
   "lib/features/tasks/data/models/task_model.g.dart": {
-    "mtime": 1793781184.6643493,
-    "seen": 1793783523.99925,
-    "ast_hash": "4f4d90fb0b4efc7ab9e5edda011e255a",
+    "mtime": 1793790505.251948,
+    "seen": 1793794730.0366662,
+    "ast_hash": "2d4d2bd798e5e805787a11b6e121299f",
     "semantic_hash": ""
   },
   "lib/features/tasks/data/repositories/task_repository.dart": {
@@ -2022,9 +2022,9 @@
     "semantic_hash": ""
   },
   "lib/features/tasks/data/repositories/task_repository_impl.dart": {
-    "mtime": 1793781184.665458,
-    "seen": 1793783523.99925,
-    "ast_hash": "2d85971d573d7ad754c5c60f648b5488",
+    "mtime": 1793794272.1886063,
+    "seen": 1793794730.0366662,
+    "ast_hash": "0e423b59eecc6dfc94786218930697f0",
     "semantic_hash": ""
   },
   "lib/features/tasks/ui/all_tasks_screen.dart": {
@@ -2106,15 +2106,15 @@
     "semantic_hash": ""
   },
   "lib/features/tasks/ui/widgets/task_card.dart": {
-    "mtime": 1793781184.6703134,
-    "seen": 1793783523.99925,
-    "ast_hash": "fbd5062923c7d0562e15e997583d7f52",
+    "mtime": 1793794272.4064696,
+    "seen": 1793794730.0378337,
+    "ast_hash": "ab2e88338be22fc2913dabb40bc05860",
     "semantic_hash": ""
   },
   "lib/features/tasks/ui/widgets/task_form_sheet.dart": {
-    "mtime": 1793781184.6708312,
-    "seen": 1793783523.99925,
-    "ast_hash": "dc3a616b1afbe9159790425f8dd29731",
+    "mtime": 1793794511.8662262,
+    "seen": 1793794730.0378337,
+    "ast_hash": "162115ef2a1254cdc94327a170c627d3",
     "semantic_hash": ""
   },
   "lib/features/tasks/ui/widgets/today_section_header.dart": {
@@ -2391,6 +2391,258 @@
     "mtime": 1793783330.5997653,
     "seen": 1793783523.99925,
     "ast_hash": "b175e879b8aed3f542b9a4b8a925139d",
+    "semantic_hash": ""
+  },
+  "lib/core/services/notification_action_handler.dart": {
+    "mtime": 1793794446.9715383,
+    "seen": 1793794730.0366662,
+    "ast_hash": "cde0218908db6cd116f89270e7c26c35",
+    "semantic_hash": ""
+  },
+  "lib/core/services/reminder_service.dart": {
+    "mtime": 1793794504.8192017,
+    "seen": 1793794730.0366662,
+    "ast_hash": "e23619f14d19e8c65fe17d952b4d9308",
+    "semantic_hash": ""
+  },
+  "lib/core/widgets/permission_status_badge.dart": {
+    "mtime": 1793793891.746208,
+    "seen": 1793794730.0366662,
+    "ast_hash": "cfc1bf5056d62d6c1efedcfd55423738",
+    "semantic_hash": ""
+  },
+  "lib/core/widgets/reminder_lead_time_chips.dart": {
+    "mtime": 1793793969.7761667,
+    "seen": 1793794730.0366662,
+    "ast_hash": "82dfc1ea9029ca48f42360f4cbd0784f",
+    "semantic_hash": ""
+  },
+  "lib/features/tasks/data/models/reminder_model.dart": {
+    "mtime": 1793790311.6697435,
+    "seen": 1793794730.0366662,
+    "ast_hash": "5e16daeb276ca5eb7c3f5ce9ea4973cf",
+    "semantic_hash": ""
+  },
+  "lib/features/tasks/data/models/reminder_model.freezed.dart": {
+    "mtime": 1793790504.973006,
+    "seen": 1793794730.0366662,
+    "ast_hash": "139fbd17c9030d022136788b4b2d0b27",
+    "semantic_hash": ""
+  },
+  "lib/features/tasks/data/models/reminder_model.g.dart": {
+    "mtime": 1793790505.2510607,
+    "seen": 1793794730.0366662,
+    "ast_hash": "85f69f5309651289187168b2a6280052",
+    "semantic_hash": ""
+  },
+  "lib/features/tasks/ui/reminder_troubleshooting_screen.dart": {
+    "mtime": 1793793806.7692473,
+    "seen": 1793794730.0366662,
+    "ast_hash": "b8965ad6e62ae9c900718d5898c4ffd5",
+    "semantic_hash": ""
+  },
+  "lib/features/tasks/ui/widgets/permission_primer_dialog.dart": {
+    "mtime": 1793793853.9547117,
+    "seen": 1793794730.0366662,
+    "ast_hash": "3abf50f8933067c93a7847455387d702",
+    "semantic_hash": ""
+  },
+  "test/core/services/reminder_service_start_working_test.dart": {
+    "mtime": 1793794272.5704398,
+    "seen": 1793794730.0378337,
+    "ast_hash": "765ec5b193e93f4824d20919443f1aca",
+    "semantic_hash": ""
+  },
+  "test/core/services/reminder_service_test.dart": {
+    "mtime": 1793794272.579162,
+    "seen": 1793794730.0378337,
+    "ast_hash": "1d78ddaf92fc94856af04581698c4ff9",
+    "semantic_hash": ""
+  },
+  "test/core/storage/migration_test.dart": {
+    "mtime": 1793794272.5958188,
+    "seen": 1793794730.0378337,
+    "ast_hash": "45ef369542951dc35a1468ccf10268ea",
+    "semantic_hash": ""
+  },
+  "test/features/tasks/data/repositories/task_repository_reminders_test.dart": {
+    "mtime": 1793794272.6617558,
+    "seen": 1793794730.0378337,
+    "ast_hash": "fa3c3cd102cedbf7536597df85121a64",
+    "semantic_hash": ""
+  },
+  "test/features/tasks/ui/reminder_troubleshooting_screen_test.dart": {
+    "mtime": 1793794272.686824,
+    "seen": 1793794730.0378337,
+    "ast_hash": "e52224f4968cddc2f79ade6da7a636c5",
+    "semantic_hash": ""
+  },
+  "test/features/tasks/ui/widgets/permission_primer_dialog_test.dart": {
+    "mtime": 1793794272.735113,
+    "seen": 1793794730.0378337,
+    "ast_hash": "b0d7160c945539cbeae3207ea15eb654",
+    "semantic_hash": ""
+  },
+  "test/features/tasks/ui/widgets/start_working_helper_test.dart": {
+    "mtime": 1793794272.7485092,
+    "seen": 1793794730.0378337,
+    "ast_hash": "a41beaa437f886b239abf499707a3663",
+    "semantic_hash": ""
+  },
+  "test/features/tasks/ui/widgets/task_form_sheet_reminders_test.dart": {
+    "mtime": 1793794272.7636192,
+    "seen": 1793794730.0378337,
+    "ast_hash": "530bc0bf6bb98997854d92ff0e3a8d69",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/checklists/requirements.md": {
+    "mtime": 1793785778.0519161,
+    "seen": 1793794730.0378337,
+    "ast_hash": "37ebdc6ea1719a45c9595482cc4fd4e9",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/contracts/reminder_service_contract.md": {
+    "mtime": 1793786035.8817,
+    "seen": 1793794730.0378337,
+    "ast_hash": "5fa38d5e656f2a3add095ec880c9d06a",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/data-model.md": {
+    "mtime": 1793786022.9746523,
+    "seen": 1793794730.0378337,
+    "ast_hash": "0387d794bf1d8798fcfed09698f3484e",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/design/design-notes.md": {
+    "mtime": 1793788619.2563918,
+    "seen": 1793794730.0378337,
+    "ast_hash": "47fdb5afb34c473faff4defe8a583584",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/design/stitch-prompts.md": {
+    "mtime": 1793786303.194522,
+    "seen": 1793794730.0378337,
+    "ast_hash": "a1d1fca51a7aafbb81503bf1a1664008",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/design/ui-brief.md": {
+    "mtime": 1793786267.1627104,
+    "seen": 1793794730.0378337,
+    "ast_hash": "5b96831217efd9defaa15f69fa36674d",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/plan.md": {
+    "mtime": 1793788726.8093662,
+    "seen": 1793794730.0378337,
+    "ast_hash": "14b4748689fc031009c7ffda0bb68ee9",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/quickstart.md": {
+    "mtime": 1793786057.3718665,
+    "seen": 1793794730.0378337,
+    "ast_hash": "cc2eeb671e18ce30dec85f2107c7d0d5",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/research.md": {
+    "mtime": 1793786002.5861044,
+    "seen": 1793794730.0378337,
+    "ast_hash": "23c75a77ab664acc2e11147adbe22763",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/spec.md": {
+    "mtime": 1793788661.5548718,
+    "seen": 1793794730.0378337,
+    "ast_hash": "c3d75b452649afd1fce4401522607eaa",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/tasks.md": {
+    "mtime": 1793794075.7172005,
+    "seen": 1793794730.0378337,
+    "ast_hash": "294fae5c09b1215ec4063cd4803f01c5",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/design/screens/01-reminders-modal-ar-light.png": {
+    "mtime": 1793788466.5523524,
+    "seen": 1793794730.0378337,
+    "ast_hash": "5b6cb4878849ca57962376939c58a80d",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/design/screens/01-reminders-modal-en-dark.png": {
+    "mtime": 1793788466.5533528,
+    "seen": 1793794730.0378337,
+    "ast_hash": "30dd8b60bf0c6c222597e109e5e2f7c9",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/design/screens/01-reminders-modal-en-light.png": {
+    "mtime": 1793788380.336298,
+    "seen": 1793794730.0378337,
+    "ast_hash": "7050b3f8e9888b911ce4209d8deadf19",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/design/screens/01-reminders-modal-inexact-warning.png": {
+    "mtime": 1793788466.5553527,
+    "seen": 1793794730.0378337,
+    "ast_hash": "d23379bb30589f8158671aac1243345d",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/design/screens/02-permission-primer-ar-light.png": {
+    "mtime": 1793788516.570609,
+    "seen": 1793794730.0378337,
+    "ast_hash": "f966ca71868325a0b37b7e23baab8243",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/design/screens/02-permission-primer-en-dark.png": {
+    "mtime": 1793788516.5721931,
+    "seen": 1793794730.0378337,
+    "ast_hash": "9756e91916796295c054075358f719df",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/design/screens/02-permission-primer-en-light.png": {
+    "mtime": 1793788466.5563529,
+    "seen": 1793794730.0378337,
+    "ast_hash": "751f394e087713181bdf56649fecd617",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/design/screens/03-reminder-reliability-ar-light.png": {
+    "mtime": 1793788516.575477,
+    "seen": 1793794730.0378337,
+    "ast_hash": "c95e290f8ec826ede7ffbedebed8a4a0",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/design/screens/03-reminder-reliability-en-dark.png": {
+    "mtime": 1793788574.173124,
+    "seen": 1793794730.0378337,
+    "ast_hash": "81c3c10ddb27c86361e328581d32f9cc",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/design/screens/03-reminder-reliability-en-light.png": {
+    "mtime": 1793788516.5734687,
+    "seen": 1793794730.0378337,
+    "ast_hash": "a4dae79ab256d8cc94f573c0c20f93a3",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/design/screens/04-notification-cards-dark.png": {
+    "mtime": 1793788574.177123,
+    "seen": 1793794730.0378337,
+    "ast_hash": "27df20cc54b8364ab8258436955af4d1",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/design/screens/04-notification-cards-light.png": {
+    "mtime": 1793788574.1751237,
+    "seen": 1793794730.0378337,
+    "ast_hash": "3a34bdcd4dafbd7072ea6489a8ded054",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/design/screens/05-task-card-reminder-ar.png": {
+    "mtime": 1793788574.1801238,
+    "seen": 1793794730.0378337,
+    "ast_hash": "640770ce76e7b97447d7af5f24a296fe",
+    "semantic_hash": ""
+  },
+  "specs/002-task-reminders/design/screens/05-task-card-reminder-en.png": {
+    "mtime": 1793788574.178124,
+    "seen": 1793794730.0378337,
+    "ast_hash": "9672681f7ef9e38f7ae9e774516f3e64",
     "semantic_hash": ""
   }
 }

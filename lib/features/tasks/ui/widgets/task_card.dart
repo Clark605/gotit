@@ -71,8 +71,8 @@ class TaskCard extends StatelessWidget {
                         color: isCompleted
                             ? (isDark ? AppColors.darkAccent : AppColors.accent)
                             : (isDark
-                                ? AppColors.darkHairlineStrong
-                                : AppColors.hairlineStrong),
+                                  ? AppColors.darkHairlineStrong
+                                  : AppColors.hairlineStrong),
                         width: 1.5,
                       ),
                     ),

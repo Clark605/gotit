@@ -13,10 +13,7 @@ class TaskRepositoryImpl implements TaskRepository {
   final IReminderService? _reminderService;
   static const _uuid = Uuid();
 
-  TaskRepositoryImpl(
-    this._dataSource, [
-    this._reminderService,
-  ]);
+  TaskRepositoryImpl(this._dataSource, [this._reminderService]);
 
   @override
   Stream<List<TaskModel>> watchTodayTasks() => _dataSource.watchTodayTasks();
@@ -79,8 +76,7 @@ class TaskRepositoryImpl implements TaskRepository {
   Future<ChecklistItemModel> toggleChecklistItem({
     required String taskId,
     required String itemId,
-  }) =>
-      _dataSource.toggleChecklistItem(taskId: taskId, itemId: itemId);
+  }) => _dataSource.toggleChecklistItem(taskId: taskId, itemId: itemId);
 
   @override
   Stream<List<ContextModel>> watchContexts() => _dataSource.watchContexts();

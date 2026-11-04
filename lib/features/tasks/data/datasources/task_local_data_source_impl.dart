@@ -454,7 +454,9 @@ class TaskLocalDataSourceImpl implements TaskLocalDataSource {
     required int notificationId,
   }) async {
     final now = DateTime.now();
-    await _db.into(_db.remindersTable).insertOnConflictUpdate(
+    await _db
+        .into(_db.remindersTable)
+        .insertOnConflictUpdate(
           RemindersTableCompanion.insert(
             id: id,
             taskId: taskId,
@@ -471,9 +473,9 @@ class TaskLocalDataSourceImpl implements TaskLocalDataSource {
 
   @override
   Future<List<ReminderModel>> getRemindersForTask(String taskId) async {
-    final rows = await (_db.select(_db.remindersTable)
-          ..where((r) => r.taskId.equals(taskId)))
-        .get();
+    final rows = await (_db.select(
+      _db.remindersTable,
+    )..where((r) => r.taskId.equals(taskId))).get();
 
     return rows
         .map(
@@ -511,8 +513,8 @@ class TaskLocalDataSourceImpl implements TaskLocalDataSource {
 
   @override
   Future<void> deleteRemindersForTask(String taskId) async {
-    await (_db.delete(_db.remindersTable)
-          ..where((r) => r.taskId.equals(taskId)))
-        .go();
+    await (_db.delete(
+      _db.remindersTable,
+    )..where((r) => r.taskId.equals(taskId))).go();
   }
 }

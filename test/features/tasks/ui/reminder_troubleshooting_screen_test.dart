@@ -26,8 +26,9 @@ Widget _buildTroubleshootingTestApp({
 
 void main() {
   group('ReminderTroubleshootingScreen Visual & Interaction Tests', () {
-    testWidgets('renders diagnostics and OEM guides in English Light',
-        (tester) async {
+    testWidgets('renders diagnostics and OEM guides in English Light', (
+      tester,
+    ) async {
       await tester.pumpWidget(_buildTroubleshootingTestApp());
       await tester.pumpAndSettle();
 

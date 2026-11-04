@@ -81,38 +81,47 @@ void main() {
       await repository.createTask(task);
 
       expect(mockReminderService.syncedSchedules.length, equals(1));
-      expect(mockReminderService.syncedSchedules.first.taskId, equals('task-rem-1'));
-      expect(mockReminderService.syncedSchedules.first.isReminderEnabled, isTrue);
-    });
-
-    test('updateTask triggers syncReminderSchedule with updated values', () async {
-      final now = DateTime.now();
-      final task = TaskModel(
-        id: 'task-rem-2',
-        title: 'Team standup',
-        dueDate: now.add(const Duration(hours: 2)),
-        isReminderEnabled: true,
-        reminderLeadMinutes: 5,
-        createdAt: now,
-        updatedAt: now,
-      );
-
-      await repository.createTask(task);
-      mockReminderService.syncedSchedules.clear();
-
-      final updatedTask = task.copyWith(
-        title: 'Team standup rescheduled',
-        dueDate: now.add(const Duration(hours: 4)),
-      );
-
-      await repository.updateTask(updatedTask);
-
-      expect(mockReminderService.syncedSchedules.length, equals(1));
       expect(
-        mockReminderService.syncedSchedules.first.title,
-        equals('Team standup rescheduled'),
+        mockReminderService.syncedSchedules.first.taskId,
+        equals('task-rem-1'),
+      );
+      expect(
+        mockReminderService.syncedSchedules.first.isReminderEnabled,
+        isTrue,
       );
     });
+
+    test(
+      'updateTask triggers syncReminderSchedule with updated values',
+      () async {
+        final now = DateTime.now();
+        final task = TaskModel(
+          id: 'task-rem-2',
+          title: 'Team standup',
+          dueDate: now.add(const Duration(hours: 2)),
+          isReminderEnabled: true,
+          reminderLeadMinutes: 5,
+          createdAt: now,
+          updatedAt: now,
+        );
+
+        await repository.createTask(task);
+        mockReminderService.syncedSchedules.clear();
+
+        final updatedTask = task.copyWith(
+          title: 'Team standup rescheduled',
+          dueDate: now.add(const Duration(hours: 4)),
+        );
+
+        await repository.updateTask(updatedTask);
+
+        expect(mockReminderService.syncedSchedules.length, equals(1));
+        expect(
+          mockReminderService.syncedSchedules.first.title,
+          equals('Team standup rescheduled'),
+        );
+      },
+    );
 
     test('completing a task cancels pending reminders immediately', () async {
       final now = DateTime.now();
@@ -156,7 +165,10 @@ void main() {
       final reopened = await repository.toggleTaskStatus('task-rem-4');
       expect(reopened.status, equals(TaskStatus.open));
       expect(mockReminderService.syncedSchedules.length, equals(1));
-      expect(mockReminderService.syncedSchedules.first.taskId, equals('task-rem-4'));
+      expect(
+        mockReminderService.syncedSchedules.first.taskId,
+        equals('task-rem-4'),
+      );
     });
 
     test('deleting a task cancels pending reminders immediately', () async {

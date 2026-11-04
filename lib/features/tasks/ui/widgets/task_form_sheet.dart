@@ -264,7 +264,7 @@ class _TaskFormSheetState extends State<TaskFormSheet> {
             Switch.adaptive(
               key: const Key('reminder_switch'),
               value: state.isReminderEnabled,
-              activeColor: AppColors.accent,
+              activeTrackColor: AppColors.accent,
               onChanged: (enabled) async {
                 if (enabled) {
                   final accepted = await PermissionPrimerDialog.show(context);
@@ -466,9 +466,9 @@ class _TaskFormSheetState extends State<TaskFormSheet> {
           TextButton(
             key: const Key('inexact_alarm_fix_button'),
             onPressed: () {
-              Navigator.of(context).pushNamed(
-                RouteNames.reminderTroubleshooting,
-              );
+              Navigator.of(
+                context,
+              ).pushNamed(RouteNames.reminderTroubleshooting);
             },
             child: Text(
               l10n.inexactAlarmFixButton,

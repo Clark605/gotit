@@ -19,9 +19,7 @@ Widget _buildPrimerTestApp({
       GlobalCupertinoLocalizations.delegate,
     ],
     supportedLocales: const [Locale('en'), Locale('ar')],
-    home: const Scaffold(
-      body: PermissionPrimerDialog(),
-    ),
+    home: const Scaffold(body: PermissionPrimerDialog()),
   );
 }
 

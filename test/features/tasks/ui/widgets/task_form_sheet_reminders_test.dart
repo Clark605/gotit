@@ -57,8 +57,7 @@ void main() {
   });
 
   group('TaskFormSheet Reminders Section', () {
-    testWidgets('renders reminder toggle switch initially off',
-        (tester) async {
+    testWidgets('renders reminder toggle switch initially off', (tester) async {
       await tester.pumpWidget(_buildFormTestApp(cubit: cubit));
       await tester.pumpAndSettle();
 
@@ -71,36 +70,38 @@ void main() {
     });
 
     testWidgets(
-        'toggling reminder on reveals lead time chips and updates cubit',
-        (tester) async {
-      await tester.pumpWidget(_buildFormTestApp(cubit: cubit));
-      await tester.pumpAndSettle();
-
-      final reminderSwitch = find.byKey(const Key('reminder_switch'));
-      await tester.tap(reminderSwitch);
-      await tester.pumpAndSettle();
-
-      // Tap Enable Reminders on educational primer
-      final primerEnable = find.byKey(const Key('primer_enable_button'));
-      if (primerEnable.evaluate().isNotEmpty) {
-        await tester.tap(primerEnable);
+      'toggling reminder on reveals lead time chips and updates cubit',
+      (tester) async {
+        await tester.pumpWidget(_buildFormTestApp(cubit: cubit));
         await tester.pumpAndSettle();
-      }
 
-      expect(cubit.state.isReminderEnabled, isTrue);
-      expect(find.byType(ReminderLeadTimeChips), findsOneWidget);
+        final reminderSwitch = find.byKey(const Key('reminder_switch'));
+        await tester.tap(reminderSwitch);
+        await tester.pumpAndSettle();
 
-      // Tap 30m chip
-      final chip30m = find.text('30m before');
-      expect(chip30m, findsOneWidget);
-      await tester.tap(chip30m);
-      await tester.pumpAndSettle();
+        // Tap Enable Reminders on educational primer
+        final primerEnable = find.byKey(const Key('primer_enable_button'));
+        if (primerEnable.evaluate().isNotEmpty) {
+          await tester.tap(primerEnable);
+          await tester.pumpAndSettle();
+        }
 
-      expect(cubit.state.reminderLeadMinutes, equals(30));
-    });
+        expect(cubit.state.isReminderEnabled, isTrue);
+        expect(find.byType(ReminderLeadTimeChips), findsOneWidget);
 
-    testWidgets('renders all-day alert time when isAllDay is selected',
-        (tester) async {
+        // Tap 30m chip
+        final chip30m = find.text('30m before');
+        expect(chip30m, findsOneWidget);
+        await tester.tap(chip30m);
+        await tester.pumpAndSettle();
+
+        expect(cubit.state.reminderLeadMinutes, equals(30));
+      },
+    );
+
+    testWidgets('renders all-day alert time when isAllDay is selected', (
+      tester,
+    ) async {
       cubit.updateDueDate(DateTime.now(), isAllDay: true);
       cubit.toggleReminder(true);
 
@@ -113,17 +114,18 @@ void main() {
     });
 
     testWidgets(
-        'renders start-working notice when effort and future timed due date are set',
-        (tester) async {
-      final futureDue = DateTime.now().add(const Duration(hours: 3));
-      cubit.updateDueDate(futureDue, isAllDay: false);
-      cubit.updateEffortMinutes(45);
-      cubit.toggleReminder(true);
+      'renders start-working notice when effort and future timed due date are set',
+      (tester) async {
+        final futureDue = DateTime.now().add(const Duration(hours: 3));
+        cubit.updateDueDate(futureDue, isAllDay: false);
+        cubit.updateEffortMinutes(45);
+        cubit.toggleReminder(true);
 
-      await tester.pumpWidget(_buildFormTestApp(cubit: cubit));
-      await tester.pumpAndSettle();
+        await tester.pumpWidget(_buildFormTestApp(cubit: cubit));
+        await tester.pumpAndSettle();
 
-      expect(find.byIcon(Icons.access_time_filled), findsOneWidget);
-    });
+        expect(find.byIcon(Icons.access_time_filled), findsOneWidget);
+      },
+    );
   });
 }

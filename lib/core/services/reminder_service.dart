@@ -64,11 +64,9 @@ class ReminderServiceImpl implements IReminderService {
 
   bool _isInitialized = false;
 
-  ReminderServiceImpl(
-    this._database,
-    this._prefs,
-  )   : _notificationsPlugin = FlutterLocalNotificationsPlugin(),
-        _onNotificationTap = null;
+  ReminderServiceImpl(this._database, this._prefs)
+    : _notificationsPlugin = FlutterLocalNotificationsPlugin(),
+      _onNotificationTap = null;
 
   @visibleForTesting
   ReminderServiceImpl.forTesting(
@@ -76,9 +74,9 @@ class ReminderServiceImpl implements IReminderService {
     this._prefs, {
     FlutterLocalNotificationsPlugin? notificationsPlugin,
     void Function(String? payload)? onNotificationTap,
-  })  : _notificationsPlugin =
-            notificationsPlugin ?? FlutterLocalNotificationsPlugin(),
-        _onNotificationTap = onNotificationTap;
+  }) : _notificationsPlugin =
+           notificationsPlugin ?? FlutterLocalNotificationsPlugin(),
+       _onNotificationTap = onNotificationTap;
 
   static int getDueNotificationId(String taskId) =>
       (taskId.hashCode ^ 0x1000) & 0x7FFFFFFF;
@@ -92,12 +90,12 @@ class ReminderServiceImpl implements IReminderService {
   void _ensureTimezoneInitialized() {
     try {
       tz.local;
-    } catch (_) {
+    } on Object catch (_) {
       tz.initializeTimeZones();
       try {
         final localName = DateTime.now().timeZoneName;
         tz.setLocalLocation(tz.getLocation(localName));
-      } catch (_) {
+      } on Object catch (_) {
         tz.setLocalLocation(tz.getLocation('UTC'));
       }
     }
@@ -110,8 +108,9 @@ class ReminderServiceImpl implements IReminderService {
     try {
       _ensureTimezoneInitialized();
 
-      const androidSettings =
-          AndroidInitializationSettings('@mipmap/ic_launcher');
+      const androidSettings = AndroidInitializationSettings(
+        '@mipmap/ic_launcher',
+      );
       const darwinSettings = DarwinInitializationSettings(
         requestAlertPermission: false,
         requestBadgePermission: false,
@@ -132,10 +131,7 @@ class ReminderServiceImpl implements IReminderService {
             if (payload == 'today') {
               AppNavigator.pushNamed(RouteNames.today);
             } else {
-              AppNavigator.pushNamed(
-                RouteNames.taskDetail,
-                arguments: payload,
-              );
+              AppNavigator.pushNamed(RouteNames.taskDetail, arguments: payload);
             }
           }
         },
@@ -144,7 +140,7 @@ class ReminderServiceImpl implements IReminderService {
 
       await _createNotificationChannels();
       _isInitialized = true;
-    } catch (e, st) {
+    } on Object catch (e, st) {
       AppLogger.error(
         'Failed to initialize ReminderService',
         error: e,
@@ -157,7 +153,8 @@ class ReminderServiceImpl implements IReminderService {
     if (!kIsWeb && Platform.isAndroid) {
       final androidPlugin = _notificationsPlugin
           .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>();
+            AndroidFlutterLocalNotificationsPlugin
+          >();
 
       const remindersChannel = AndroidNotificationChannel(
         NotificationActionIds.channelReminders,
@@ -189,7 +186,8 @@ class ReminderServiceImpl implements IReminderService {
     if (Platform.isAndroid) {
       final androidPlugin = _notificationsPlugin
           .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>();
+            AndroidFlutterLocalNotificationsPlugin
+          >();
       return await androidPlugin?.areNotificationsEnabled() ?? false;
     }
     return true;
@@ -201,7 +199,8 @@ class ReminderServiceImpl implements IReminderService {
     if (Platform.isAndroid) {
       final androidPlugin = _notificationsPlugin
           .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>();
+            AndroidFlutterLocalNotificationsPlugin
+          >();
       return await androidPlugin?.requestNotificationsPermission() ?? false;
     }
     return true;
@@ -213,7 +212,8 @@ class ReminderServiceImpl implements IReminderService {
     if (Platform.isAndroid) {
       final androidPlugin = _notificationsPlugin
           .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>();
+            AndroidFlutterLocalNotificationsPlugin
+          >();
       return await androidPlugin?.canScheduleExactNotifications() ?? false;
     }
     return true;
@@ -224,7 +224,8 @@ class ReminderServiceImpl implements IReminderService {
     if (!kIsWeb && Platform.isAndroid) {
       final androidPlugin = _notificationsPlugin
           .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>();
+            AndroidFlutterLocalNotificationsPlugin
+          >();
       await androidPlugin?.requestExactAlarmsPermission();
     }
   }
@@ -247,16 +248,17 @@ class ReminderServiceImpl implements IReminderService {
 
     // 2. Calculate due reminder trigger time
     DateTime? dueTriggerTime;
-    final leadMinutes = schedule.reminderLeadMinutes ??
-        _prefs.getReminderDefaultLeadMinutes();
+    final leadMinutes =
+        schedule.reminderLeadMinutes ?? _prefs.getReminderDefaultLeadMinutes();
 
     if (schedule.isAllDay) {
-      final allDayTime = schedule.allDayReminderTime ??
-          _prefs.getReminderDefaultAllDayTime();
+      final allDayTime =
+          schedule.allDayReminderTime ?? _prefs.getReminderDefaultAllDayTime();
       final timeParts = allDayTime.split(':');
       final hour = int.tryParse(timeParts[0]) ?? 9;
-      final minute =
-          timeParts.length > 1 ? (int.tryParse(timeParts[1]) ?? 0) : 0;
+      final minute = timeParts.length > 1
+          ? (int.tryParse(timeParts[1]) ?? 0)
+          : 0;
       dueTriggerTime = DateTime(
         schedule.dueDate!.year,
         schedule.dueDate!.month,
@@ -265,8 +267,9 @@ class ReminderServiceImpl implements IReminderService {
         minute,
       );
     } else {
-      dueTriggerTime =
-          schedule.dueDate!.subtract(Duration(minutes: leadMinutes));
+      dueTriggerTime = schedule.dueDate!.subtract(
+        Duration(minutes: leadMinutes),
+      );
     }
 
     // Schedule due reminder if in the future
@@ -291,7 +294,9 @@ class ReminderServiceImpl implements IReminderService {
           payload: schedule.taskId,
         );
 
-        await _database.into(_database.remindersTable).insert(
+        await _database
+            .into(_database.remindersTable)
+            .insert(
               RemindersTableCompanion.insert(
                 id: '${schedule.taskId}_due',
                 taskId: schedule.taskId,
@@ -304,7 +309,7 @@ class ReminderServiceImpl implements IReminderService {
                 updatedAt: Value(now),
               ),
             );
-      } catch (e, st) {
+      } on Object catch (e, st) {
         AppLogger.error(
           'Failed to schedule due reminder',
           error: e,
@@ -316,11 +321,13 @@ class ReminderServiceImpl implements IReminderService {
     // 3. Calculate start-working reminder (US2)
     final effort = schedule.effortMinutes ?? 0;
     if (effort > 0 && !schedule.isAllDay) {
-      final startWorkingTriggerTime =
-          schedule.dueDate!.subtract(Duration(minutes: effort));
+      final startWorkingTriggerTime = schedule.dueDate!.subtract(
+        Duration(minutes: effort),
+      );
       if (startWorkingTriggerTime.isAfter(now)) {
-        final startWorkingNotificationId =
-            getStartWorkingNotificationId(schedule.taskId);
+        final startWorkingNotificationId = getStartWorkingNotificationId(
+          schedule.taskId,
+        );
         final details = _buildNotificationDetails(
           channelId: NotificationActionIds.channelReminders,
           channelName: 'Task Reminders',
@@ -340,7 +347,9 @@ class ReminderServiceImpl implements IReminderService {
             payload: schedule.taskId,
           );
 
-          await _database.into(_database.remindersTable).insert(
+          await _database
+              .into(_database.remindersTable)
+              .insert(
                 RemindersTableCompanion.insert(
                   id: '${schedule.taskId}_start_working',
                   taskId: schedule.taskId,
@@ -353,7 +362,7 @@ class ReminderServiceImpl implements IReminderService {
                   updatedAt: Value(now),
                 ),
               );
-        } catch (e, st) {
+        } on Object catch (e, st) {
           AppLogger.error(
             'Failed to schedule start-working reminder',
             error: e,
@@ -375,10 +384,10 @@ class ReminderServiceImpl implements IReminderService {
       await _notificationsPlugin.cancel(startWorkingId);
       await _notificationsPlugin.cancel(snoozeId);
 
-      await (_database.delete(_database.remindersTable)
-            ..where((r) => r.taskId.equals(taskId)))
-          .go();
-    } catch (e, st) {
+      await (_database.delete(
+        _database.remindersTable,
+      )..where((r) => r.taskId.equals(taskId))).go();
+    } on Object catch (e, st) {
       AppLogger.error(
         'Failed to cancel reminders for task $taskId',
         error: e,
@@ -405,9 +414,9 @@ class ReminderServiceImpl implements IReminderService {
     );
 
     // Look up task title from database if available
-    final task = await (_database.select(_database.tasksTable)
-          ..where((t) => t.id.equals(taskId)))
-        .getSingleOrNull();
+    final task = await (_database.select(
+      _database.tasksTable,
+    )..where((t) => t.id.equals(taskId))).getSingleOrNull();
 
     final taskTitle = task?.title ?? 'Task';
 
@@ -423,7 +432,7 @@ class ReminderServiceImpl implements IReminderService {
             UILocalNotificationDateInterpretation.absoluteTime,
         payload: taskId,
       );
-    } catch (e, st) {
+    } on Object catch (e, st) {
       AppLogger.error(
         'Failed to snooze reminder for task $taskId',
         error: e,
@@ -439,18 +448,18 @@ class ReminderServiceImpl implements IReminderService {
     final cutoff24hAgo = now.subtract(const Duration(hours: 24));
 
     try {
-      final pendingReminders = await (_database.select(_database.remindersTable)
-            ..where((r) => r.status.equals('pending')))
-          .get();
+      final pendingReminders = await (_database.select(
+        _database.remindersTable,
+      )..where((r) => r.status.equals('pending'))).get();
 
       int missedCount = 0;
 
       for (final reminder in pendingReminders) {
         if (reminder.scheduledTime.isAfter(now)) {
           // Future reminder: re-arm alarm
-          final task = await (_database.select(_database.tasksTable)
-                ..where((t) => t.id.equals(reminder.taskId)))
-              .getSingleOrNull();
+          final task = await (_database.select(
+            _database.tasksTable,
+          )..where((t) => t.id.equals(reminder.taskId))).getSingleOrNull();
 
           if (task != null && !task.isDeleted && task.status == 'open') {
             final canExact = await hasExactAlarmPermission();
@@ -482,9 +491,9 @@ class ReminderServiceImpl implements IReminderService {
           }
         } else {
           // Scheduled time elapsed during device shutdown
-          await (_database.update(_database.remindersTable)
-                ..where((r) => r.id.equals(reminder.id)))
-              .write(
+          await (_database.update(
+            _database.remindersTable,
+          )..where((r) => r.id.equals(reminder.id))).write(
             RemindersTableCompanion(
               status: const Value('fired'),
               updatedAt: Value(now),
@@ -499,7 +508,7 @@ class ReminderServiceImpl implements IReminderService {
 
       // If missed reminders occurred during shutdown, show consolidated summary notification
       if (missedCount > 0) {
-        final summaryDetails = NotificationDetails(
+        const summaryDetails = NotificationDetails(
           android: AndroidNotificationDetails(
             NotificationActionIds.channelMissed,
             'Missed Reminders',
@@ -508,7 +517,7 @@ class ReminderServiceImpl implements IReminderService {
             importance: Importance.defaultImportance,
             priority: Priority.defaultPriority,
           ),
-          iOS: const DarwinNotificationDetails(),
+          iOS: DarwinNotificationDetails(),
         );
 
         await _notificationsPlugin.show(
@@ -519,7 +528,7 @@ class ReminderServiceImpl implements IReminderService {
           payload: 'today',
         );
       }
-    } catch (e, st) {
+    } on Object catch (e, st) {
       AppLogger.error(
         'Failed to restore and reconcile schedule',
         error: e,

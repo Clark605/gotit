@@ -4,9 +4,13 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:gotit/core/services/reminder_service.dart';
 import 'package:gotit/core/storage/app_database.dart';
 import 'package:gotit/core/utils/app_logger.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 @pragma('vm:entry-point')
-void notificationTapBackground(NotificationResponse notificationResponse) async {
+void notificationTapBackground(
+  NotificationResponse notificationResponse,
+) async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final actionId = notificationResponse.actionId;
@@ -19,9 +23,9 @@ void notificationTapBackground(NotificationResponse notificationResponse) async 
 
     if (actionId == NotificationActionIds.markDone) {
       final now = DateTime.now();
-      await (database.update(database.tasksTable)
-            ..where((t) => t.id.equals(taskId)))
-          .write(
+      await (database.update(
+        database.tasksTable,
+      )..where((t) => t.id.equals(taskId))).write(
         TasksTableCompanion(
           status: const Value('completed'),
           updatedAt: Value(now),
@@ -29,9 +33,9 @@ void notificationTapBackground(NotificationResponse notificationResponse) async 
       );
 
       // Cancel any remaining reminders for this task
-      await (database.delete(database.remindersTable)
-            ..where((r) => r.taskId.equals(taskId)))
-          .go();
+      await (database.delete(
+        database.remindersTable,
+      )..where((r) => r.taskId.equals(taskId))).go();
     } else if (actionId == NotificationActionIds.snooze15m) {
       // Re-arm local alarm for 15 minutes
       final notificationsPlugin = FlutterLocalNotificationsPlugin();
@@ -62,15 +66,20 @@ void notificationTapBackground(NotificationResponse notificationResponse) async 
         iOS: DarwinNotificationDetails(),
       );
 
-      await notificationsPlugin.show(
+      tz.initializeTimeZones();
+      await notificationsPlugin.zonedSchedule(
         snoozeId,
         'Task Reminder',
         'Reminder snoozed for 15 minutes',
+        tz.TZDateTime.from(snoozeTime, tz.local),
         details,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
         payload: taskId,
       );
     }
-  } catch (e, st) {
+  } on Object catch (e, st) {
     AppLogger.error(
       'Error handling background notification tap',
       error: e,

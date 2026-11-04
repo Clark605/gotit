@@ -28,10 +28,7 @@ Widget _buildHelperTestApp({
     ],
     supportedLocales: const [Locale('en'), Locale('ar')],
     home: Scaffold(
-      body: BlocProvider.value(
-        value: cubit,
-        child: const TaskFormSheet(),
-      ),
+      body: BlocProvider.value(value: cubit, child: const TaskFormSheet()),
     ),
   );
 }
@@ -56,27 +53,34 @@ void main() {
 
   group('StartWorkingHelperCard Widget Tests', () {
     testWidgets(
-        'renders helper card with accurate calculated time when effort and future timed due date are present',
-        (tester) async {
-      final now = DateTime.now();
-      final futureDue = DateTime(now.year, now.month, now.day + 1, 16, 0); // Tomorrow at 4:00 PM
-      const effort = 45; // 45m lead -> 3:15 PM
+      'renders helper card with accurate calculated time when effort and future timed due date are present',
+      (tester) async {
+        final now = DateTime.now();
+        final futureDue = DateTime(
+          now.year,
+          now.month,
+          now.day + 1,
+          16,
+          0,
+        ); // Tomorrow at 4:00 PM
+        const effort = 45; // 45m lead -> 3:15 PM
 
-      cubit.updateDueDate(futureDue, isAllDay: false);
-      cubit.updateEffortMinutes(effort);
-      cubit.toggleReminder(true);
+        cubit.updateDueDate(futureDue, isAllDay: false);
+        cubit.updateEffortMinutes(effort);
+        cubit.toggleReminder(true);
 
-      await tester.pumpWidget(_buildHelperTestApp(cubit: cubit));
-      await tester.pumpAndSettle();
+        await tester.pumpWidget(_buildHelperTestApp(cubit: cubit));
+        await tester.pumpAndSettle();
 
-      final expectedTime = DateFormat('h:mm a').format(
-        futureDue.subtract(const Duration(minutes: effort)),
-      );
+        final expectedTime = DateFormat(
+          'h:mm a',
+        ).format(futureDue.subtract(const Duration(minutes: effort)));
 
-      expect(find.byIcon(Icons.access_time_filled), findsOneWidget);
-      expect(find.textContaining(expectedTime), findsOneWidget);
-      expect(find.textContaining('45m'), findsOneWidget);
-    });
+        expect(find.byIcon(Icons.access_time_filled), findsOneWidget);
+        expect(find.textContaining(expectedTime), findsOneWidget);
+        expect(find.textContaining('45m'), findsOneWidget);
+      },
+    );
 
     testWidgets('hides helper card when task is all-day', (tester) async {
       final futureDue = DateTime.now().add(const Duration(hours: 4));
@@ -90,8 +94,7 @@ void main() {
       expect(find.byIcon(Icons.access_time_filled), findsNothing);
     });
 
-    testWidgets('hides helper card when reminder is disabled',
-        (tester) async {
+    testWidgets('hides helper card when reminder is disabled', (tester) async {
       final futureDue = DateTime.now().add(const Duration(hours: 4));
       cubit.updateDueDate(futureDue, isAllDay: false);
       cubit.updateEffortMinutes(30);
