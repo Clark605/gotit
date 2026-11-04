@@ -529,6 +529,306 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Get Started'**
   String get getStarted;
+
+  /// No description provided for @todayNav.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get todayNav;
+
+  /// No description provided for @tasksNav.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks'**
+  String get tasksNav;
+
+  /// No description provided for @todayTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get todayTitle;
+
+  /// No description provided for @overdueSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Overdue'**
+  String get overdueSection;
+
+  /// No description provided for @dueTodaySection.
+  ///
+  /// In en, this message translates to:
+  /// **'Due Today'**
+  String get dueTodaySection;
+
+  /// No description provided for @startTodaySection.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Today'**
+  String get startTodaySection;
+
+  /// No description provided for @allClearTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'All clear for today'**
+  String get allClearTitle;
+
+  /// No description provided for @allClearSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Take a breath or plan ahead.'**
+  String get allClearSubtitle;
+
+  /// No description provided for @addTask.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a task'**
+  String get addTask;
+
+  /// No description provided for @tasksTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks'**
+  String get tasksTitle;
+
+  /// No description provided for @activeStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get activeStatus;
+
+  /// No description provided for @completedStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get completedStatus;
+
+  /// No description provided for @allStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get allStatus;
+
+  /// No description provided for @allContexts.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get allContexts;
+
+  /// No description provided for @newContext.
+  ///
+  /// In en, this message translates to:
+  /// **'+ New'**
+  String get newContext;
+
+  /// No description provided for @dailyMomentum.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Momentum'**
+  String get dailyMomentum;
+
+  /// No description provided for @completedRatio.
+  ///
+  /// In en, this message translates to:
+  /// **'{completed} of {total} completed ({percent}%)'**
+  String completedRatio(int completed, int total, int percent);
+
+  /// No description provided for @noTasksInContext.
+  ///
+  /// In en, this message translates to:
+  /// **'No tasks in this context.'**
+  String get noTasksInContext;
+
+  /// No description provided for @taskDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Task Detail'**
+  String get taskDetailTitle;
+
+  /// No description provided for @checklistTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Checklist'**
+  String get checklistTitle;
+
+  /// No description provided for @checklistProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{completed} of {total} completed'**
+  String checklistProgress(int completed, int total);
+
+  /// No description provided for @estimatedEffort.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated effort: {effort}'**
+  String estimatedEffort(String effort);
+
+  /// No description provided for @notesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get notesTitle;
+
+  /// No description provided for @deleteTaskConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this task?'**
+  String get deleteTaskConfirmTitle;
+
+  /// No description provided for @deleteTaskConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This will remove the task and its checklist items.'**
+  String get deleteTaskConfirmMessage;
+
+  /// No description provided for @undo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get undo;
+
+  /// No description provided for @taskDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Task deleted'**
+  String get taskDeleted;
+
+  /// No description provided for @newTaskTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New Task'**
+  String get newTaskTitle;
+
+  /// No description provided for @editTaskTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Task'**
+  String get editTaskTitle;
+
+  /// No description provided for @taskTitleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get taskTitleLabel;
+
+  /// No description provided for @taskTitleHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Task title'**
+  String get taskTitleHint;
+
+  /// No description provided for @titleRequiredError.
+  ///
+  /// In en, this message translates to:
+  /// **'Title cannot be empty'**
+  String get titleRequiredError;
+
+  /// No description provided for @scheduleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Schedule'**
+  String get scheduleLabel;
+
+  /// No description provided for @allDay.
+  ///
+  /// In en, this message translates to:
+  /// **'All-day'**
+  String get allDay;
+
+  /// No description provided for @contextLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Context'**
+  String get contextLabel;
+
+  /// No description provided for @effortEstimateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated Effort'**
+  String get effortEstimateLabel;
+
+  /// No description provided for @notesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add notes or details...'**
+  String get notesHint;
+
+  /// No description provided for @addChecklistItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Add checklist item'**
+  String get addChecklistItem;
+
+  /// No description provided for @saveTask.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Task'**
+  String get saveTask;
+
+  /// No description provided for @manageContextsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Contexts'**
+  String get manageContextsTitle;
+
+  /// No description provided for @contextNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Context name (e.g. Finance, Fitness)'**
+  String get contextNameHint;
+
+  /// No description provided for @addContext.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Context'**
+  String get addContext;
+
+  /// No description provided for @contextAlreadyExists.
+  ///
+  /// In en, this message translates to:
+  /// **'Context already exists'**
+  String get contextAlreadyExists;
+
+  /// No description provided for @deleteContextConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete \"{name}\"?'**
+  String deleteContextConfirmTitle(String name);
+
+  /// No description provided for @deleteContextConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks with this context will be kept and set to No Context.'**
+  String get deleteContextConfirmMessage;
+
+  /// No description provided for @noContext.
+  ///
+  /// In en, this message translates to:
+  /// **'No Context'**
+  String get noContext;
+
+  /// No description provided for @defaultContext.
+  ///
+  /// In en, this message translates to:
+  /// **'Default'**
+  String get defaultContext;
+
+  /// No description provided for @contextWork.
+  ///
+  /// In en, this message translates to:
+  /// **'Work'**
+  String get contextWork;
+
+  /// No description provided for @contextHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get contextHome;
+
+  /// No description provided for @contextPersonal.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal'**
+  String get contextPersonal;
 }
 
 class _AppLocalizationsDelegate

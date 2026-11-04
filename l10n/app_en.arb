@@ -89,5 +89,83 @@
   "onboardingTitle3": "Ready to Ship Out of Box",
   "onboardingDesc3": "Multi-flavor environments, guarded actions, CI/CD pipelines, and zero third-party accounts.",
   "skip": "Skip",
-  "getStarted": "Get Started"
+  "getStarted": "Get Started",
+
+  "todayNav": "Today",
+  "tasksNav": "Tasks",
+  "todayTitle": "Today",
+  "overdueSection": "Overdue",
+  "dueTodaySection": "Due Today",
+  "startTodaySection": "Start Today",
+  "allClearTitle": "All clear for today",
+  "allClearSubtitle": "Take a breath or plan ahead.",
+  "addTask": "Add a task",
+
+  "tasksTitle": "Tasks",
+  "activeStatus": "Active",
+  "completedStatus": "Completed",
+  "allStatus": "All",
+  "allContexts": "All",
+  "newContext": "+ New",
+  "dailyMomentum": "Daily Momentum",
+  "completedRatio": "{completed} of {total} completed ({percent}%)",
+  "@completedRatio": {
+    "placeholders": {
+      "completed": { "type": "int" },
+      "total": { "type": "int" },
+      "percent": { "type": "int" }
+    }
+  },
+  "noTasksInContext": "No tasks in this context.",
+
+  "taskDetailTitle": "Task Detail",
+  "checklistTitle": "Checklist",
+  "checklistProgress": "{completed} of {total} completed",
+  "@checklistProgress": {
+    "placeholders": {
+      "completed": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "estimatedEffort": "Estimated effort: {effort}",
+  "@estimatedEffort": {
+    "placeholders": {
+      "effort": { "type": "String" }
+    }
+  },
+  "notesTitle": "Notes",
+  "deleteTaskConfirmTitle": "Delete this task?",
+  "deleteTaskConfirmMessage": "This will remove the task and its checklist items.",
+  "undo": "Undo",
+  "taskDeleted": "Task deleted",
+
+  "newTaskTitle": "New Task",
+  "editTaskTitle": "Edit Task",
+  "taskTitleLabel": "Title",
+  "taskTitleHint": "Task title",
+  "titleRequiredError": "Title cannot be empty",
+  "scheduleLabel": "Schedule",
+  "allDay": "All-day",
+  "contextLabel": "Context",
+  "effortEstimateLabel": "Estimated Effort",
+  "notesHint": "Add notes or details...",
+  "addChecklistItem": "Add checklist item",
+  "saveTask": "Save Task",
+
+  "manageContextsTitle": "Manage Contexts",
+  "contextNameHint": "Context name (e.g. Finance, Fitness)",
+  "addContext": "Add Context",
+  "contextAlreadyExists": "Context already exists",
+  "deleteContextConfirmTitle": "Delete \"{name}\"?",
+  "@deleteContextConfirmTitle": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "deleteContextConfirmMessage": "Tasks with this context will be kept and set to No Context.",
+  "noContext": "No Context",
+  "defaultContext": "Default",
+  "contextWork": "Work",
+  "contextHome": "Home",
+  "contextPersonal": "Personal"
 }
