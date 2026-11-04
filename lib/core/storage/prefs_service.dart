@@ -33,6 +33,24 @@ class PrefsService {
   Future<void> setHasSeenOnboarding(bool seen) =>
       _prefs.setBool(StorageKeys.hasSeenOnboarding, seen);
 
+  int getReminderDefaultLeadMinutes() =>
+      _prefs.getInt(StorageKeys.reminderDefaultLeadMinutes) ?? 15;
+
+  Future<void> setReminderDefaultLeadMinutes(int minutes) =>
+      _prefs.setInt(StorageKeys.reminderDefaultLeadMinutes, minutes);
+
+  String getReminderDefaultAllDayTime() =>
+      _prefs.getString(StorageKeys.reminderDefaultAllDayTime) ?? '09:00';
+
+  Future<void> setReminderDefaultAllDayTime(String time) =>
+      _prefs.setString(StorageKeys.reminderDefaultAllDayTime, time);
+
+  bool get isExactAlarmFallbackAcknowledged =>
+      _prefs.getBool(StorageKeys.exactAlarmFallbackAcknowledged) ?? false;
+
+  Future<void> setExactAlarmFallbackAcknowledged(bool acknowledged) =>
+      _prefs.setBool(StorageKeys.exactAlarmFallbackAcknowledged, acknowledged);
+
   String? getString(String key) => _prefs.getString(key);
 
   Future<void> setString(String key, String value) =>

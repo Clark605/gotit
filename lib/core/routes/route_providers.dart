@@ -23,6 +23,7 @@ import 'package:gotit/features/example/ui/example_screen.dart';
 import 'package:gotit/features/tasks/cubit/task_form_cubit.dart';
 import 'package:gotit/features/tasks/cubit/tasks_cubit.dart';
 import 'package:gotit/features/tasks/ui/all_tasks_screen.dart';
+import 'package:gotit/features/tasks/ui/reminder_troubleshooting_screen.dart';
 import 'package:gotit/features/tasks/ui/task_detail_args.dart';
 import 'package:gotit/features/tasks/ui/task_detail_screen.dart';
 import 'package:gotit/features/tasks/ui/today_screen.dart';
@@ -38,6 +39,9 @@ Widget buildOnboardingRoute() => OnboardingScreen(
 );
 
 Widget buildSettingsRoute() => const SettingsScreen();
+
+Widget buildReminderTroubleshootingRoute() =>
+    const ReminderTroubleshootingScreen();
 
 Widget buildThemeGalleryRoute() => const ThemeGalleryScreen();
 

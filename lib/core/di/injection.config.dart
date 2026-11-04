@@ -41,6 +41,7 @@ import '../observability/crash_reporter.dart' as _i72;
 import '../observability/force_update_gate.dart' as _i1050;
 import '../observability/remote_config_service.dart' as _i939;
 import '../services/connectivity_service.dart' as _i47;
+import '../services/reminder_service.dart' as _i537;
 import '../storage/app_database.dart' as _i690;
 import '../storage/prefs_service.dart' as _i415;
 import '../storage/secure_storage_service.dart' as _i666;
@@ -84,6 +85,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i505.TaskLocalDataSource>(
       () => _i715.TaskLocalDataSourceImpl(gh<_i690.AppDatabase>()),
+    );
+    gh.lazySingleton<_i537.IReminderService>(
+      () => _i537.ReminderServiceImpl(
+        gh<_i690.AppDatabase>(),
+        gh<_i415.PrefsService>(),
+      ),
     );
     gh.lazySingleton<_i30.AppSettingsCubit>(
       () => _i30.AppSettingsCubit(gh<_i415.PrefsService>()),

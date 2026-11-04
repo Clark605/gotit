@@ -167,5 +167,89 @@
   "defaultContext": "Default",
   "contextWork": "Work",
   "contextHome": "Home",
-  "contextPersonal": "Personal"
+  "contextPersonal": "Personal",
+
+  "remindersLabel": "Reminders",
+  "enableReminder": "Enable Reminder",
+  "remindMe": "Remind me",
+  "reminderLeadAtDue": "At due time",
+  "reminderLead5m": "5m before",
+  "reminderLead15m": "15m before",
+  "reminderLead30m": "30m before",
+  "reminderLead1h": "1h before",
+  "reminderLead1d": "1d before",
+  "allDayAlertTime": "Alert Time",
+  "allDayAlertTimeHint": "Select time for all-day reminder",
+  "startWorkingNotice": "🔔 Start-working reminder will sound at {time} ({lead} lead time)",
+  "@startWorkingNotice": {
+    "placeholders": {
+      "time": { "type": "String" },
+      "lead": { "type": "String" }
+    }
+  },
+  "startWorkingNotificationTitle": "Start Working: {title}",
+  "@startWorkingNotificationTitle": {
+    "placeholders": {
+      "title": { "type": "String" }
+    }
+  },
+  "startWorkingNotificationBody": "Time to start working on {title} — due in {effort}",
+  "@startWorkingNotificationBody": {
+    "placeholders": {
+      "title": { "type": "String" },
+      "effort": { "type": "String" }
+    }
+  },
+  "dueNotificationTitle": "Task Due: {title}",
+  "@dueNotificationTitle": {
+    "placeholders": {
+      "title": { "type": "String" }
+    }
+  },
+  "dueNotificationBody": "{title} is due now",
+  "@dueNotificationBody": {
+    "placeholders": {
+      "title": { "type": "String" }
+    }
+  },
+  "actionMarkDone": "Mark as Done",
+  "actionSnooze15m": "Snooze (15m)",
+  "missedRemindersTitle": "Gotit",
+  "missedRemindersBody": "{count} missed reminders while device was off",
+  "@missedRemindersBody": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "permissionPrimerTitle": "Stay On Top of Your Tasks",
+  "permissionPrimerBody": "Gotit delivers precise, timely reminders so you never miss a deadline. To notify you even when the app is closed, Gotit needs permission to send notifications and schedule exact alarms.",
+  "permissionPrimerNotificationItem": "Timely task notifications and lock screen quick actions",
+  "permissionPrimerAlarmItem": "Exact timing for high-priority reminders",
+  "permissionPrimerEnableButton": "Enable Reminders",
+  "permissionPrimerLaterButton": "Maybe Later",
+  "inexactAlarmWarningTitle": "Exact Alarms Disabled",
+  "inexactAlarmWarningBody": "Reminders may vary by up to 10 minutes. Enable exact alarms for precise delivery.",
+  "inexactAlarmFixButton": "Fix",
+  "troubleshootingTitle": "Reminder Reliability",
+  "systemDiagnosticsTitle": "System Diagnostics",
+  "diagnosticNotifications": "Notifications",
+  "diagnosticExactAlarms": "Exact Alarms",
+  "diagnosticBatteryOptimizations": "Battery Saver",
+  "diagnosticStatusActive": "Active",
+  "diagnosticStatusInexact": "Inexact",
+  "diagnosticStatusRestricted": "Restricted",
+  "diagnosticStatusDisabled": "Disabled",
+  "oemGuidesTitle": "Device-Specific Settings",
+  "oemGuidesSubtitle": "Aggressive battery optimization may delay notifications when Gotit is closed.",
+  "oemXiaomiTitle": "Xiaomi / HyperOS / MIUI",
+  "oemXiaomiGuide": "1. Enable Autostart in Security > Manage apps > Gotit.\n2. Set Battery saver to No restrictions.\n3. Lock Gotit in Recent Apps.",
+  "oemSamsungTitle": "Samsung (One UI)",
+  "oemSamsungGuide": "1. Go to Settings > Apps > Gotit > Battery > Select 'Unrestricted'.\n2. In Device care > Battery > Background usage limits, remove Gotit from 'Sleeping apps'.",
+  "oemHuaweiTitle": "Huawei (EMUI)",
+  "oemHuaweiGuide": "1. Go to Settings > Battery > App launch > Gotit.\n2. Turn off 'Manage automatically' and enable 'Auto-launch', 'Secondary launch', and 'Run in background'.",
+  "oemOppoVivoTitle": "OPPO / Vivo / OnePlus",
+  "oemOppoVivoGuide": "1. Enable 'Allow background activity' in Battery settings.\n2. In App info > Permissions, allow Autostart.",
+  "openBatterySettings": "Open Battery Settings",
+  "openExactAlarmSettings": "Open Exact Alarm Settings",
+  "dontKillMyAppLink": "Learn more at dontkillmyapp.com"
 }

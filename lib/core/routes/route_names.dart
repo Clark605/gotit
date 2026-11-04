@@ -8,6 +8,7 @@ class RouteNames {
   static const String today = '/today';
   static const String allTasks = '/tasks';
   static const String taskDetail = '/task-detail';
+  static const String reminderTroubleshooting = '/reminder-troubleshooting';
   static const String settings = '/settings';
   static const String themeGallery = '/theme-gallery';
   static const String example = '/example';
