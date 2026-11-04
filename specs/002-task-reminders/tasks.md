@@ -92,14 +92,14 @@ description: "Task list for Phase 2: Resilient Task Reminders & Notifications"
 **Independent Test**: Mark a task complete, verify pending alarm is cancelled immediately in < 150ms. Simulate device reboot, verify future alarms are restored and missed shutdown alarms appear as a single consolidated summary notification.
 
 ### Tests for User Story 3
-- [ ] T026 [P] [US3] Write unit and repository tests for lifecycle cancellation and rescheduling on task edit/complete/delete in `test/features/tasks/data/repositories/task_repository_reminders_test.dart`
+- [X] T026 [P] [US3] Write unit and repository tests for lifecycle cancellation and rescheduling on task edit/complete/delete in `test/features/tasks/data/repositories/task_repository_reminders_test.dart`
 
 ### Implementation for User Story 3
-- [ ] T027 [US3] Update `TaskRepositoryImpl` in `lib/features/tasks/data/repositories/task_repository_impl.dart` to call `reminderService.cancelForTask(taskId)` inside `toggleTaskStatus`, `deleteTask`, and upon task rescheduling
-- [ ] T028 [US3] Create top-level `@pragma('vm:entry-point')` background action handler in `lib/core/services/notification_action_handler.dart` implementing `NotificationActionIds.markDone` (updates task status to completed in database) and `NotificationActionIds.snooze15m` (re-arms alarm for 15 minutes)
-- [ ] T029 [US3] Implement `ReminderServiceImpl.restoreAndReconcileSchedule` in `lib/core/services/reminder_service.dart` querying SQLite database on startup/boot, re-scheduling future alarms, and posting a consolidated missed summary notification (`NotificationActionIds.missedSummaryNotificationId`) for elapsed shutdown alarms
-- [ ] T030 [US3] Wire notification payload deep-linking in `lib/core/routes/app_router.dart` and `lib/core/services/reminder_service.dart` routing tapped notifications to `RouteNames.taskDetail` with `TaskDetailArgs(taskId: id)`
-- [ ] T031 [US3] Hook `reminderService.restoreAndReconcileSchedule()` into app initialization sequence in `lib/bootstrap.dart`
+- [X] T027 [US3] Update `TaskRepositoryImpl` in `lib/features/tasks/data/repositories/task_repository_impl.dart` to call `reminderService.cancelForTask(taskId)` inside `toggleTaskStatus`, `deleteTask`, and upon task rescheduling
+- [X] T028 [US3] Create top-level `@pragma('vm:entry-point')` background action handler in `lib/core/services/notification_action_handler.dart` implementing `NotificationActionIds.markDone` (updates task status to completed in database) and `NotificationActionIds.snooze15m` (re-arms alarm for 15 minutes)
+- [X] T029 [US3] Implement `ReminderServiceImpl.restoreAndReconcileSchedule` in `lib/core/services/reminder_service.dart` querying SQLite database on startup/boot, re-scheduling future alarms, and posting a consolidated missed summary notification (`NotificationActionIds.missedSummaryNotificationId`) for elapsed shutdown alarms
+- [X] T030 [US3] Wire notification payload deep-linking in `lib/core/routes/app_router.dart` and `lib/core/services/reminder_service.dart` routing tapped notifications to `RouteNames.taskDetail` with `TaskDetailArgs(taskId: id)`
+- [X] T031 [US3] Hook `reminderService.restoreAndReconcileSchedule()` into app initialization sequence in `lib/bootstrap.dart`
 
 **Checkpoint**: Lifecycles, boot persistence, and tray quick actions fully synchronized.
 

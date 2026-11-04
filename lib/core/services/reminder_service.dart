@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:drift/drift.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:gotit/core/routes/app_navigator.dart';
+import 'package:gotit/core/routes/route_names.dart';
 import 'package:gotit/core/services/notification_action_handler.dart';
 import 'package:gotit/core/storage/app_database.dart';
 import 'package:gotit/core/storage/prefs_service.dart';
@@ -124,8 +126,17 @@ class ReminderServiceImpl implements IReminderService {
       await _notificationsPlugin.initialize(
         initSettings,
         onDidReceiveNotificationResponse: (details) {
-          if (details.payload != null && details.payload!.isNotEmpty) {
-            _onNotificationTap?.call(details.payload);
+          final payload = details.payload;
+          if (payload != null && payload.isNotEmpty) {
+            _onNotificationTap?.call(payload);
+            if (payload == 'today') {
+              AppNavigator.pushNamed(RouteNames.today);
+            } else {
+              AppNavigator.pushNamed(
+                RouteNames.taskDetail,
+                arguments: payload,
+              );
+            }
           }
         },
         onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
