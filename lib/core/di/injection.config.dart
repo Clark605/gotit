@@ -22,6 +22,15 @@ import '../../features/example/data/datasources/item_remote_data_source.dart'
 import '../../features/example/data/repositories/item_repository.dart' as _i368;
 import '../../features/example/data/repositories/item_repository_impl.dart'
     as _i187;
+import '../../features/tasks/cubit/task_form_cubit.dart' as _i703;
+import '../../features/tasks/cubit/tasks_cubit.dart' as _i177;
+import '../../features/tasks/data/datasources/task_local_data_source.dart'
+    as _i505;
+import '../../features/tasks/data/datasources/task_local_data_source_impl.dart'
+    as _i715;
+import '../../features/tasks/data/repositories/task_repository.dart' as _i1069;
+import '../../features/tasks/data/repositories/task_repository_impl.dart'
+    as _i20;
 import '../cubit/app_settings_cubit.dart' as _i30;
 import '../cubit/connectivity_cubit.dart' as _i948;
 import '../network/auth_interceptor.dart' as _i908;
@@ -32,6 +41,7 @@ import '../observability/crash_reporter.dart' as _i72;
 import '../observability/force_update_gate.dart' as _i1050;
 import '../observability/remote_config_service.dart' as _i939;
 import '../services/connectivity_service.dart' as _i47;
+import '../storage/app_database.dart' as _i690;
 import '../storage/prefs_service.dart' as _i415;
 import '../storage/secure_storage_service.dart' as _i666;
 
@@ -44,6 +54,7 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final prefsModule = _$PrefsModule();
     final dioModule = _$DioModule();
+    gh.lazySingleton<_i690.AppDatabase>(() => _i690.AppDatabase());
     await gh.lazySingletonAsync<_i460.SharedPreferences>(
       () => prefsModule.prefs,
       preResolve: true,
@@ -51,17 +62,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i666.SecureStorageService>(
       () => _i666.SecureStorageService(),
     );
-    gh.lazySingleton<_i207.IAnalyticsService>(
-      () => _i207.NoOpAnalyticsService(),
-    );
-    gh.lazySingleton<_i47.IConnectivityService>(
-      () => _i47.ConnectivityService(),
-    );
-    gh.lazySingleton<_i72.ICrashReporter>(() => _i72.NoOpCrashReporter());
     gh.lazySingleton<_i939.IRemoteConfigService>(
       () => _i939.NoOpRemoteConfigService(),
     );
+    gh.lazySingleton<_i72.ICrashReporter>(() => _i72.NoOpCrashReporter());
+    gh.lazySingleton<_i47.IConnectivityService>(
+      () => _i47.ConnectivityService(),
+    );
     gh.lazySingleton<_i853.TokenProvider>(() => _i853.NoOpTokenProvider());
+    gh.lazySingleton<_i207.IAnalyticsService>(
+      () => _i207.NoOpAnalyticsService(),
+    );
     gh.lazySingleton<_i948.ConnectivityCubit>(
       () => _i948.ConnectivityCubit(gh<_i47.IConnectivityService>()),
     );
@@ -71,14 +82,26 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1050.ForceUpdateGate>(
       () => _i1050.ForceUpdateGate(gh<_i939.IRemoteConfigService>()),
     );
+    gh.lazySingleton<_i505.TaskLocalDataSource>(
+      () => _i715.TaskLocalDataSourceImpl(gh<_i690.AppDatabase>()),
+    );
     gh.lazySingleton<_i30.AppSettingsCubit>(
       () => _i30.AppSettingsCubit(gh<_i415.PrefsService>()),
     );
     gh.lazySingleton<_i908.AuthInterceptor>(
       () => _i908.AuthInterceptor(gh<_i853.TokenProvider>()),
     );
+    gh.lazySingleton<_i1069.TaskRepository>(
+      () => _i20.TaskRepositoryImpl(gh<_i505.TaskLocalDataSource>()),
+    );
     gh.lazySingleton<_i361.Dio>(
       () => dioModule.dio(gh<_i908.AuthInterceptor>()),
+    );
+    gh.factory<_i703.TaskFormCubit>(
+      () => _i703.TaskFormCubit(gh<_i1069.TaskRepository>()),
+    );
+    gh.factory<_i177.TasksCubit>(
+      () => _i177.TasksCubit(gh<_i1069.TaskRepository>()),
     );
     gh.lazySingleton<_i205.ItemRemoteDataSource>(
       () => _i205.ItemRemoteDataSourceImpl(gh<_i361.Dio>()),

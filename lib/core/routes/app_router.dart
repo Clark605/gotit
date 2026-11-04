@@ -22,6 +22,18 @@ class AppRouter {
 
       case RouteNames.initial:
       case RouteNames.home:
+      case RouteNames.today:
+        return _fadeRoute(buildTodayRoute(), settings);
+
+      case RouteNames.allTasks:
+        return _fadeRoute(buildAllTasksRoute(), settings);
+
+      case RouteNames.taskDetail:
+        return MaterialPageRoute(
+          builder: (_) => buildTaskDetailRoute(settings.arguments),
+          settings: settings,
+        );
+
       case RouteNames.example:
         return _fadeRoute(buildExampleRoute(), settings);
 

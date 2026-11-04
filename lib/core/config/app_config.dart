@@ -54,7 +54,7 @@ class AppConfig {
   );
   static const String minSupportedVersion = String.fromEnvironment(
     'MIN_SUPPORTED_VERSION',
-    defaultValue: '1.0.0',
+    defaultValue: '0.1.0',
   );
   static const bool maintenanceMode = bool.fromEnvironment(
     'MAINTENANCE_MODE',

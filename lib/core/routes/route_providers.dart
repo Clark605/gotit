@@ -20,6 +20,12 @@ import 'package:gotit/features/example/cubit/example_cubit.dart';
 import 'package:gotit/features/example/ui/example_detail_args.dart';
 import 'package:gotit/features/example/ui/example_detail_screen.dart';
 import 'package:gotit/features/example/ui/example_screen.dart';
+import 'package:gotit/features/tasks/cubit/task_form_cubit.dart';
+import 'package:gotit/features/tasks/cubit/tasks_cubit.dart';
+import 'package:gotit/features/tasks/ui/all_tasks_screen.dart';
+import 'package:gotit/features/tasks/ui/task_detail_args.dart';
+import 'package:gotit/features/tasks/ui/task_detail_screen.dart';
+import 'package:gotit/features/tasks/ui/today_screen.dart';
 
 Widget buildSplashRoute() => const SplashScreen();
 
@@ -57,6 +63,44 @@ Widget buildExampleRoute() => BlocProvider(
   create: (_) => getIt<ExampleCubit>()..loadItems(),
   child: const ExampleScreen(),
 );
+
+Widget buildTodayRoute() => MultiBlocProvider(
+  providers: [
+    BlocProvider(create: (_) => getIt<TasksCubit>()..initSubscriptions()),
+    BlocProvider(create: (_) => getIt<TaskFormCubit>()),
+  ],
+  child: const TodayScreen(),
+);
+
+Widget buildAllTasksRoute() => MultiBlocProvider(
+  providers: [
+    BlocProvider(create: (_) => getIt<TasksCubit>()..initSubscriptions()),
+    BlocProvider(create: (_) => getIt<TaskFormCubit>()),
+  ],
+  child: const AllTasksScreen(),
+);
+
+Widget buildTaskDetailRoute(Object? arguments) {
+  final String? taskId = switch (arguments) {
+    final TaskDetailArgs detailArgs => detailArgs.taskId,
+    final String id => id,
+    final Map<String, dynamic> map =>
+      (map['id'] as String?) ?? (map['taskId'] as String?),
+    _ => null,
+  };
+
+  if (taskId == null || taskId.isEmpty) {
+    return buildNotFoundRoute(RouteNames.taskDetail);
+  }
+
+  return MultiBlocProvider(
+    providers: [
+      BlocProvider(create: (_) => getIt<TasksCubit>()..initSubscriptions()),
+      BlocProvider(create: (_) => getIt<TaskFormCubit>()),
+    ],
+    child: TaskDetailScreen(taskId: taskId),
+  );
+}
 
 Widget buildExampleDetailRoute(Object? arguments) {
   final int? itemId = switch (arguments) {
