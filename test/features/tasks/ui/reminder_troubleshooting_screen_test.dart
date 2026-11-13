@@ -38,11 +38,21 @@ void main() {
       expect(find.text('Exact Alarms'), findsOneWidget);
       expect(find.text('Battery Saver'), findsOneWidget);
       expect(find.byType(PermissionStatusBadge), findsNWidgets(3));
+      expect(
+        find.byKey(const Key('open_battery_settings_button')),
+        findsOneWidget,
+      );
 
       expect(find.text('Device-Specific Settings'), findsOneWidget);
       expect(find.text('Samsung (One UI)'), findsOneWidget);
       expect(find.text('Xiaomi / HyperOS / MIUI'), findsOneWidget);
       expect(find.text('Huawei (EMUI)'), findsOneWidget);
+
+      await tester.scrollUntilVisible(
+        find.text('OPPO / Vivo / OnePlus'),
+        100,
+        scrollable: find.byType(Scrollable),
+      );
       expect(find.text('OPPO / Vivo / OnePlus'), findsOneWidget);
 
       // Expand Samsung tile
@@ -72,6 +82,7 @@ void main() {
       expect(find.text('تشخيص النظام'), findsOneWidget);
       expect(find.text('الإشعارات'), findsOneWidget);
       expect(find.text('التنبيهات الدقيقة'), findsOneWidget);
+      expect(find.text('فتح إعدادات البطارية'), findsOneWidget);
     });
   });
 }

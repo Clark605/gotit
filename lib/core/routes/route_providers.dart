@@ -4,6 +4,7 @@ import 'package:gotit/core/di/injection.dart';
 import 'package:gotit/core/errors/failure.dart';
 import 'package:gotit/core/routes/app_navigator.dart';
 import 'package:gotit/core/routes/route_names.dart';
+import 'package:gotit/core/services/reminder_service.dart';
 import 'package:gotit/core/storage/prefs_service.dart';
 import 'package:gotit/core/widgets/screens/error_screen.dart';
 import 'package:gotit/core/widgets/screens/maintenance_screen.dart';
@@ -41,7 +42,7 @@ Widget buildOnboardingRoute() => OnboardingScreen(
 Widget buildSettingsRoute() => const SettingsScreen();
 
 Widget buildReminderTroubleshootingRoute() =>
-    const ReminderTroubleshootingScreen();
+    ReminderTroubleshootingScreen(reminderService: getIt<IReminderService>());
 
 Widget buildThemeGalleryRoute() => const ThemeGalleryScreen();
 

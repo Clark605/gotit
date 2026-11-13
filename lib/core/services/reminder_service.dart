@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:gotit/core/routes/app_navigator.dart';
 import 'package:gotit/core/routes/route_names.dart';
@@ -12,6 +13,7 @@ import 'package:gotit/core/utils/app_logger.dart';
 import 'package:injectable/injectable.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:url_launcher/url_launcher.dart';
 
 abstract class NotificationActionIds {
   static const String markDone = 'action_mark_done';
@@ -49,6 +51,7 @@ abstract class IReminderService {
   Future<bool> requestNotificationPermission();
   Future<bool> hasExactAlarmPermission();
   Future<void> requestExactAlarmPermission();
+  Future<void> openBatteryOptimizationSettings();
   Future<void> syncReminderSchedule(TaskReminderSchedule schedule);
   Future<void> cancelForTask(String taskId);
   Future<void> snoozeReminder(String taskId, {int minutes = 15});
@@ -227,6 +230,34 @@ class ReminderServiceImpl implements IReminderService {
             AndroidFlutterLocalNotificationsPlugin
           >();
       await androidPlugin?.requestExactAlarmsPermission();
+    }
+  }
+
+  static const MethodChannel _settingsChannel = MethodChannel(
+    'com.clark.gotit/settings',
+  );
+
+  @override
+  Future<void> openBatteryOptimizationSettings() async {
+    if (kIsWeb) return;
+    if (Platform.isAndroid) {
+      try {
+        await _settingsChannel.invokeMethod<bool>(
+          'openBatteryOptimizationSettings',
+        );
+        return;
+      } on Object catch (e, st) {
+        AppLogger.warning(
+          'Failed to open battery optimization settings via channel',
+          error: e,
+          stackTrace: st,
+        );
+      }
+    } else if (Platform.isIOS) {
+      final uri = Uri.parse('app-settings:');
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      }
     }
   }
 

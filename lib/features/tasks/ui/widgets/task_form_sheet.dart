@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gotit/core/routes/route_names.dart';
@@ -44,6 +46,7 @@ class _TaskFormSheetState extends State<TaskFormSheet> {
   late final TextEditingController _titleController;
   late final TextEditingController _notesController;
   late final TextEditingController _checklistController;
+  bool _hasExactAlarm = true;
 
   @override
   void initState() {
@@ -52,6 +55,16 @@ class _TaskFormSheetState extends State<TaskFormSheet> {
     _titleController = TextEditingController(text: cubit.state.title);
     _notesController = TextEditingController(text: cubit.state.notes);
     _checklistController = TextEditingController();
+    unawaited(_checkExactAlarm(cubit));
+  }
+
+  Future<void> _checkExactAlarm(TaskFormCubit cubit) async {
+    final hasExact = await cubit.hasExactAlarmPermission();
+    if (mounted) {
+      setState(() {
+        _hasExactAlarm = hasExact;
+      });
+    }
   }
 
   @override
@@ -267,9 +280,21 @@ class _TaskFormSheetState extends State<TaskFormSheet> {
               activeTrackColor: AppColors.accent,
               onChanged: (enabled) async {
                 if (enabled) {
-                  final accepted = await PermissionPrimerDialog.show(context);
-                  if (accepted) {
+                  final hasPermission = await cubit.hasNotificationPermission();
+                  if (!hasPermission) {
+                    if (!context.mounted) return;
+                    final accepted = await PermissionPrimerDialog.show(context);
+                    if (accepted) {
+                      final granted = await cubit
+                          .requestNotificationPermission();
+                      if (granted) {
+                        cubit.toggleReminder(true);
+                        await _checkExactAlarm(cubit);
+                      }
+                    }
+                  } else {
                     cubit.toggleReminder(true);
+                    await _checkExactAlarm(cubit);
                   }
                 } else {
                   cubit.toggleReminder(false);
@@ -281,9 +306,11 @@ class _TaskFormSheetState extends State<TaskFormSheet> {
 
         // Expanded Reminder Configuration
         if (state.isReminderEnabled) ...[
-          const SizedBox(height: 6),
-          // Inexact alarm warning banner (US4)
-          _buildInexactAlarmBanner(context, l10n, isDark),
+          if (!_hasExactAlarm) ...[
+            const SizedBox(height: 6),
+            // Inexact alarm warning banner (US4)
+            _buildInexactAlarmBanner(context, l10n, isDark),
+          ],
           const SizedBox(height: 6),
           if (state.isAllDay) ...[
             // All-day alert time selector
@@ -343,6 +370,24 @@ class _TaskFormSheetState extends State<TaskFormSheet> {
               ),
             ),
           ] else ...[
+            // Lead time section header
+            Row(
+              children: [
+                Icon(
+                  Icons.schedule_outlined,
+                  size: 14,
+                  color: isDark ? AppColors.darkSteel : AppColors.steel,
+                ),
+                AppSpacing.gapWXs,
+                Text(
+                  l10n.remindMe,
+                  style: AppTypography.captionBold.copyWith(
+                    color: isDark ? AppColors.darkSteel : AppColors.steel,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 6),
             // Lead time chips
             ReminderLeadTimeChips(
               selectedMinutes: state.reminderLeadMinutes ?? 15,
@@ -465,10 +510,13 @@ class _TaskFormSheetState extends State<TaskFormSheet> {
           ),
           TextButton(
             key: const Key('inexact_alarm_fix_button'),
-            onPressed: () {
-              Navigator.of(
+            onPressed: () async {
+              await Navigator.of(
                 context,
               ).pushNamed(RouteNames.reminderTroubleshooting);
+              if (context.mounted) {
+                await _checkExactAlarm(context.read<TaskFormCubit>());
+              }
             },
             child: Text(
               l10n.inexactAlarmFixButton,

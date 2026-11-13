@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gotit/core/services/reminder_service.dart';
 import 'package:gotit/core/storage/app_database.dart';
 import 'package:gotit/core/theme/app_theme.dart';
 import 'package:gotit/core/widgets/reminder_lead_time_chips.dart';
@@ -38,16 +39,57 @@ Widget _buildFormTestApp({
   );
 }
 
+class _TestReminderService implements IReminderService {
+  bool hasNotification = false;
+  bool requestCalled = false;
+
+  @override
+  Future<void> initialize() async {}
+
+  @override
+  Future<bool> hasNotificationPermission() async => hasNotification;
+
+  @override
+  Future<bool> requestNotificationPermission() async {
+    requestCalled = true;
+    hasNotification = true;
+    return true;
+  }
+
+  @override
+  Future<bool> hasExactAlarmPermission() async => true;
+
+  @override
+  Future<void> requestExactAlarmPermission() async {}
+
+  @override
+  Future<void> openBatteryOptimizationSettings() async {}
+
+  @override
+  Future<void> syncReminderSchedule(TaskReminderSchedule schedule) async {}
+
+  @override
+  Future<void> cancelForTask(String taskId) async {}
+
+  @override
+  Future<void> snoozeReminder(String taskId, {int minutes = 15}) async {}
+
+  @override
+  Future<void> restoreAndReconcileSchedule() async {}
+}
+
 void main() {
   late AppDatabase database;
   late TaskLocalDataSourceImpl dataSource;
+  late _TestReminderService testReminderService;
   late TaskRepositoryImpl repository;
   late TaskFormCubit cubit;
 
   setUp(() {
     database = AppDatabase.forTesting(NativeDatabase.memory());
     dataSource = TaskLocalDataSourceImpl(database);
-    repository = TaskRepositoryImpl(dataSource);
+    testReminderService = _TestReminderService();
+    repository = TaskRepositoryImpl(dataSource, testReminderService);
     cubit = TaskFormCubit(repository);
   });
 
@@ -86,6 +128,7 @@ void main() {
           await tester.pumpAndSettle();
         }
 
+        expect(testReminderService.requestCalled, isTrue);
         expect(cubit.state.isReminderEnabled, isTrue);
         expect(find.byType(ReminderLeadTimeChips), findsOneWidget);
 

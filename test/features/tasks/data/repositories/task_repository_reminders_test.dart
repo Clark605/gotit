@@ -28,6 +28,9 @@ class _MockReminderService implements IReminderService {
   Future<void> requestExactAlarmPermission() async {}
 
   @override
+  Future<void> openBatteryOptimizationSettings() async {}
+
+  @override
   Future<void> syncReminderSchedule(TaskReminderSchedule schedule) async {
     syncedSchedules.add(schedule);
   }

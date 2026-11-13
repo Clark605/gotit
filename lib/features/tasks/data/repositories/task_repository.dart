@@ -42,4 +42,16 @@ abstract class TaskRepository {
 
   /// Delete a custom context (sets contextId to null on associated tasks).
   Future<void> deleteContext(String id);
+
+  /// Checks whether notification permission is currently granted.
+  Future<bool> hasNotificationPermission();
+
+  /// Requests notification permissions from the OS.
+  Future<bool> requestNotificationPermission();
+
+  /// Checks whether exact alarm permission is currently granted (Android 12+).
+  Future<bool> hasExactAlarmPermission();
+
+  /// Requests exact alarm permission by directing user to system settings.
+  Future<void> requestExactAlarmPermission();
 }

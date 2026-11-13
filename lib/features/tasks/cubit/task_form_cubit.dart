@@ -79,6 +79,22 @@ class TaskFormCubit extends BaseCubit<TaskFormState> {
     emit(state.copyWith(allDayReminderTime: time));
   }
 
+  /// Checks whether notifications are already enabled.
+  Future<bool> hasNotificationPermission() =>
+      _repository.hasNotificationPermission();
+
+  /// Requests OS notification permissions. Returns true if granted.
+  Future<bool> requestNotificationPermission() =>
+      _repository.requestNotificationPermission();
+
+  /// Checks whether exact alarm permission is granted.
+  Future<bool> hasExactAlarmPermission() =>
+      _repository.hasExactAlarmPermission();
+
+  /// Requests exact alarm permission by directing user to system settings.
+  Future<void> requestExactAlarmPermission() =>
+      _repository.requestExactAlarmPermission();
+
   void addChecklistItem(String content) {
     final trimmed = content.trim();
     if (trimmed.isEmpty) return;

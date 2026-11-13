@@ -1,14 +1,22 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:gotit/core/services/reminder_service.dart';
 import 'package:gotit/core/theme/app_colors.dart';
 import 'package:gotit/core/theme/app_radius.dart';
 import 'package:gotit/core/theme/app_spacing.dart';
 import 'package:gotit/core/theme/app_typography.dart';
+import 'package:gotit/core/widgets/app_button.dart';
 import 'package:gotit/core/widgets/permission_status_badge.dart';
 import 'package:gotit/l10n/generated/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ReminderTroubleshootingScreen extends StatefulWidget {
-  const ReminderTroubleshootingScreen({super.key});
+  final IReminderService? reminderService;
+
+  const ReminderTroubleshootingScreen({super.key, this.reminderService});
 
   @override
   State<ReminderTroubleshootingScreen> createState() =>
@@ -16,7 +24,78 @@ class ReminderTroubleshootingScreen extends StatefulWidget {
 }
 
 class _ReminderTroubleshootingScreenState
-    extends State<ReminderTroubleshootingScreen> {
+    extends State<ReminderTroubleshootingScreen>
+    with WidgetsBindingObserver {
+  bool? _hasNotifications;
+  bool? _hasExactAlarms;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    _refreshDiagnostics();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _refreshDiagnostics();
+    }
+  }
+
+  Future<void> _refreshDiagnostics() async {
+    if (widget.reminderService == null) {
+      if (mounted) {
+        setState(() {
+          _hasNotifications = true;
+          _hasExactAlarms = true;
+          _isLoading = false;
+        });
+      }
+      return;
+    }
+
+    final notifs = await widget.reminderService!.hasNotificationPermission();
+    final exact = await widget.reminderService!.hasExactAlarmPermission();
+
+    if (mounted) {
+      setState(() {
+        _hasNotifications = notifs;
+        _hasExactAlarms = exact;
+        _isLoading = false;
+      });
+    }
+  }
+
+  Future<void> _openBatterySettings() async {
+    if (kIsWeb) return;
+
+    if (widget.reminderService != null) {
+      await widget.reminderService!.openBatteryOptimizationSettings();
+      return;
+    }
+
+    if (Platform.isAndroid) {
+      const channel = MethodChannel('com.clark.gotit/settings');
+      try {
+        await channel.invokeMethod<bool>('openBatteryOptimizationSettings');
+        return;
+      } on Object catch (_) {}
+    } else if (Platform.isIOS) {
+      final fallbackUri = Uri.parse('app-settings:');
+      if (await canLaunchUrl(fallbackUri)) {
+        await launchUrl(fallbackUri, mode: LaunchMode.externalApplication);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -118,6 +197,24 @@ class _ReminderTroubleshootingScreenState
     AppLocalizations? l10n,
     bool isDark,
   ) {
+    final notifStatus = _isLoading
+        ? PermissionBadgeStatus.disabled
+        : (_hasNotifications == true
+              ? PermissionBadgeStatus.active
+              : PermissionBadgeStatus.disabled);
+
+    final exactStatus = _isLoading
+        ? PermissionBadgeStatus.disabled
+        : (_hasExactAlarms == true
+              ? PermissionBadgeStatus.active
+              : PermissionBadgeStatus.inexact);
+
+    final batteryStatus = _isLoading
+        ? PermissionBadgeStatus.restricted
+        : (_hasExactAlarms == true
+              ? PermissionBadgeStatus.active
+              : PermissionBadgeStatus.restricted);
+
     return Container(
       decoration: BoxDecoration(
         color: isDark ? AppColors.darkSurface : AppColors.surface,
@@ -150,7 +247,7 @@ class _ReminderTroubleshootingScreenState
           const SizedBox(height: 12),
           _buildDiagnosticRow(
             title: l10n?.diagnosticNotifications ?? 'Notifications',
-            status: PermissionBadgeStatus.active,
+            status: notifStatus,
             isDark: isDark,
           ),
           Divider(
@@ -159,7 +256,7 @@ class _ReminderTroubleshootingScreenState
           ),
           _buildDiagnosticRow(
             title: l10n?.diagnosticExactAlarms ?? 'Exact Alarms',
-            status: PermissionBadgeStatus.active,
+            status: exactStatus,
             isDark: isDark,
           ),
           Divider(
@@ -168,8 +265,15 @@ class _ReminderTroubleshootingScreenState
           ),
           _buildDiagnosticRow(
             title: l10n?.diagnosticBatteryOptimizations ?? 'Battery Saver',
-            status: PermissionBadgeStatus.restricted,
+            status: batteryStatus,
             isDark: isDark,
+          ),
+          AppSpacing.gapHMd,
+          AppButton(
+            key: const Key('open_battery_settings_button'),
+            label: l10n?.openBatterySettings ?? 'Open Battery Settings',
+            icon: Icons.battery_charging_full_outlined,
+            onPressed: _openBatterySettings,
           ),
         ],
       ),

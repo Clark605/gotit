@@ -102,4 +102,20 @@ class TaskRepositoryImpl implements TaskRepository {
 
   @override
   Future<void> deleteContext(String id) => _dataSource.deleteContext(id);
+
+  @override
+  Future<bool> hasNotificationPermission() async =>
+      _reminderService?.hasNotificationPermission() ?? true;
+
+  @override
+  Future<bool> requestNotificationPermission() async =>
+      _reminderService?.requestNotificationPermission() ?? true;
+
+  @override
+  Future<bool> hasExactAlarmPermission() async =>
+      _reminderService?.hasExactAlarmPermission() ?? true;
+
+  @override
+  Future<void> requestExactAlarmPermission() async =>
+      _reminderService?.requestExactAlarmPermission() ?? Future.value();
 }
