@@ -1,5 +1,6 @@
 import 'package:gotit/features/tasks/data/models/checklist_item_model.dart';
 import 'package:gotit/features/tasks/data/models/context_model.dart';
+import 'package:gotit/features/tasks/data/models/reminder_model.dart';
 import 'package:gotit/features/tasks/data/models/task_model.dart';
 
 abstract class TaskLocalDataSource {
@@ -38,4 +39,23 @@ abstract class TaskLocalDataSource {
 
   /// Delete context and set context_id = null on all associated tasks.
   Future<void> deleteContext(String id);
+
+  /// Insert or replace reminder.
+  Future<void> insertReminder({
+    required String id,
+    required String taskId,
+    required String type,
+    required DateTime scheduledTime,
+    required int leadTimeMinutes,
+    required int notificationId,
+  });
+
+  /// Get all reminders for a task.
+  Future<List<ReminderModel>> getRemindersForTask(String taskId);
+
+  /// Update reminder status ('pending', 'fired', 'cancelled', 'dismissed').
+  Future<void> updateReminderStatus(String id, String status);
+
+  /// Delete all reminders for a task.
+  Future<void> deleteRemindersForTask(String taskId);
 }

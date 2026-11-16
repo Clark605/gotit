@@ -2,6 +2,7 @@
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.41.1-02569B?logo=flutter)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.11.0-0175C2?logo=dart)](https://dart.dev)
+[![CI](https://github.com/Clark605/gotit/actions/workflows/ci.yml/badge.svg)](https://github.com/Clark605/gotit/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Constitution](https://img.shields.io/badge/Constitution-v1.0.0-blue)](.specify/memory/constitution.md)
 
@@ -11,11 +12,38 @@ Gotit is an **automation-first task application** designed for busy students and
 
 ---
 
-## 🚀 PRD Feature Scope
+## 🚧 Current Status: Phase 1 (Local Foundation, In Progress)
 
-The product scope is strictly defined by the [Gotit PRD](docs/Gotit%20Product%20Requirements%20Document.md) and governed by the [Project Constitution](.specify/memory/constitution.md).
+Gotit is actively under development. Rather than claiming a finished v1, this repository documents the engineering progression from local foundation to AI-powered share capture:
 
-### 📱 v1 (MVP) Features
+- [x] **Local Database (Drift SQLite)**: Fully offline-first schema (`tasks`, `reminders`, `checklist_items`, `contexts`) with reactive streams, migrations, and soft-delete support.
+- [x] **State Management & Reliability**: Feature-first `flutter_bloc` Cubits backed by `ActionGuard` for duplicate async action rejection.
+- [x] **Core UI & Task Management**: Today view (grouped into Overdue, Due Today, and Start Today), All Tasks list, Task Detail, context tagging, and task creation bottom sheet.
+- [x] **Exact Local Reminders**: Reliable scheduling via `flutter_local_notifications`, boot recovery receiver (`BOOT_COMPLETED`), start-working alerts, and battery troubleshooting UI.
+- [ ] **Android Native Share Target**: Native Kotlin `ShareActivity` and intent filter to accept text and image shares directly *(Phase 2 - Planned)*.
+- [ ] **On-Device OCR**: Offline text recognition with Google ML Kit Text Recognition on Android *(Phase 2 - Planned)*.
+- [ ] **Serverless AI Extraction**: Supabase Edge Function proxy with strict JSON schema validation and zero client secrets *(Phase 3 - Planned)*.
+- [ ] **One-Tap Confirm Card**: Instant preview with low-confidence field highlighting (< 0.6) and multi-task selection *(Phase 3 - Planned)*.
+- [ ] **Cloud Sync & Supabase Auth**: Asynchronous Last-Write-Wins (LWW) Postgres sync with email and Google OAuth *(Phase 4 - Planned)*.
+- [ ] **Home-Screen Quick Add Widget**: Native Android home-screen widget for two-tap capture *(Phase 4 - Planned)*.
+
+---
+
+## 📸 App Preview
+
+> *Visual preview of the task workflow, including the Today view, task creation, context tagging, and reminder configuration.*
+
+| Today View (Overdue & Due Today) | Task Creation & Lead Times | Reliability & Troubleshooting |
+|:---:|:---:|:---:|
+| *(Screenshots coming soon)* | *(Screenshots coming soon)* | *(Screenshots coming soon)* |
+
+---
+
+## 🚀 Planned v1 Scope
+
+The product scope is strictly defined by the [Gotit PRD](docs/prd.md) and governed by the [Project Constitution](.specify/memory/constitution.md).
+
+### 📱 Planned Features Breakdown
 
 | Area | Feature | Specification & Non-Negotiable Rules |
 |---|---|---|
@@ -57,7 +85,7 @@ The product scope is strictly defined by the [Gotit PRD](docs/Gotit%20Product%20
 ## 🔒 Privacy & Architecture Principles
 
 - **Zero Image Uploads**: Screenshot OCR is executed 100% on the device.
-- **Ephemeral AI Processing**: The backend never logs or stores raw shared messages; only the tasks the user explicitly saves are persisted.
+- **Ephemeral AI Processing (Design Goal)**: The backend is architected never to log or store raw shared messages; only tasks the user explicitly reviews and saves are persisted. This will be verified against Supabase Edge Function execution logs and LLM provider data retention terms prior to production.
 - **Zero Client Secrets**: No third-party LLM API keys exist in the Flutter binary or client bundle.
 - **Offline First**: All task reading, editing, and reminders operate completely offline. Network is only required for AI extraction and background backup sync.
 - **Bilingual Excellence**: Full English and Arabic localization with comprehensive Right-to-Left (RTL) layout support.
@@ -68,7 +96,7 @@ The product scope is strictly defined by the [Gotit PRD](docs/Gotit%20Product%20
 
 ```mermaid
 flowchart TD
-    subgraph Client ["Flutter Mobile Client (Android / iOS)"]
+    subgraph Client ["Flutter Mobile Client (Android first, iOS later)"]
         ShareTarget["Native Kotlin Share Activity / Widget"]
         OCR["On-Device ML Kit OCR"]
         UI["UI Layer (Screens & Confirm Card)"]
@@ -108,16 +136,20 @@ flowchart TD
 - **OCR Engine**: Google ML Kit Text Recognition (on-device)
 - **Architecture**: Feature-first (`data/`, `cubit/`, `ui/`), repository pattern, no separate domain layer
 
+### 🧩 Modular Architecture & Optional Modules
+
+The project maintains a catalog of modular, pluggable reference packages in [`optional_modules/`](optional_modules/) (detailed in [`docs/optional-modules.md`](docs/optional-modules.md)). These include optional or future integrations for Firebase Crashlytics/Analytics, Sentry, deep links, biometric auth, and push notifications, keeping the primary codebase lean until explicitly brought into active feature scope.
+
 ---
 
-## 📊 AI Prompt & Extraction Evaluation
+## 📊 AI Prompt & Extraction Evaluation (Planned)
 
-Every prompt or model change is benchmarked against a curated test suite (`tests/eval/`) of real English and Arabic messages. Accuracy targets:
-- **Due Date Precision**: $\ge 85\%$ on messages containing stated deadlines.
-- **Title Accuracy**: $\ge 90\%$ on task messages.
-- **Non-Task Detection (`no_task_found`)**: $\ge 90\%$ on conversational/non-actionable messages.
+Once the AI extraction pipeline is integrated, prompt and model iterations will be benchmarked against a curated test suite under `test/eval/` (following the Flutter `test/` convention) with real English and Arabic messages. Accuracy targets:
+- **Due Date Precision**: ≥ 85% on messages containing stated deadlines.
+- **Title Accuracy**: ≥ 90% on task messages.
+- **Non-Task Detection (`no_task_found`)**: ≥ 90% on conversational or non-actionable messages.
 
-Results are tracked in the repository to guarantee continuous accuracy improvements.
+Benchmark results will be tracked in the repository to measure and validate continuous accuracy improvements across model revisions.
 
 ---
 
@@ -168,10 +200,11 @@ flutter test
 
 ## 📄 Governance & Standards
 
-- [Product Requirements Document (PRD)](docs/Gotit%20Product%20Requirements%20Document.md)
+- [Product Requirements Document (PRD)](docs/prd.md)
 - [Project Constitution](.specify/memory/constitution.md)
 - [Architecture & Agent Guidelines](AGENTS.md)
 - [Design Tokens & Theming](docs/theming.md)
+- [Optional Modules Catalog](docs/optional-modules.md)
 
 ---
 

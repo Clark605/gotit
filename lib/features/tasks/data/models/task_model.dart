@@ -25,6 +25,9 @@ abstract class TaskModel with _$TaskModel {
     String? sourceExcerpt,
     @Default(false) bool isDeleted,
     @Default(<ChecklistItemModel>[]) List<ChecklistItemModel> checklist,
+    @Default(false) bool isReminderEnabled,
+    int? reminderLeadMinutes,
+    String? allDayReminderTime,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _TaskModel;

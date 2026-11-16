@@ -829,6 +829,312 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Personal'**
   String get contextPersonal;
+
+  /// No description provided for @remindersLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders'**
+  String get remindersLabel;
+
+  /// No description provided for @enableReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Reminder'**
+  String get enableReminder;
+
+  /// No description provided for @remindMe.
+  ///
+  /// In en, this message translates to:
+  /// **'Remind me'**
+  String get remindMe;
+
+  /// No description provided for @reminderLeadAtDue.
+  ///
+  /// In en, this message translates to:
+  /// **'At due time'**
+  String get reminderLeadAtDue;
+
+  /// No description provided for @reminderLead5m.
+  ///
+  /// In en, this message translates to:
+  /// **'5m before'**
+  String get reminderLead5m;
+
+  /// No description provided for @reminderLead15m.
+  ///
+  /// In en, this message translates to:
+  /// **'15m before'**
+  String get reminderLead15m;
+
+  /// No description provided for @reminderLead30m.
+  ///
+  /// In en, this message translates to:
+  /// **'30m before'**
+  String get reminderLead30m;
+
+  /// No description provided for @reminderLead1h.
+  ///
+  /// In en, this message translates to:
+  /// **'1h before'**
+  String get reminderLead1h;
+
+  /// No description provided for @reminderLead1d.
+  ///
+  /// In en, this message translates to:
+  /// **'1d before'**
+  String get reminderLead1d;
+
+  /// No description provided for @allDayAlertTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert Time'**
+  String get allDayAlertTime;
+
+  /// No description provided for @allDayAlertTimeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Select time for all-day reminder'**
+  String get allDayAlertTimeHint;
+
+  /// No description provided for @startWorkingNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'🔔 Start-working reminder will sound at {time} ({lead} lead time)'**
+  String startWorkingNotice(String time, String lead);
+
+  /// No description provided for @startWorkingNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Working: {title}'**
+  String startWorkingNotificationTitle(String title);
+
+  /// No description provided for @startWorkingNotificationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Time to start working on {title} — due in {effort}'**
+  String startWorkingNotificationBody(String title, String effort);
+
+  /// No description provided for @dueNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Task Due: {title}'**
+  String dueNotificationTitle(String title);
+
+  /// No description provided for @dueNotificationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{title} is due now'**
+  String dueNotificationBody(String title);
+
+  /// No description provided for @actionMarkDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as Done'**
+  String get actionMarkDone;
+
+  /// No description provided for @actionSnooze15m.
+  ///
+  /// In en, this message translates to:
+  /// **'Snooze (15m)'**
+  String get actionSnooze15m;
+
+  /// No description provided for @missedRemindersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Gotit'**
+  String get missedRemindersTitle;
+
+  /// No description provided for @missedRemindersBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} missed reminders while device was off'**
+  String missedRemindersBody(int count);
+
+  /// No description provided for @permissionPrimerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay On Top of Your Tasks'**
+  String get permissionPrimerTitle;
+
+  /// No description provided for @permissionPrimerBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Gotit delivers precise, timely reminders so you never miss a deadline. To notify you even when the app is closed, Gotit needs permission to send notifications and schedule exact alarms.'**
+  String get permissionPrimerBody;
+
+  /// No description provided for @permissionPrimerNotificationItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Timely task notifications and lock screen quick actions'**
+  String get permissionPrimerNotificationItem;
+
+  /// No description provided for @permissionPrimerAlarmItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Exact timing for high-priority reminders'**
+  String get permissionPrimerAlarmItem;
+
+  /// No description provided for @permissionPrimerEnableButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Reminders'**
+  String get permissionPrimerEnableButton;
+
+  /// No description provided for @permissionPrimerLaterButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Maybe Later'**
+  String get permissionPrimerLaterButton;
+
+  /// No description provided for @inexactAlarmWarningTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Exact Alarms Disabled'**
+  String get inexactAlarmWarningTitle;
+
+  /// No description provided for @inexactAlarmWarningBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders may vary by up to 10 minutes. Enable exact alarms for precise delivery.'**
+  String get inexactAlarmWarningBody;
+
+  /// No description provided for @inexactAlarmFixButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Fix'**
+  String get inexactAlarmFixButton;
+
+  /// No description provided for @troubleshootingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminder Reliability'**
+  String get troubleshootingTitle;
+
+  /// No description provided for @systemDiagnosticsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'System Diagnostics'**
+  String get systemDiagnosticsTitle;
+
+  /// No description provided for @diagnosticNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get diagnosticNotifications;
+
+  /// No description provided for @diagnosticExactAlarms.
+  ///
+  /// In en, this message translates to:
+  /// **'Exact Alarms'**
+  String get diagnosticExactAlarms;
+
+  /// No description provided for @diagnosticBatteryOptimizations.
+  ///
+  /// In en, this message translates to:
+  /// **'Battery Saver'**
+  String get diagnosticBatteryOptimizations;
+
+  /// No description provided for @diagnosticStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get diagnosticStatusActive;
+
+  /// No description provided for @diagnosticStatusInexact.
+  ///
+  /// In en, this message translates to:
+  /// **'Inexact'**
+  String get diagnosticStatusInexact;
+
+  /// No description provided for @diagnosticStatusRestricted.
+  ///
+  /// In en, this message translates to:
+  /// **'Restricted'**
+  String get diagnosticStatusRestricted;
+
+  /// No description provided for @diagnosticStatusDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Disabled'**
+  String get diagnosticStatusDisabled;
+
+  /// No description provided for @oemGuidesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Device-Specific Settings'**
+  String get oemGuidesTitle;
+
+  /// No description provided for @oemGuidesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Aggressive battery optimization may delay notifications when Gotit is closed.'**
+  String get oemGuidesSubtitle;
+
+  /// No description provided for @oemXiaomiTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Xiaomi / HyperOS / MIUI'**
+  String get oemXiaomiTitle;
+
+  /// No description provided for @oemXiaomiGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'1. Enable Autostart in Security > Manage apps > Gotit.\n2. Set Battery saver to No restrictions.\n3. Lock Gotit in Recent Apps.'**
+  String get oemXiaomiGuide;
+
+  /// No description provided for @oemSamsungTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Samsung (One UI)'**
+  String get oemSamsungTitle;
+
+  /// No description provided for @oemSamsungGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'1. Go to Settings > Apps > Gotit > Battery > Select \'Unrestricted\'.\n2. In Device care > Battery > Background usage limits, remove Gotit from \'Sleeping apps\'.'**
+  String get oemSamsungGuide;
+
+  /// No description provided for @oemHuaweiTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Huawei (EMUI)'**
+  String get oemHuaweiTitle;
+
+  /// No description provided for @oemHuaweiGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'1. Go to Settings > Battery > App launch > Gotit.\n2. Turn off \'Manage automatically\' and enable \'Auto-launch\', \'Secondary launch\', and \'Run in background\'.'**
+  String get oemHuaweiGuide;
+
+  /// No description provided for @oemOppoVivoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'OPPO / Vivo / OnePlus'**
+  String get oemOppoVivoTitle;
+
+  /// No description provided for @oemOppoVivoGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'1. Enable \'Allow background activity\' in Battery settings.\n2. In App info > Permissions, allow Autostart.'**
+  String get oemOppoVivoGuide;
+
+  /// No description provided for @openBatterySettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Battery Settings'**
+  String get openBatterySettings;
+
+  /// No description provided for @openExactAlarmSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Exact Alarm Settings'**
+  String get openExactAlarmSettings;
+
+  /// No description provided for @dontKillMyAppLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn more at dontkillmyapp.com'**
+  String get dontKillMyAppLink;
 }
 
 class _AppLocalizationsDelegate

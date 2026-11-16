@@ -1,13 +1,18 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gotit/core/routes/route_names.dart';
 import 'package:gotit/core/theme/app_colors.dart';
 import 'package:gotit/core/theme/app_radius.dart';
 import 'package:gotit/core/theme/app_spacing.dart';
 import 'package:gotit/core/theme/app_typography.dart';
 import 'package:gotit/core/utils/load_status.dart';
+import 'package:gotit/core/widgets/reminder_lead_time_chips.dart';
 import 'package:gotit/features/tasks/cubit/task_form_cubit.dart';
 import 'package:gotit/features/tasks/cubit/task_form_state.dart';
 import 'package:gotit/features/tasks/data/models/context_model.dart';
+import 'package:gotit/features/tasks/ui/widgets/permission_primer_dialog.dart';
 import 'package:gotit/l10n/generated/app_localizations.dart';
 import 'package:intl/intl.dart';
 
@@ -41,6 +46,7 @@ class _TaskFormSheetState extends State<TaskFormSheet> {
   late final TextEditingController _titleController;
   late final TextEditingController _notesController;
   late final TextEditingController _checklistController;
+  bool _hasExactAlarm = true;
 
   @override
   void initState() {
@@ -49,6 +55,16 @@ class _TaskFormSheetState extends State<TaskFormSheet> {
     _titleController = TextEditingController(text: cubit.state.title);
     _notesController = TextEditingController(text: cubit.state.notes);
     _checklistController = TextEditingController();
+    unawaited(_checkExactAlarm(cubit));
+  }
+
+  Future<void> _checkExactAlarm(TaskFormCubit cubit) async {
+    final hasExact = await cubit.hasExactAlarmPermission();
+    if (mounted) {
+      setState(() {
+        _hasExactAlarm = hasExact;
+      });
+    }
   }
 
   @override
@@ -104,17 +120,20 @@ class _TaskFormSheetState extends State<TaskFormSheet> {
                 ),
                 // Sheet Title
                 Text(
-                  state.taskId != null ? l10n.editTaskTitle : l10n.newTaskTitle,
+                  state.taskId != null
+                      ? (l10n.editTaskTitle)
+                      : (l10n.newTaskTitle),
                   style: AppTypography.title.copyWith(
                     color: isDark ? AppColors.darkTextPrimary : AppColors.ink,
                   ),
                 ),
                 AppSpacing.gapHMd,
-                // Title Field
+                // Title Input
                 TextField(
+                  key: const Key('task_title_input'),
                   controller: _titleController,
                   autofocus: state.taskId == null,
-                  style: AppTypography.bodyMedium.copyWith(
+                  style: AppTypography.body.copyWith(
                     color: isDark ? AppColors.darkTextPrimary : AppColors.ink,
                   ),
                   decoration: InputDecoration(
@@ -151,7 +170,12 @@ class _TaskFormSheetState extends State<TaskFormSheet> {
                 ),
                 const SizedBox(height: 6),
                 _buildEffortChips(state, cubit, isDark),
-                AppSpacing.gapHSm,
+                AppSpacing.gapHMd,
+                // Reminders Section (US1 & US2)
+                ...[
+                  _buildRemindersSection(context, state, cubit, l10n, isDark),
+                  AppSpacing.gapHMd,
+                ],
                 // Checklist Items
                 Text(
                   l10n.checklistTitle,
@@ -215,6 +239,296 @@ class _TaskFormSheetState extends State<TaskFormSheet> {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildRemindersSection(
+    BuildContext context,
+    TaskFormState state,
+    TaskFormCubit cubit,
+    AppLocalizations l10n,
+    bool isDark,
+  ) {
+    final alertTimeStr = state.allDayReminderTime ?? '09:00';
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        // Toggle Row
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  Icons.notifications_outlined,
+                  size: 18,
+                  color: isDark ? AppColors.darkSteel : AppColors.steel,
+                ),
+                AppSpacing.gapWXs,
+                Text(
+                  l10n.remindersLabel,
+                  style: AppTypography.captionBold.copyWith(
+                    color: isDark ? AppColors.darkSteel : AppColors.steel,
+                  ),
+                ),
+              ],
+            ),
+            Switch.adaptive(
+              key: const Key('reminder_switch'),
+              value: state.isReminderEnabled,
+              activeTrackColor: AppColors.accent,
+              onChanged: (enabled) async {
+                if (enabled) {
+                  final hasPermission = await cubit.hasNotificationPermission();
+                  if (!hasPermission) {
+                    if (!context.mounted) return;
+                    final accepted = await PermissionPrimerDialog.show(context);
+                    if (accepted) {
+                      final granted = await cubit
+                          .requestNotificationPermission();
+                      if (granted) {
+                        cubit.toggleReminder(true);
+                        await _checkExactAlarm(cubit);
+                      }
+                    }
+                  } else {
+                    cubit.toggleReminder(true);
+                    await _checkExactAlarm(cubit);
+                  }
+                } else {
+                  cubit.toggleReminder(false);
+                }
+              },
+            ),
+          ],
+        ),
+
+        // Expanded Reminder Configuration
+        if (state.isReminderEnabled) ...[
+          if (!_hasExactAlarm) ...[
+            const SizedBox(height: 6),
+            // Inexact alarm warning banner (US4)
+            _buildInexactAlarmBanner(context, l10n, isDark),
+          ],
+          const SizedBox(height: 6),
+          if (state.isAllDay) ...[
+            // All-day alert time selector
+            InkWell(
+              onTap: () async {
+                final parts = alertTimeStr.split(':');
+                final initialHour = int.tryParse(parts[0]) ?? 9;
+                final initialMinute = parts.length > 1
+                    ? (int.tryParse(parts[1]) ?? 0)
+                    : 0;
+                final picked = await showTimePicker(
+                  context: context,
+                  initialTime: TimeOfDay(
+                    hour: initialHour,
+                    minute: initialMinute,
+                  ),
+                );
+                if (picked != null) {
+                  final formatted =
+                      '${picked.hour.toString().padLeft(2, '0')}:${picked.minute.toString().padLeft(2, '0')}';
+                  cubit.setAllDayReminderTime(formatted);
+                }
+              },
+              borderRadius: AppRadius.md,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.md,
+                  vertical: AppSpacing.sm,
+                ),
+                decoration: BoxDecoration(
+                  color: isDark ? AppColors.darkSurface : AppColors.surface,
+                  borderRadius: AppRadius.md,
+                  border: Border.all(
+                    color: isDark ? AppColors.darkHairline : AppColors.hairline,
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      l10n.allDayAlertTime,
+                      style: AppTypography.bodySm.copyWith(
+                        color: isDark
+                            ? AppColors.darkTextPrimary
+                            : AppColors.ink,
+                      ),
+                    ),
+                    Text(
+                      alertTimeStr,
+                      style: AppTypography.bodySm.copyWith(
+                        color: isDark ? AppColors.darkAccent : AppColors.accent,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ] else ...[
+            // Lead time section header
+            Row(
+              children: [
+                Icon(
+                  Icons.schedule_outlined,
+                  size: 14,
+                  color: isDark ? AppColors.darkSteel : AppColors.steel,
+                ),
+                AppSpacing.gapWXs,
+                Text(
+                  l10n.remindMe,
+                  style: AppTypography.captionBold.copyWith(
+                    color: isDark ? AppColors.darkSteel : AppColors.steel,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            // Lead time chips
+            ReminderLeadTimeChips(
+              selectedMinutes: state.reminderLeadMinutes ?? 15,
+              onSelected: cubit.setReminderLeadMinutes,
+            ),
+          ],
+
+          // Start-working reminder dynamic helper notice (US2)
+          if (state.effortMinutes != null &&
+              state.effortMinutes! > 0 &&
+              state.dueDate != null &&
+              !state.isAllDay) ...[
+            const SizedBox(height: 8),
+            _buildStartWorkingNotice(state, l10n, isDark),
+          ],
+        ],
+      ],
+    );
+  }
+
+  Widget _buildStartWorkingNotice(
+    TaskFormState state,
+    AppLocalizations l10n,
+    bool isDark,
+  ) {
+    final startWorkingTime = state.dueDate!.subtract(
+      Duration(minutes: state.effortMinutes!),
+    );
+    final timeStr = DateFormat('h:mm a').format(startWorkingTime);
+    final effortLabel = state.effortMinutes! < 60
+        ? '${state.effortMinutes!}m'
+        : '${state.effortMinutes! ~/ 60}h';
+
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
+      decoration: BoxDecoration(
+        color: isDark ? AppColors.darkSurface : AppColors.surface,
+        borderRadius: AppRadius.md,
+        border: Border.all(
+          color: isDark ? AppColors.darkHairline : AppColors.hairline,
+        ),
+      ),
+      child: Row(
+        children: [
+          Icon(
+            Icons.access_time_filled,
+            size: 16,
+            color: isDark ? AppColors.darkAccent : AppColors.accent,
+          ),
+          AppSpacing.gapWXs,
+          Expanded(
+            child: Text(
+              l10n.startWorkingNotice(timeStr, effortLabel),
+              style: AppTypography.caption.copyWith(
+                color: isDark ? AppColors.darkTextSecondary : AppColors.slate,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInexactAlarmBanner(
+    BuildContext context,
+    AppLocalizations l10n,
+    bool isDark,
+  ) {
+    return Container(
+      key: const Key('inexact_alarm_banner'),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
+      decoration: BoxDecoration(
+        color: isDark ? AppColors.darkTintYellow : AppColors.tintYellow,
+        borderRadius: AppRadius.md,
+        border: Border.all(
+          color: isDark
+              ? AppColors.darkTintYellowText.withValues(alpha: 0.3)
+              : AppColors.tintYellowText.withValues(alpha: 0.3),
+        ),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.warning_amber_rounded,
+            size: 18,
+            color: isDark
+                ? AppColors.darkTintYellowText
+                : AppColors.tintYellowText,
+          ),
+          AppSpacing.gapWXs,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.inexactAlarmWarningTitle,
+                  style: AppTypography.captionBold.copyWith(
+                    color: isDark
+                        ? AppColors.darkTintYellowText
+                        : AppColors.tintYellowText,
+                  ),
+                ),
+                Text(
+                  l10n.inexactAlarmWarningBody,
+                  style: AppTypography.caption.copyWith(
+                    color: isDark
+                        ? AppColors.darkTintYellowText
+                        : AppColors.tintYellowText,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          TextButton(
+            key: const Key('inexact_alarm_fix_button'),
+            onPressed: () async {
+              await Navigator.of(
+                context,
+              ).pushNamed(RouteNames.reminderTroubleshooting);
+              if (context.mounted) {
+                await _checkExactAlarm(context.read<TaskFormCubit>());
+              }
+            },
+            child: Text(
+              l10n.inexactAlarmFixButton,
+              style: AppTypography.captionBold.copyWith(
+                color: isDark
+                    ? AppColors.darkTintYellowText
+                    : AppColors.tintYellowText,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

@@ -406,4 +406,178 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get contextPersonal => 'شخصي';
+
+  @override
+  String get remindersLabel => 'التذكيرات';
+
+  @override
+  String get enableReminder => 'تفعيل التذكير';
+
+  @override
+  String get remindMe => 'تذكيري';
+
+  @override
+  String get reminderLeadAtDue => 'في موعد الاستحقاق';
+
+  @override
+  String get reminderLead5m => 'قبل 5 دقائق';
+
+  @override
+  String get reminderLead15m => 'قبل 15 دقيقة';
+
+  @override
+  String get reminderLead30m => 'قبل 30 دقيقة';
+
+  @override
+  String get reminderLead1h => 'قبل ساعة';
+
+  @override
+  String get reminderLead1d => 'قبل يوم';
+
+  @override
+  String get allDayAlertTime => 'وقت التنبيه';
+
+  @override
+  String get allDayAlertTimeHint => 'حدد وقت التنبيه لمهام طوال اليوم';
+
+  @override
+  String startWorkingNotice(String time, String lead) {
+    return '🔔 سينبهك تذكير بدء العمل في $time (قبل $lead)';
+  }
+
+  @override
+  String startWorkingNotificationTitle(String title) {
+    return 'حان وقت العمل: $title';
+  }
+
+  @override
+  String startWorkingNotificationBody(String title, String effort) {
+    return 'حان وقت البدء في تنفيذ $title — موعد الاستحقاق بعد $effort';
+  }
+
+  @override
+  String dueNotificationTitle(String title) {
+    return 'موعد استحقاق المهمة: $title';
+  }
+
+  @override
+  String dueNotificationBody(String title) {
+    return '$title مستحقة الآن';
+  }
+
+  @override
+  String get actionMarkDone => 'تحديد كمكتمل';
+
+  @override
+  String get actionSnooze15m => 'تأجيل (15 دقيقة)';
+
+  @override
+  String get missedRemindersTitle => 'Gotit';
+
+  @override
+  String missedRemindersBody(int count) {
+    return '$count تذكيرات فائتة أثناء إيقاف تشغيل الجهاز';
+  }
+
+  @override
+  String get permissionPrimerTitle => 'ابقَ على اطلاع دائم بمهامك';
+
+  @override
+  String get permissionPrimerBody =>
+      'يقدم Gotit تنبيهات دقيقة في الوقت المناسب حتى لا يفوتك أي موعد. لتلقي الإشعارات حتى عند إغلاق التطبيق، يحتاج Gotit إلى إذن إرسال الإشعارات وجدولة التنبيهات الدقيقة.';
+
+  @override
+  String get permissionPrimerNotificationItem =>
+      'تنبيهات المهام في الوقت المناسب وإجراءات سريعة من شاشة القفل';
+
+  @override
+  String get permissionPrimerAlarmItem =>
+      'توقيت دقيق للتذكيرات ذات الأولوية العالية';
+
+  @override
+  String get permissionPrimerEnableButton => 'تفعيل التذكيرات';
+
+  @override
+  String get permissionPrimerLaterButton => 'ربما لاحقاً';
+
+  @override
+  String get inexactAlarmWarningTitle => 'التنبيهات الدقيقة معطلة';
+
+  @override
+  String get inexactAlarmWarningBody =>
+      'قد تتأخر التذكيرات حتى 10 دقائق. فعّل التنبيهات الدقيقة للحصول على مواعيد دقيقة.';
+
+  @override
+  String get inexactAlarmFixButton => 'إصلاح';
+
+  @override
+  String get troubleshootingTitle => 'موثوقية التذكيرات';
+
+  @override
+  String get systemDiagnosticsTitle => 'تشخيص النظام';
+
+  @override
+  String get diagnosticNotifications => 'الإشعارات';
+
+  @override
+  String get diagnosticExactAlarms => 'التنبيهات الدقيقة';
+
+  @override
+  String get diagnosticBatteryOptimizations => 'توفير البطارية';
+
+  @override
+  String get diagnosticStatusActive => 'نشط';
+
+  @override
+  String get diagnosticStatusInexact => 'غير دقيق';
+
+  @override
+  String get diagnosticStatusRestricted => 'مقيد';
+
+  @override
+  String get diagnosticStatusDisabled => 'معطل';
+
+  @override
+  String get oemGuidesTitle => 'إعدادات حسب طراز الجهاز';
+
+  @override
+  String get oemGuidesSubtitle =>
+      'قد يتسبب التحسين القوي للبطارية في تأخير الإشعارات عند إغلاق التطبيق.';
+
+  @override
+  String get oemXiaomiTitle => 'Xiaomi / HyperOS / MIUI';
+
+  @override
+  String get oemXiaomiGuide =>
+      '1. فعّل التشغيل التلقائي من الأمان > إدارة التطبيقات > Gotit.\n2. عيّن توفير البطارية إلى لا توجد قيود.\n3. قفل تطبيق Gotit في قائمة التطبيقات الحديثة.';
+
+  @override
+  String get oemSamsungTitle => 'Samsung (One UI)';
+
+  @override
+  String get oemSamsungGuide =>
+      '1. انتقل إلى الإعدادات > التطبيقات > Gotit > البطارية > اختر \'غير مقيد\'.\n2. في العناية بالجهاز > البطارية > حدود الاستخدام في الخلفية، أزل Gotit من \'التطبيقات في وضع السكون\'.';
+
+  @override
+  String get oemHuaweiTitle => 'Huawei (EMUI)';
+
+  @override
+  String get oemHuaweiGuide =>
+      '1. انتقل إلى الإعدادات > البطارية > تشغيل التطبيقات > Gotit.\n2. أوقف \'الإدارة تلقائياً\' وفعّل \'التشغيل التلقائي\'، و\'التشغيل الثانوي\'، و\'التشغيل في الخلفية\'.';
+
+  @override
+  String get oemOppoVivoTitle => 'OPPO / Vivo / OnePlus';
+
+  @override
+  String get oemOppoVivoGuide =>
+      '1. فعّل \'السماح بالنشاط في الخلفية\' من إعدادات البطارية.\n2. في معلومات التطبيق > الأذونات، اسمح بالتشغيل التلقائي.';
+
+  @override
+  String get openBatterySettings => 'فتح إعدادات البطارية';
+
+  @override
+  String get openExactAlarmSettings => 'فتح إعدادات التنبيهات الدقيقة';
+
+  @override
+  String get dontKillMyAppLink => 'معرفة المزيد عبر dontkillmyapp.com';
 }

@@ -30,7 +30,7 @@ Deferred Items / TODOs:
 
 ### I. Purpose and Scope
 Gotit is an automation-first task application: the user shares text or a screenshot from another app, AI extracts a structured task, and the user confirms it in one tap.
-- Every feature MUST trace directly to a stated requirement in the Gotit Product Requirements Document (PRD) for the version currently being built.
+- Every feature MUST trace directly to a stated requirement in the [Gotit Product Requirements Document (PRD)](../../docs/prd.md) for the version currently being built.
 - Work outside the current version’s scope—such as background reading of chats or notifications, calendar sync, or team lists—MUST NOT be started until the PRD is formally amended.
 - When a specification or requirement is ambiguous, the smaller, simpler solution that satisfies the requirement wins (YAGNI).
 
@@ -132,7 +132,7 @@ Before any feature branch or task can be merged into `main`, the following quali
 
 ## Governance
 
-This constitution supersedes all other project documents and development practices, except that the Gotit Product Requirements Document (PRD) defines product scope.
+This constitution supersedes all other project documents and development practices, except that the [Gotit Product Requirements Document (PRD)](../../docs/prd.md) defines product scope.
 - **Amendments**: Modifying this constitution requires a written rationale, an incremented version number, and corresponding updates to any affected templates, specifications, or tests.
 - **Versioning Policy**: The constitution follows Semantic Versioning (`MAJOR.MINOR.PATCH`):
   - **MAJOR**: Incompatible governance changes, principle removals, or significant redefinitions of core principles.

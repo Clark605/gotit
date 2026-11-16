@@ -84,4 +84,5 @@ android/key.properties
 *.jks
 *.keystore
 
-graphify-out/cache/
+# Graphify knowledge graph and AST cache
+graphify-out/

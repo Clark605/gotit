@@ -43,6 +43,12 @@ class AppRouter {
           settings: settings,
         );
 
+      case RouteNames.reminderTroubleshooting:
+        return MaterialPageRoute(
+          builder: (_) => buildReminderTroubleshootingRoute(),
+          settings: settings,
+        );
+
       case RouteNames.settings:
         return MaterialPageRoute(
           builder: (_) => buildSettingsRoute(),

@@ -48,6 +48,12 @@ class TasksTable extends Table {
   DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
   DateTimeColumn get updatedAt => dateTime().withDefault(currentDateAndTime)();
 
+  // Phase 2 additions:
+  BoolColumn get isReminderEnabled =>
+      boolean().withDefault(const Constant(false))();
+  IntColumn get reminderLeadMinutes => integer().nullable()();
+  TextColumn get allDayReminderTime => text().nullable()();
+
   @override
   Set<Column> get primaryKey => {id};
 }
@@ -67,15 +73,38 @@ class ChecklistItemsTable extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+@TableIndex(name: 'reminders_task_idx', columns: {#taskId})
+@TableIndex(
+  name: 'reminders_status_time_idx',
+  columns: {#status, #scheduledTime},
+)
+class RemindersTable extends Table {
+  TextColumn get id => text()();
+  TextColumn get taskId =>
+      text().references(TasksTable, #id, onDelete: KeyAction.cascade)();
+  TextColumn get type => text()(); // 'due' or 'start_working'
+  DateTimeColumn get scheduledTime => dateTime()();
+  IntColumn get leadTimeMinutes => integer().withDefault(const Constant(0))();
+  TextColumn get status => text().withDefault(const Constant('pending'))();
+  IntColumn get notificationId => integer()();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+  DateTimeColumn get updatedAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 @lazySingleton
-@DriftDatabase(tables: [ContextsTable, TasksTable, ChecklistItemsTable])
+@DriftDatabase(
+  tables: [ContextsTable, TasksTable, ChecklistItemsTable, RemindersTable],
+)
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   AppDatabase.forTesting(super.executor);
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   static QueryExecutor _openConnection() {
     return driftDatabase(name: 'gotit_database');
@@ -113,6 +142,14 @@ class AppDatabase extends _$AppDatabase {
           updatedAt: Value(now),
         ),
       );
+    },
+    onUpgrade: (m, from, to) async {
+      if (from < 2) {
+        await m.createTable(remindersTable);
+        await m.addColumn(tasksTable, tasksTable.isReminderEnabled);
+        await m.addColumn(tasksTable, tasksTable.reminderLeadMinutes);
+        await m.addColumn(tasksTable, tasksTable.allDayReminderTime);
+      }
     },
     beforeOpen: (details) async {
       await customStatement('PRAGMA foreign_keys = ON');

@@ -4,6 +4,7 @@ import 'package:gotit/core/di/injection.dart';
 import 'package:gotit/core/errors/failure.dart';
 import 'package:gotit/core/routes/app_navigator.dart';
 import 'package:gotit/core/routes/route_names.dart';
+import 'package:gotit/core/services/reminder_service.dart';
 import 'package:gotit/core/storage/prefs_service.dart';
 import 'package:gotit/core/widgets/screens/error_screen.dart';
 import 'package:gotit/core/widgets/screens/maintenance_screen.dart';
@@ -23,6 +24,7 @@ import 'package:gotit/features/example/ui/example_screen.dart';
 import 'package:gotit/features/tasks/cubit/task_form_cubit.dart';
 import 'package:gotit/features/tasks/cubit/tasks_cubit.dart';
 import 'package:gotit/features/tasks/ui/all_tasks_screen.dart';
+import 'package:gotit/features/tasks/ui/reminder_troubleshooting_screen.dart';
 import 'package:gotit/features/tasks/ui/task_detail_args.dart';
 import 'package:gotit/features/tasks/ui/task_detail_screen.dart';
 import 'package:gotit/features/tasks/ui/today_screen.dart';
@@ -38,6 +40,9 @@ Widget buildOnboardingRoute() => OnboardingScreen(
 );
 
 Widget buildSettingsRoute() => const SettingsScreen();
+
+Widget buildReminderTroubleshootingRoute() =>
+    ReminderTroubleshootingScreen(reminderService: getIt<IReminderService>());
 
 Widget buildThemeGalleryRoute() => const ThemeGalleryScreen();
 

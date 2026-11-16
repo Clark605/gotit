@@ -12,6 +12,7 @@ import 'package:gotit/core/observability/crash_reporter.dart';
 import 'package:gotit/core/observability/force_update_gate.dart';
 import 'package:gotit/core/observability/remote_config_service.dart';
 import 'package:gotit/core/routes/route_names.dart';
+import 'package:gotit/core/services/reminder_service.dart';
 import 'package:gotit/core/storage/prefs_service.dart';
 import 'package:gotit/core/utils/app_logger.dart';
 
@@ -136,7 +137,23 @@ Future<void> bootstrap() async {
       }
     }
 
-    // 4. Startup maintenance and version gate check
+    // 4. Initialize Reminder Service and reconcile schedule
+    if (getIt.isRegistered<IReminderService>()) {
+      final reminderService = getIt<IReminderService>();
+      try {
+        await reminderService.initialize();
+        unawaited(reminderService.restoreAndReconcileSchedule());
+      } on Object catch (e, st) {
+        AppLogger.warning(
+          'ReminderService bootstrap initialization failed; continuing.',
+          tag: 'Startup',
+          error: e,
+          stackTrace: st,
+        );
+      }
+    }
+
+    // 5. Startup maintenance and version gate check
     final gate = getIt<ForceUpdateGate>();
     final gateResult = await gate.check();
 

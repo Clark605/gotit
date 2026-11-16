@@ -26,6 +26,9 @@ _TaskModel _$TaskModelFromJson(Map<String, dynamic> json) => _TaskModel(
           ?.map((e) => ChecklistItemModel.fromJson(e as Map<String, dynamic>))
           .toList() ??
       const <ChecklistItemModel>[],
+  isReminderEnabled: json['isReminderEnabled'] as bool? ?? false,
+  reminderLeadMinutes: (json['reminderLeadMinutes'] as num?)?.toInt(),
+  allDayReminderTime: json['allDayReminderTime'] as String?,
   createdAt: DateTime.parse(json['createdAt'] as String),
   updatedAt: DateTime.parse(json['updatedAt'] as String),
 );
@@ -43,6 +46,9 @@ Map<String, dynamic> _$TaskModelToJson(_TaskModel instance) =>
       'sourceExcerpt': instance.sourceExcerpt,
       'isDeleted': instance.isDeleted,
       'checklist': instance.checklist,
+      'isReminderEnabled': instance.isReminderEnabled,
+      'reminderLeadMinutes': instance.reminderLeadMinutes,
+      'allDayReminderTime': instance.allDayReminderTime,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
     };

@@ -16,6 +16,9 @@ abstract class TaskFormState with _$TaskFormState {
     @Default('') String notes,
     int? effortMinutes,
     @Default(<String>[]) List<String> checklistDrafts,
+    @Default(false) bool isReminderEnabled,
+    int? reminderLeadMinutes,
+    String? allDayReminderTime,
     String? titleError,
     Failure? failure,
   }) = _TaskFormState;

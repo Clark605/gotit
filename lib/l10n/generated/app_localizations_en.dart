@@ -405,4 +405,178 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get contextPersonal => 'Personal';
+
+  @override
+  String get remindersLabel => 'Reminders';
+
+  @override
+  String get enableReminder => 'Enable Reminder';
+
+  @override
+  String get remindMe => 'Remind me';
+
+  @override
+  String get reminderLeadAtDue => 'At due time';
+
+  @override
+  String get reminderLead5m => '5m before';
+
+  @override
+  String get reminderLead15m => '15m before';
+
+  @override
+  String get reminderLead30m => '30m before';
+
+  @override
+  String get reminderLead1h => '1h before';
+
+  @override
+  String get reminderLead1d => '1d before';
+
+  @override
+  String get allDayAlertTime => 'Alert Time';
+
+  @override
+  String get allDayAlertTimeHint => 'Select time for all-day reminder';
+
+  @override
+  String startWorkingNotice(String time, String lead) {
+    return '🔔 Start-working reminder will sound at $time ($lead lead time)';
+  }
+
+  @override
+  String startWorkingNotificationTitle(String title) {
+    return 'Start Working: $title';
+  }
+
+  @override
+  String startWorkingNotificationBody(String title, String effort) {
+    return 'Time to start working on $title — due in $effort';
+  }
+
+  @override
+  String dueNotificationTitle(String title) {
+    return 'Task Due: $title';
+  }
+
+  @override
+  String dueNotificationBody(String title) {
+    return '$title is due now';
+  }
+
+  @override
+  String get actionMarkDone => 'Mark as Done';
+
+  @override
+  String get actionSnooze15m => 'Snooze (15m)';
+
+  @override
+  String get missedRemindersTitle => 'Gotit';
+
+  @override
+  String missedRemindersBody(int count) {
+    return '$count missed reminders while device was off';
+  }
+
+  @override
+  String get permissionPrimerTitle => 'Stay On Top of Your Tasks';
+
+  @override
+  String get permissionPrimerBody =>
+      'Gotit delivers precise, timely reminders so you never miss a deadline. To notify you even when the app is closed, Gotit needs permission to send notifications and schedule exact alarms.';
+
+  @override
+  String get permissionPrimerNotificationItem =>
+      'Timely task notifications and lock screen quick actions';
+
+  @override
+  String get permissionPrimerAlarmItem =>
+      'Exact timing for high-priority reminders';
+
+  @override
+  String get permissionPrimerEnableButton => 'Enable Reminders';
+
+  @override
+  String get permissionPrimerLaterButton => 'Maybe Later';
+
+  @override
+  String get inexactAlarmWarningTitle => 'Exact Alarms Disabled';
+
+  @override
+  String get inexactAlarmWarningBody =>
+      'Reminders may vary by up to 10 minutes. Enable exact alarms for precise delivery.';
+
+  @override
+  String get inexactAlarmFixButton => 'Fix';
+
+  @override
+  String get troubleshootingTitle => 'Reminder Reliability';
+
+  @override
+  String get systemDiagnosticsTitle => 'System Diagnostics';
+
+  @override
+  String get diagnosticNotifications => 'Notifications';
+
+  @override
+  String get diagnosticExactAlarms => 'Exact Alarms';
+
+  @override
+  String get diagnosticBatteryOptimizations => 'Battery Saver';
+
+  @override
+  String get diagnosticStatusActive => 'Active';
+
+  @override
+  String get diagnosticStatusInexact => 'Inexact';
+
+  @override
+  String get diagnosticStatusRestricted => 'Restricted';
+
+  @override
+  String get diagnosticStatusDisabled => 'Disabled';
+
+  @override
+  String get oemGuidesTitle => 'Device-Specific Settings';
+
+  @override
+  String get oemGuidesSubtitle =>
+      'Aggressive battery optimization may delay notifications when Gotit is closed.';
+
+  @override
+  String get oemXiaomiTitle => 'Xiaomi / HyperOS / MIUI';
+
+  @override
+  String get oemXiaomiGuide =>
+      '1. Enable Autostart in Security > Manage apps > Gotit.\n2. Set Battery saver to No restrictions.\n3. Lock Gotit in Recent Apps.';
+
+  @override
+  String get oemSamsungTitle => 'Samsung (One UI)';
+
+  @override
+  String get oemSamsungGuide =>
+      '1. Go to Settings > Apps > Gotit > Battery > Select \'Unrestricted\'.\n2. In Device care > Battery > Background usage limits, remove Gotit from \'Sleeping apps\'.';
+
+  @override
+  String get oemHuaweiTitle => 'Huawei (EMUI)';
+
+  @override
+  String get oemHuaweiGuide =>
+      '1. Go to Settings > Battery > App launch > Gotit.\n2. Turn off \'Manage automatically\' and enable \'Auto-launch\', \'Secondary launch\', and \'Run in background\'.';
+
+  @override
+  String get oemOppoVivoTitle => 'OPPO / Vivo / OnePlus';
+
+  @override
+  String get oemOppoVivoGuide =>
+      '1. Enable \'Allow background activity\' in Battery settings.\n2. In App info > Permissions, allow Autostart.';
+
+  @override
+  String get openBatterySettings => 'Open Battery Settings';
+
+  @override
+  String get openExactAlarmSettings => 'Open Exact Alarm Settings';
+
+  @override
+  String get dontKillMyAppLink => 'Learn more at dontkillmyapp.com';
 }
